@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ content_recipe_detail.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 7/13/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:id="@+id/recipe_detail_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/recipe_detail_url_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:foreground="?android:selectableItemBackground"
+            android:clickable="true"
+            android:minHeight="@dimen/list_item_single_line_height"
+            android:paddingBottom="@dimen/spacing_tiny"
+            android:paddingTop="@dimen/spacing_tiny">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                android:contentDescription="@null"
+                android:tint="?android:textColorPrimary"
+                app:srcCompat="@drawable/ic_link_black_24dp" />
+
+            <TextView
+                android:id="@+id/recipe_detail_url"
+                style="@style/TextAppearance.ListItemPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                android:layout_marginStart="@dimen/list_item_text_left_padding"
+                tools:text="https://www.budgetbytes.com/2017/04/ultimate-bbq-chicken-quesadillas/" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:foreground="?android:selectableItemBackground"
+            android:minHeight="@dimen/list_item_single_line_height"
+            android:paddingBottom="@dimen/spacing_tiny"
+            android:paddingTop="@dimen/spacing_tiny">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                android:contentDescription="@null"
+                android:tint="?android:textColorPrimary"
+                app:srcCompat="@drawable/ic_short_text_black_24dp" />
+
+            <TextView
+                android:id="@+id/recipe_detail_notes"
+                style="@style/TextAppearance.ListItemPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                android:layout_marginStart="@dimen/list_item_text_left_padding"
+                tools:text="This is an example of a note" />
+
+        </FrameLayout>
+
+        <com.inelasticcollision.recipelink.widgets.KeywordsLinearLayout
+            android:id="@+id/recipe_collections_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:editable="false" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

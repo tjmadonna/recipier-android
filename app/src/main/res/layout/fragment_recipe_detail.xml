@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ fragment_recipe_detail.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 7/13/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/recipe_detail_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="@dimen/spacing_normal"
+            app:expandedTitleMarginStart="@dimen/list_item_text_left_padding"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <com.inelasticcollision.recipelink.widgets.AspectRatioView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:fitsSystemWindows="true"
+                app:aspectRatio="@dimen/aspect_16_9"
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/recipe_detail_main_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:clickable="false"
+                    android:clipToPadding="false"
+                    android:contentDescription="@null"
+                    android:fitsSystemWindows="true"
+                    android:focusable="false"
+                    android:scaleType="centerCrop" />
+
+                <View
+                    android:id="@+id/recipe_detail_gradient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background_image_gradient_overlay" />
+
+                <ProgressBar
+                    android:id="@+id/recipe_detail_image_progress"
+                    style="@style/Base.Widget.AppCompat.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+            </com.inelasticcollision.recipelink.widgets.AspectRatioView>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/recipe_detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleMarginStart="@dimen/spacing_none"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:paddingBottom="@dimen/spacing_normal">
+
+                <ImageView
+                    android:id="@+id/recipe_detail_favorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                    android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                    android:layout_marginTop="@dimen/spacing_none"
+                    android:contentDescription="@null"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+                <TextView
+                    android:id="@+id/recipe_detail_title"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                    android:layout_marginRight="@dimen/spacing_normal"
+                    android:layout_marginStart="@dimen/list_item_text_left_padding"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    tools:text="Ultimate BBQ Chicken Quesadillas" />
+
+            </FrameLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include
+        layout="@layout/content_recipe_detail"
+        android:fitsSystemWindows="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/recipe_detail_floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacing_normal"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_open_in_browser_black_24dp" />
+
+</android.support.design.widget.CoordinatorLayout>

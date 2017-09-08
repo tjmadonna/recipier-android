@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ menu_nav_drawer.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 6/30/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/nav_group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_recipes"
+            android:checked="true"
+            android:icon="@drawable/ic_view_list_black_24dp"
+            android:title="@string/action_all_recipes" />
+        <item
+            android:id="@+id/nav_favorite_recipes"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="@string/action_favorite_recipes" />
+
+    </group>
+
+    <!--
+    <group android:id="@+id/nav_group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/action_settings" />
+    </group>
+    -->
+
+</menu>

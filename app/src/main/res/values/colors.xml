@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ colors.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 6/30/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
 <resources>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FFC107</color>
+
+    <color name="light_content_scrim">#0d000000</color>
+    <color name="activated">#E0E0E0</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#cccccc</color>
+    <color name="grey_700">#646464</color>
+    <color name="black">#000000</color>
+
+    <color name="black_0">#00000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_70">#46000000</color>
+
+    <color name="primaryTextColor">#1E1E1E</color>
+    <color name="secondaryTextColor">#6A6A6A</color>
+
 </resources>

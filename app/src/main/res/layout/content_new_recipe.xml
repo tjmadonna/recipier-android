@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ content_new_recipe.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 7/1/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/new_recipe_main_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <com.inelasticcollision.recipelink.widgets.AspectRatioView
+                android:id="@+id/new_recipe_image_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:aspectRatio="@dimen/aspect_16_9">
+
+                <ImageView
+                    android:id="@+id/new_recipe_main_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:contentDescription="@null"
+                    android:focusable="false"
+                    android:scaleType="centerCrop"
+                    tools:src="@color/colorPrimaryDark" />
+
+                <ProgressBar
+                    android:id="@+id/new_recipe_image_progress"
+                    style="@style/Base.Widget.AppCompat.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+            </com.inelasticcollision.recipelink.widgets.AspectRatioView>
+
+            <Button
+                android:id="@+id/new_recipe_change_image"
+                style="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_recipe_image_container"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/action_change_photo" />
+
+            <FrameLayout
+                android:id="@+id/new_recipe_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_recipe_change_image"
+                android:minHeight="40dp"
+                android:paddingBottom="@dimen/spacing_mini"
+                android:paddingTop="@dimen/spacing_normal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                    android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                    android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                    android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                    android:contentDescription="@null"
+                    android:tint="?android:textColorPrimary"
+                    app:srcCompat="@drawable/ic_title_black_24dp" />
+
+                <EditText
+                    android:id="@+id/new_recipe_title"
+                    style="@style/TextAppearance.ListItemPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                    android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                    android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                    android:layout_marginStart="@dimen/list_item_text_left_padding"
+                    android:hint="@string/hint_title"
+                    android:paddingTop="@dimen/spacing_none"
+                    tools:text="Ultimate BBQ Chicken Quesadillas" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/new_recipe_url_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_recipe_title_container"
+                android:minHeight="40dp"
+                android:paddingBottom="@dimen/spacing_mini"
+                android:paddingTop="@dimen/spacing_mini">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                    android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                    android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                    android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                    android:contentDescription="@null"
+                    android:tint="?android:textColorPrimary"
+                    app:srcCompat="@drawable/ic_link_black_24dp" />
+
+                <EditText
+                    android:id="@+id/new_recipe_url"
+                    style="@style/TextAppearance.ListItemPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                    android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                    android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                    android:layout_marginStart="@dimen/list_item_text_left_padding"
+                    android:hint="@string/hint_url"
+                    android:inputType="textUri"
+                    android:paddingTop="@dimen/spacing_none"
+                    tools:text="https://www.budgetbytes.com/2017/04/ultimate-bbq-chicken-quesadillas/" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/new_recipe_notes_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_recipe_url_container"
+                android:minHeight="40dp"
+                android:paddingBottom="@dimen/spacing_mini"
+                android:paddingTop="@dimen/spacing_mini">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                    android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                    android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                    android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                    android:contentDescription="@null"
+                    android:tint="?android:textColorPrimary"
+                    app:srcCompat="@drawable/ic_short_text_black_24dp" />
+
+                <EditText
+                    android:id="@+id/new_recipe_notes"
+                    style="@style/TextAppearance.ListItemPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                    android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                    android:layout_marginRight="@dimen/list_item_icon_left_padding"
+                    android:layout_marginStart="@dimen/list_item_text_left_padding"
+                    android:hint="@string/hint_notes"
+                    android:paddingTop="@dimen/spacing_none"
+                    tools:text="This is an example of a note. Sometimes these notes use multiple lines." />
+
+            </FrameLayout>
+
+            <com.inelasticcollision.recipelink.widgets.KeywordsLinearLayout
+                android:id="@+id/new_recipe_collections_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_recipe_notes_container"
+                app:editable="true"/>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/new_recipe_main_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

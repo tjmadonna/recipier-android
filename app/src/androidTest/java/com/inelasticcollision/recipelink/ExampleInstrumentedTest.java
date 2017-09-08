@@ -1,3 +1,11 @@
+/*
+ * ExampleInstrumentedTest.java
+ * RecipeLink
+ *
+ * Created by Tyler Madonna on 5/29/2017.
+ * Copyright © 2017 Tyler Madonna. All rights reserved.
+ */
+
 package com.inelasticcollision.recipelink;
 
 import android.content.Context;

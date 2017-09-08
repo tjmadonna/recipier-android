@@ -1,3 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ styles.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 6/30/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
 <resources>
 
     <!-- Base application theme. -->
@@ -6,6 +15,39 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="alertDialogTheme">@style/AppTheme.DialogStyle</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="@style/AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Main" parent="AppTheme.NoActionBar" />
+
+    <style name="AppTheme.RecipeDetail" parent="AppTheme.NoActionBar" />
+
+    <style name="AppTheme.NewRecipe" parent="AppTheme.NoActionBar" />
+
+    <!-- Action bar styles -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Dialog styles -->
+    <style name="AppTheme.DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="TextAppearance.ListItemPrimary" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.ListItemSecondary" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>
