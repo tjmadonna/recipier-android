@@ -32,11 +32,15 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_recipe_detail);
 
-        int recipeId = getIntent().getExtras().getInt(EXTRA_RECIPE_ID, -1);
+        if (savedInstanceState == null) {
 
-        getFragmentManager().beginTransaction()
-                .add(R.id.recipe_detail_activity_container, RecipeDetailFragment.newInstance(recipeId), RecipeDetailFragment.TAG)
-                .commit();
+            int recipeId = getIntent().getExtras().getInt(EXTRA_RECIPE_ID, -1);
+
+            getFragmentManager().beginTransaction()
+                    .add(R.id.recipe_detail_activity_container, RecipeDetailFragment.newInstance(recipeId), RecipeDetailFragment.TAG)
+                    .commit();
+
+        }
 
     }
 
