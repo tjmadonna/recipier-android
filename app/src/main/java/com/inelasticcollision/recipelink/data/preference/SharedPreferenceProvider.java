@@ -34,7 +34,7 @@ public class SharedPreferenceProvider implements PreferenceProvider {
 
         Log.d("PreferenceProvider", "================App version is " + appVersion + " and should migrate is " + shouldMigrate);
 
-        return appVersion == 12 && shouldMigrate;
+        return appVersion >= 12 && shouldMigrate;
 
     }
 
