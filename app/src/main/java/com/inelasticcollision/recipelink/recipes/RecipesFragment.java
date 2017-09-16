@@ -175,13 +175,13 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                mPresenter.handleLoadRecipes(RecipesSortType.SEARCH, query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mPresenter.handleLoadRecipes(RecipesSortType.SEARCH, newText);
-                return true;
+                return false;
             }
         });
 
