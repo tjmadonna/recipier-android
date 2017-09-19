@@ -70,15 +70,15 @@ final class RecipeTable implements BaseColumns {
     }
 
     static String getAllRecipesQuery() {
-        return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " ORDER BY " + COLUMN_TITLE + " ASC";
+        return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " ORDER BY " + COLUMN_TITLE + " COLLATE NOCASE";
     }
 
     static String getFavoriteRecipesQuery() {
-        return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " WHERE " + COLUMN_FAVORITE + " = 1 ORDER BY " + COLUMN_TITLE + " ASC";
+        return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " WHERE " + COLUMN_FAVORITE + " = 1 ORDER BY " + COLUMN_TITLE + " COLLATE NOCASE";
     }
 
     static String getRecipesSearchQuery(String searchTerm) {
-        return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TITLE + " LIKE '%" + searchTerm + "%' OR " + COLUMN_KEYWORDS + " LIKE '%" + searchTerm + "%' ORDER BY " + COLUMN_TITLE + " ASC";
+        return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TITLE + " LIKE '%" + searchTerm + "%' OR " + COLUMN_KEYWORDS + " LIKE '%" + searchTerm + "%' ORDER BY " + COLUMN_TITLE + " COLLATE NOCASE";
     }
 
     static String getRecipeWhereClause(int id) {
