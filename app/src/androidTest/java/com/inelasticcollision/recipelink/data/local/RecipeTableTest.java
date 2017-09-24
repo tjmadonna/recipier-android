@@ -40,7 +40,7 @@ public class RecipeTableTest {
 
         String query = RecipeTable.getAllRecipesQuery();
 
-        Assert.assertEquals("SELECT recipe._id, date_added, title, link, photo_url, favorite, keywords, notes FROM recipe ORDER BY title ASC", query);
+        Assert.assertEquals("SELECT recipe._id, date_added, title, link, photo_url, favorite, keywords, notes FROM recipe ORDER BY title COLLATE NOCASE", query);
 
     }
 
@@ -49,7 +49,7 @@ public class RecipeTableTest {
 
         String query = RecipeTable.getFavoriteRecipesQuery();
 
-        Assert.assertEquals("SELECT recipe._id, date_added, title, link, photo_url, favorite, keywords, notes FROM recipe WHERE favorite = 1 ORDER BY title ASC", query);
+        Assert.assertEquals("SELECT recipe._id, date_added, title, link, photo_url, favorite, keywords, notes FROM recipe WHERE favorite = 1 ORDER BY title COLLATE NOCASE", query);
 
     }
 
@@ -58,7 +58,7 @@ public class RecipeTableTest {
 
         String query = RecipeTable.getRecipesSearchQuery("Example Search");
 
-        Assert.assertEquals("SELECT recipe._id, date_added, title, link, photo_url, favorite, keywords, notes FROM recipe WHERE title LIKE '%Example Search%' OR keywords LIKE '%Example Search%' ORDER BY title ASC", query);
+        Assert.assertEquals("SELECT recipe._id, date_added, title, link, photo_url, favorite, keywords, notes FROM recipe WHERE title LIKE '%Example Search%' OR keywords LIKE '%Example Search%' ORDER BY title COLLATE NOCASE", query);
 
     }
 
