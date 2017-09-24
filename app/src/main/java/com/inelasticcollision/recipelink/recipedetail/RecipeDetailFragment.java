@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -48,6 +49,8 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
     private static final String ARGS_RECIPE_ID = "argument_recipe_id";
 
     private RecipeDetailContract.Presenter mPresenter;
+
+    private RecipeDetailAppBarOffsetListener mAppBarOffsetListener;
 
     private TextView mTitleView;
 
@@ -121,21 +124,29 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
     // Set all the view
     private void configureViews(View rootView) {
 
-        configureActionBar(rootView);
+        Toolbar toolbar = rootView.findViewById(R.id.recipe_detail_toolbar);
 
-        mTitleView = (TextView) rootView.findViewById(R.id.recipe_detail_title);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-        mFavoriteImageView = (ImageView) rootView.findViewById(R.id.recipe_detail_favorite);
+        ActionBar actionBar;
+        if ((actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar()) != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-        mMainImageView = (ImageView) rootView.findViewById(R.id.recipe_detail_main_image);
+        mTitleView = rootView.findViewById(R.id.recipe_detail_title);
 
-        mImageProgressBar = (ProgressBar) rootView.findViewById(R.id.recipe_detail_image_progress);
+        mFavoriteImageView = rootView.findViewById(R.id.recipe_detail_favorite);
 
-        mUrlView = (TextView) rootView.findViewById(R.id.recipe_detail_url);
+        mMainImageView = rootView.findViewById(R.id.recipe_detail_main_image);
 
-        mNotesView = (TextView) rootView.findViewById(R.id.recipe_detail_notes);
+        mImageProgressBar = rootView.findViewById(R.id.recipe_detail_image_progress);
 
-        mKeywordsLayout = (KeywordsLinearLayout) rootView.findViewById(R.id.recipe_collections_container);
+        mUrlView = rootView.findViewById(R.id.recipe_detail_url);
+
+        mNotesView = rootView.findViewById(R.id.recipe_detail_notes);
+
+        mKeywordsLayout = rootView.findViewById(R.id.recipe_collections_container);
 
         rootView.findViewById(R.id.recipe_detail_floating_action_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,18 +158,16 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
             public void onClick(View v) { openUrlInBrowser(); }
         });
 
-    }
+        AppBarLayout appBarLayout = rootView.findViewById(R.id.recipe_detail_app_bar);
 
-    private void configureActionBar(View rootView) {
+        if (appBarLayout != null) {
 
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.recipe_detail_toolbar);
+            int toolbarHeight = toolbar.getLayoutParams().height;
 
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            mAppBarOffsetListener = new RecipeDetailAppBarOffsetListener(mFavoriteImageView, toolbarHeight);
 
-        ActionBar actionBar;
-        if ((actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar()) != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            appBarLayout.addOnOffsetChangedListener(mAppBarOffsetListener);
+
         }
 
     }
@@ -272,6 +281,10 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
     @Override
     public void showFavoriteIcon(boolean favorite) {
         mFavoriteImageView.setVisibility(favorite ? View.VISIBLE : View.GONE);
+
+        if (mAppBarOffsetListener != null) {
+            mAppBarOffsetListener.setEnabled(favorite);
+        }
     }
 
     @Override
