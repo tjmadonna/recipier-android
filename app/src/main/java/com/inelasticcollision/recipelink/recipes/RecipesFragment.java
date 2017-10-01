@@ -20,7 +20,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -149,8 +148,6 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
             boolean focus = mSearchView.hasFocus();
             outState.putBoolean(SAVED_SEARCH_FOCUS, focus);
 
-            Log.d("RecipesFragment", "======= Focus is " + focus);
-
         }
 
     }
@@ -276,6 +273,8 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
     public void activateSearchView() {
 
         mSearchQuery = "";
+
+        mSearchFocus = true;
 
     }
 
