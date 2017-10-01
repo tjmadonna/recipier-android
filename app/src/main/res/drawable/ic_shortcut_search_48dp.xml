@@ -1,0 +1,24 @@
+<!--
+  ~ ic_shortcut_search_48dp.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 9/29/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="48dp"
+        android:height="48dp"
+        android:viewportWidth="48.0"
+        android:viewportHeight="48.0">
+    <path
+        android:pathData="M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0"
+        android:strokeColor="#F5F5F5"
+        android:fillColor="#F5F5F5"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M21.69,15C25.38,15 28.37,17.99 28.37,21.69C28.37,23.34 27.76,24.86 26.77,26.04L27.04,26.31L27.86,26.31L33,31.46L31.46,33L26.31,27.86L26.31,27.04L26.04,26.77C24.86,27.76 23.34,28.37 21.69,28.37C17.99,28.37 15,25.38 15,21.69C15,17.99 17.99,15 21.69,15L21.69,15ZM21.69,17.06C19.11,17.06 17.06,19.11 17.06,21.69C17.06,24.26 19.11,26.31 21.69,26.31C24.26,26.31 26.31,24.26 26.31,21.69C26.31,19.11 24.26,17.06 21.69,17.06Z"
+        android:strokeColor="#00000000"
+        android:fillColor="#3F51B5"
+        android:strokeWidth="1"/>
+</vector>

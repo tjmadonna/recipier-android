@@ -38,6 +38,8 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
 
     private static final String SAVED_SEARCH_STRING = "saved_search_string";
 
+    private static final String SAVED_SEARCH_FOCUS = "saved_search_focus";
+
     private static final String SAVED_SORT_TYPE = "saved_sort_type";
 
     private static final String LEARN_HOW_URL = "https://madonnaapps.com/recipelink/learn-android.html";
@@ -51,6 +53,8 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
     private SearchView mSearchView;
 
     private String mSearchQuery;
+
+    private boolean mSearchFocus = false;
 
     private int mSortType;
 
@@ -74,6 +78,8 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
 
             mSortType = savedInstanceState.getInt(SAVED_SORT_TYPE, RecipesSortType.ALL);
 
+            mSearchFocus = savedInstanceState.getBoolean(SAVED_SEARCH_FOCUS, false);
+
         }
 
     }
@@ -95,14 +101,13 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
         mAdapter = new RecipesAdapter(getActivity(), new RecipesAdapter.OnRecipesAdapterItemClickListener() {
             @Override
             public void onRecipesAdapterItemClick(Recipe recipe) {
-                Log.d("RecipeFragment", "Recipe item clicked");
                 mListener.onRecipeItemClicked(recipe);
             }
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recipes_recycler);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recipes_recycler);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
@@ -137,8 +142,15 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
         outState.putInt(SAVED_SORT_TYPE, mSortType);
 
         if (!mSearchView.isIconified()) {
+
             String query = mSearchView.getQuery().toString();
             outState.putString(SAVED_SEARCH_STRING, query);
+
+            boolean focus = mSearchView.hasFocus();
+            outState.putBoolean(SAVED_SEARCH_FOCUS, focus);
+
+            Log.d("RecipesFragment", "======= Focus is " + focus);
+
         }
 
     }
@@ -149,8 +161,6 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_recipes, menu);
-
-        Log.d("RecipeFragment", " ========Search query is " + ((mSearchQuery == null) ? "null" : mSearchQuery));
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
 
@@ -175,7 +185,7 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mPresenter.handleLoadRecipes(RecipesSortType.SEARCH, query);
+                queryForSearchTerm(query, true);
                 return false;
             }
 
@@ -186,11 +196,28 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
         });
 
         if (mSearchQuery != null) {
+
             searchItem.expandActionView();
-            mSearchView.setQuery(mSearchQuery, true);
-            mSearchView.clearFocus();
+            mSearchView.setQuery(mSearchQuery, false);
+            queryForSearchTerm(mSearchQuery, false);
+
+            if (!mSearchFocus) {
+                mSearchView.clearFocus();
+            }
+
+            if (mSearchQuery.isEmpty()) {
+                mPresenter.handleLoadRecipes(mSortType, null);
+            }
+
         }
 
+    }
+
+    private void queryForSearchTerm(String searchTerm, boolean clearFocus) {
+        mPresenter.handleLoadRecipes(RecipesSortType.SEARCH, searchTerm);
+        if (clearFocus) {
+            mSearchView.clearFocus();
+        }
     }
 
     public void setListener(RecipesFragmentInteractionListener listener) {
@@ -236,14 +263,19 @@ public class RecipesFragment extends Fragment implements RecipesContract.View, M
 
         if (mSearchQuery == null) {
 
-            Log.d("RecipesFragment", "======navigationItemSelected");
-
             int sortType = RecipesSortType.sortTypeFromViewId(viewId);
 
             mSortType = sortType;
 
             mPresenter.handleLoadRecipes(sortType, null);
         }
+
+    }
+
+    @Override
+    public void activateSearchView() {
+
+        mSearchQuery = "";
 
     }
 

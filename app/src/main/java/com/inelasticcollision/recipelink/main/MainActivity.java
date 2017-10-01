@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static final int NAVDRAWER_LAUNCH_DELAY = 250;
 
+    private static final String EXTRA_SHORTCUT_ID = "extra_shortcut_id";
+
+    private static final String SHORTCUT_ID_FAVORITE = "shortcut_favorite";
+
+    private static final String SHORTCUT_ID_SEARCH = "shortcut_search";
+
     private NavigationView mNavigationView;
 
     private DrawerLayout mDrawerLayout;
@@ -44,9 +50,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private MainActivityActionListener mListener;
 
+    private boolean mActivateSearchView = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getIntent().getExtras() != null) {
+
+            String shortcutId = getIntent().getExtras().getString(EXTRA_SHORTCUT_ID, "");
+
+            if (shortcutId.equals(SHORTCUT_ID_FAVORITE)) {
+
+                mNavigationViewSelectedItem = R.id.nav_favorite_recipes;
+
+            } else if (shortcutId.equals(SHORTCUT_ID_SEARCH)) {
+
+                mActivateSearchView = true;
+
+            }
+
+        }
 
         if (savedInstanceState != null) {
 
@@ -66,18 +90,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mListener = (MainActivityActionListener) getFragmentManager().findFragmentById(R.id.main_fragment_recipes);
 
         // Set the toolbar as the actionbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
         // Set up the drawer layout
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        mDrawerLayout = findViewById(R.id.main_drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.prompt_navigation_drawer_open, R.string.prompt_navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         // Set up the navigation view
-        mNavigationView = (NavigationView) findViewById(R.id.main_nav_view);
+        mNavigationView = findViewById(R.id.main_nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -98,6 +122,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
 
         selectSortTypeInNavigationDrawer(mNavigationViewSelectedItem);
+
+        if (mActivateSearchView) {
+            mListener.activateSearchView();
+            mActivateSearchView = false;
+        }
 
         migrateDatabase();
 
@@ -182,6 +211,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void selectSortTypeInNavigationDrawer(int itemId) {
 
         mNavigationViewSelectedItem = itemId;
+
+        mNavigationView.setCheckedItem(itemId);
 
         setTitleForItemId(itemId);
 

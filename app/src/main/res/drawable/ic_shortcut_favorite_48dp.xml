@@ -1,0 +1,24 @@
+<!--
+  ~ ic_shortcut_favorite_48dp.xml
+  ~ RecipeLink-SQLBrite
+  ~
+  ~ Created by Tyler Madonna on 9/29/2017.
+  ~ Copyright © 2017 Tyler Madonna. All rights reserved.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="48dp"
+        android:height="48dp"
+        android:viewportWidth="48.0"
+        android:viewportHeight="48.0">
+    <path
+        android:pathData="M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0"
+        android:strokeColor="#F5F5F5"
+        android:fillColor="#F5F5F5"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M24,33L22.69,31.71C18.06,27.12 15,24.09 15,20.4C15,17.36 17.18,15 19.95,15C21.52,15 23.02,15.79 24,17.04C24.98,15.79 26.48,15 28.05,15C30.82,15 33,17.36 33,20.4C33,24.09 29.94,27.12 25.31,31.71L24,33Z"
+        android:strokeColor="#00000000"
+        android:fillColor="#3F51B5"
+        android:strokeWidth="1"/>
+</vector>

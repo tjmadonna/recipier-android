@@ -12,4 +12,6 @@ public interface MainActivityActionListener {
 
     void changeSortTypeSelection(int viewId);
 
+    void activateSearchView();
+
 }

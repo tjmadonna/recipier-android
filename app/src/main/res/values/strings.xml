@@ -17,6 +17,11 @@
     <string name="title_add_collection">Add Collection</string>
     <string name="title_change_image">Change Image</string>
 
+    <string name="title_shortcut_favorite_long">Favorite recipes</string>
+    <string name="title_shortcut_favorite_short">Favorites</string>
+    <string name="title_shortcut_search_long">Search recipes</string>
+    <string name="title_shortcut_search_short">Search</string>
+
     <string name="content_authority" translatable="false">com.inelasticcollision.recipelink</string>
 
     <string name="prompt_no_recipes_found">No recipes found</string>
