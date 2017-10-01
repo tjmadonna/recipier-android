@@ -32,8 +32,6 @@ public class SharedPreferenceProvider implements PreferenceProvider {
 
         boolean shouldMigrate = mSharedPreferences.getBoolean(SHOULD_MIGRATE_DATABASE_VERION_12, true);
 
-        Log.d("PreferenceProvider", "================App version is " + appVersion + " and should migrate is " + shouldMigrate);
-
         return appVersion >= 12 && shouldMigrate;
 
     }
