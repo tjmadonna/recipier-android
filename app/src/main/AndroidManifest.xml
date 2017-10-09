@@ -52,6 +52,11 @@
             android:theme="@style/AppTheme.RecipeDetail" />
 
         <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_settings"
+            android:theme="@style/AppTheme.Settings" />
+
+        <activity
             android:name=".main.MigrationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"

@@ -11,6 +11,7 @@ package com.inelasticcollision.recipelink.main;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -29,6 +30,7 @@ import com.inelasticcollision.recipelink.data.preference.PreferenceProvider;
 import com.inelasticcollision.recipelink.data.preference.SharedPreferenceProvider;
 import com.inelasticcollision.recipelink.recipedetail.RecipeDetailActivity;
 import com.inelasticcollision.recipelink.recipes.RecipesFragment;
+import com.inelasticcollision.recipelink.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -182,18 +184,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (itemId) {
 
-//            case R.id.nav_settings:
-//
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        mNavigationView.setCheckedItem(mNavigationViewSelectedItem);
-//
-//                    }
-//                }, NAVDRAWER_LAUNCH_DELAY);
-//
-//                break;
+            case R.id.nav_settings:
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent intent = SettingsActivity.createIntent(MainActivity.this);
+
+                        startActivity(intent);
+
+                        mNavigationView.setCheckedItem(mNavigationViewSelectedItem);
+
+                    }
+                }, NAVDRAWER_LAUNCH_DELAY);
+
+                break;
 
             default:
 

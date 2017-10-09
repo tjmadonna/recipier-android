@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ styles.xml
   ~ RecipeLink-SQLBrite
   ~
@@ -28,6 +27,8 @@
     <style name="AppTheme.RecipeDetail" parent="AppTheme.NoActionBar" />
 
     <style name="AppTheme.NewRecipe" parent="AppTheme.NoActionBar" />
+
+    <style name="AppTheme.Settings" parent="@style/AppTheme" />
 
     <!-- Action bar styles -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
