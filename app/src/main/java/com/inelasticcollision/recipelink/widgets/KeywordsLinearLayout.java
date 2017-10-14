@@ -166,9 +166,9 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
 
     private void populateView(View view, String keyword, int index) {
 
-        ImageView image = (ImageView) view.findViewById(R.id.recipe_detail_list_item_image);
+        ImageView image = view.findViewById(R.id.recipe_detail_list_item_image);
 
-        TextView text = (TextView) view.findViewById(R.id.recipe_detail_list_item_text);
+        TextView text = view.findViewById(R.id.recipe_detail_list_item_text);
 
         text.setTextColor(mKeywordsTextColor);
 
@@ -184,9 +184,9 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
 
     private void populateAddView(View view, int index) {
 
-        ImageView image = (ImageView) view.findViewById(R.id.recipe_detail_list_item_image);
+        ImageView image = view.findViewById(R.id.recipe_detail_list_item_image);
 
-        TextView text = (TextView) view.findViewById(R.id.recipe_detail_list_item_text);
+        TextView text = view.findViewById(R.id.recipe_detail_list_item_text);
 
         text.setTextColor(mAddKeywordTextColor);
 
@@ -208,11 +208,11 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
 
     private void populateNullView(View view, String message) {
 
-        ImageView image = (ImageView) view.findViewById(R.id.recipe_detail_list_item_image);
+        ImageView image = view.findViewById(R.id.recipe_detail_list_item_image);
 
         image.setVisibility(VISIBLE);
 
-        TextView text = (TextView) view.findViewById(R.id.recipe_detail_list_item_text);
+        TextView text = view.findViewById(R.id.recipe_detail_list_item_text);
 
         text.setTextColor(mAddKeywordTextColor);
 
