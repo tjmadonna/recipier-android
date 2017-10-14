@@ -93,6 +93,8 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
 
                         mState.selectedImage = recipe.getImageUrl();
 
+                        mState.favorite = recipe.isFavorite();
+
                         mView.showMainImage(imageUrl);
 
                         mView.showTitle(recipe.getTitle());
