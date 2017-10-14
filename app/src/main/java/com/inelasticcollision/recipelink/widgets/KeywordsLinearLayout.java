@@ -14,7 +14,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -317,6 +316,11 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
 
         private SavedState(Parcel in) {
             super(in);
+
+            if (in == null) {
+                return;
+            }
+
             in.readStringList(mKeywordsState);
         }
 
