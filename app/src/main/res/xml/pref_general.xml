@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ pref_general.xml
   ~ RecipeLink-SQLBrite
   ~
@@ -9,39 +8,32 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="Contact">
+    <PreferenceCategory android:title="@string/title_pref_section_contact">
 
         <Preference
             android:key="contact_developer"
-            android:title="Contact developer"
-            android:summary="developer@madonnaapps.com">
-
-        </Preference>
+            android:summary="@string/summary_pref_item_contact"
+            android:title="@string/title_pref_item_contact" />
 
     </PreferenceCategory>
 
-
-    <PreferenceCategory
-        android:title="About">
+    <PreferenceCategory android:title="@string/title_pref_section_about">
 
         <Preference
-            android:title="Rate app"
             android:key="rate"
-            android:summary="Rate and leave a review">
-        </Preference>
+            android:summary="@string/summary_pref_item_rate"
+            android:title="@string/title_pref_item_rate" />
 
         <Preference
-            android:title="Open source licenses"
             android:key="licenses"
-            android:summary="License details for open source software">
-        </Preference>
+            android:summary="@string/summary_pref_item_licenses"
+            android:title="@string/title_pref_item_licenses" />
 
         <Preference
-            android:title="Version"
             android:key="version"
-            android:summary="1.0">
-        </Preference>
+            android:selectable="false"
+            android:summary="1.0"
+            android:title="@string/title_pref_item_version" />
 
     </PreferenceCategory>
 

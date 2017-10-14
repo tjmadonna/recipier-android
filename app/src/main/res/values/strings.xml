@@ -22,6 +22,16 @@
     <string name="title_shortcut_search_long">Search recipes</string>
     <string name="title_shortcut_search_short">Search</string>
 
+    <string name="title_pref_section_contact">Contact</string>
+    <string name="title_pref_section_about">About</string>
+    <string name="title_pref_item_contact">Contact developer</string>
+    <string name="summary_pref_item_contact">Ask a question or report a bug</string>
+    <string name="title_pref_item_rate">Rate app</string>
+    <string name="summary_pref_item_rate">Rate and leave a review</string>
+    <string name="title_pref_item_licenses">Open source licenses</string>
+    <string name="summary_pref_item_licenses">License details for open source software</string>
+    <string name="title_pref_item_version">Version</string>
+
     <string name="content_authority" translatable="false">com.inelasticcollision.recipelink</string>
 
     <string name="prompt_no_recipes_found">No recipes found</string>
