@@ -26,6 +26,8 @@ public class SettingsFragment extends PreferenceFragment {
 
     private static final String EMAIL_ADDRESS = "developer@madonnaapps.com";
 
+    private static final String LICENSES_URL = "https://madonnaapps.com/recipelink/licenses-android.html";
+
     private static final String PLAY_URL_DETAILS = "details?id=com.inelasticcollision.recipelink";
 
     @Override
@@ -47,6 +49,18 @@ public class SettingsFragment extends PreferenceFragment {
             public boolean onPreferenceClick(Preference preference) {
                 // Open play store to rate the app
                 sendRating();
+                return false;
+            }
+        });
+
+        // Set licenses preference's on preference listener to open the browser to view the open
+        // source licenses
+        Preference licensesPreference = findPreference("licenses");
+        licensesPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                // Open the open source licenses web page
+                openWebpage(LICENSES_URL);
                 return false;
             }
         });
@@ -88,8 +102,7 @@ public class SettingsFragment extends PreferenceFragment {
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Uri webUri = Uri.parse("https://play.google.com/store/apps/" + PLAY_URL_DETAILS);
-            startActivity(new Intent(Intent.ACTION_VIEW, webUri));
+            openWebpage("https://play.google.com/store/apps/" + PLAY_URL_DETAILS);
             Log.e("SettingsFragment", e.getMessage(), e);
         }
 
@@ -128,6 +141,12 @@ public class SettingsFragment extends PreferenceFragment {
             return String.format(format, BuildConfig.VERSION_NAME, Build.VERSION.RELEASE);
         }
 
+    }
+
+    // Open the given web page using an intent
+    private void openWebpage(String url) {
+        Uri webUri = Uri.parse(url);
+        startActivity(new Intent(Intent.ACTION_VIEW, webUri));
     }
 
 }
