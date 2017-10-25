@@ -317,11 +317,12 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
         private SavedState(Parcel in) {
             super(in);
 
-            if (in == null) {
-                return;
+            mKeywordsState = new ArrayList<>();
+
+            if (in != null) {
+                in.readStringList(mKeywordsState);
             }
 
-            in.readStringList(mKeywordsState);
         }
 
         @Override
