@@ -19,7 +19,7 @@
 
     <declare-styleable name="ForegroundRelativeLayout">
         <attr name="android:foreground" />
-        <attr name="android:foregroundInsidePadding" />
+        <attr name="foregroundInsidePadding" format="boolean"/>
         <attr name="android:foregroundGravity" />
     </declare-styleable>
 

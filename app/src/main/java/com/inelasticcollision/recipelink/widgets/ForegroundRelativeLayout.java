@@ -57,7 +57,7 @@ public class ForegroundRelativeLayout extends RelativeLayout {
             setForeground(d);
         }
 
-        foregroundInPadding = a.getBoolean(R.styleable.ForegroundRelativeLayout_android_foregroundInsidePadding, true);
+        foregroundInPadding = a.getBoolean(R.styleable.ForegroundRelativeLayout_foregroundInsidePadding, true);
 
         a.recycle();
 
