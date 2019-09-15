@@ -10,20 +10,16 @@ package com.inelasticcollision.recipelink.ui.recipes;
 
 import android.content.Context;
 
-import com.inelasticcollision.recipelink.data.local.helper.BriteDatabaseHelper;
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
-import com.inelasticcollision.recipelink.data.local.provider.RecipeLocalDataProvider;
-import com.squareup.sqlbrite.BriteDatabase;
+import com.inelasticcollision.recipelink.di.AppDependencyProvider;
 
 class RecipesInjection {
 
     static void inject(Context context, RecipesContract.View view) {
 
-        BriteDatabase database = BriteDatabaseHelper.getInstance(context);
+        LocalDataProvider localDataProvider = AppDependencyProvider.provideLocalDataProvider(context);
 
-        LocalDataProvider dataProvider = new RecipeLocalDataProvider(database);
-
-        RecipesContract.Presenter presenter = new RecipesPresenter(view, dataProvider);
+        RecipesContract.Presenter presenter = new RecipesPresenter(view, localDataProvider);
 
         view.setPresenter(presenter);
 

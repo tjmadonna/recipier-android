@@ -10,13 +10,9 @@ package com.inelasticcollision.recipelink.ui.newrecipe;
 
 import android.content.Context;
 
-import com.inelasticcollision.recipelink.data.local.helper.BriteDatabaseHelper;
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
-import com.inelasticcollision.recipelink.data.local.provider.RecipeLocalDataProvider;
 import com.inelasticcollision.recipelink.data.remote.RemoteDataProvider;
-import com.inelasticcollision.recipelink.data.remote.ExtractionService;
-import com.inelasticcollision.recipelink.data.remote.ExtractionRemoteDataProvider;
-import com.squareup.sqlbrite.BriteDatabase;
+import com.inelasticcollision.recipelink.di.AppDependencyProvider;
 
 import java.util.ArrayList;
 
@@ -32,13 +28,9 @@ class NewRecipeInjection {
 
     static void inject(Context context, NewRecipeContract.View view, NewRecipeSavedState state) {
 
-        BriteDatabase database = BriteDatabaseHelper.getInstance(context);
+        LocalDataProvider localDataProvider = AppDependencyProvider.provideLocalDataProvider(context);
 
-        ExtractionService service = ExtractionRemoteDataProvider.buildExtractionService();
-
-        LocalDataProvider localDataProvider = new RecipeLocalDataProvider(database);
-
-        RemoteDataProvider remoteDataProvider = new ExtractionRemoteDataProvider(service);
+        RemoteDataProvider remoteDataProvider = AppDependencyProvider.provideRemoteDataProvider();
 
         NewRecipeContract.Presenter presenter = new NewRecipePresenter(view, localDataProvider, remoteDataProvider, state);
 
