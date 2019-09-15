@@ -6,7 +6,7 @@
  * Copyright © 2017 Tyler Madonna. All rights reserved.
  */
 
-package com.inelasticcollision.recipelink.data.local;
+package com.inelasticcollision.recipelink.data.local.table;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -23,24 +23,24 @@ import java.util.List;
 
 import rx.functions.Func1;
 
-final class RecipeTable implements BaseColumns {
+public final class RecipeTable implements BaseColumns {
 
     // Table name
-    static final String TABLE_NAME = "recipe";
+    public static final String TABLE_NAME = "recipe";
 
     // Columns
-    static final String COLUMN_DATE_ADDED = "date_added";
-    static final String COLUMN_DATE_UPDATED = "date_updated";
-    static final String COLUMN_TITLE = "title";
-    static final String COLUMN_URL = "link";
-    static final String COLUMN_IMAGE_URL = "photo_url";
-    static final String COLUMN_FAVORITE = "favorite";
-    static final String COLUMN_CATEGORY = "category";
-    static final String COLUMN_KEYWORDS = "keywords";
-    static final String COLUMN_NOTES = "notes";
+    public static final String COLUMN_DATE_ADDED = "date_added";
+    public static final String COLUMN_DATE_UPDATED = "date_updated";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_URL = "link";
+    public static final String COLUMN_IMAGE_URL = "photo_url";
+    public static final String COLUMN_FAVORITE = "favorite";
+    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_KEYWORDS = "keywords";
+    public static final String COLUMN_NOTES = "notes";
 
     // Columns for a recipe
-    static final String RECIPE_COLUMNS =
+    public static final String RECIPE_COLUMNS =
             TABLE_NAME + "." + _ID + ", " +
                     COLUMN_DATE_ADDED + ", " +
                     COLUMN_TITLE + ", " +
@@ -52,40 +52,40 @@ final class RecipeTable implements BaseColumns {
 
 
     // Columns indices for a recipe
-    static final int COL_RECIPE_ID = 0;
-    static final int COL_RECIPE_DATE_ADDED = 1;
-    static final int COL_RECIPE_TITLE = 2;
-    static final int COL_RECIPE_URL = 3;
-    static final int COL_RECIPE_IMAGE_URL = 4;
-    static final int COL_RECIPE_FAVORITE = 5;
-    static final int COL_RECIPE_KEYWORDS = 6;
-    static final int COL_RECIPE_NOTES = 7;
+    public static final int COL_RECIPE_ID = 0;
+    public static final int COL_RECIPE_DATE_ADDED = 1;
+    public static final int COL_RECIPE_TITLE = 2;
+    public static final int COL_RECIPE_URL = 3;
+    public static final int COL_RECIPE_IMAGE_URL = 4;
+    public static final int COL_RECIPE_FAVORITE = 5;
+    public static final int COL_RECIPE_KEYWORDS = 6;
+    public static final int COL_RECIPE_NOTES = 7;
 
-    static final String KEYWORDS_DELIMITER = "|";
+    public static final String KEYWORDS_DELIMITER = "|";
 
     // Queries
 
-    static String getRecipeIdQuery(int id) {
+    public static String getRecipeIdQuery(int id) {
         return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " WHERE " + TABLE_NAME + "." + _ID + " = " + String.valueOf(id) + " ORDER BY " + COLUMN_TITLE + " ASC";
     }
 
-    static String getAllRecipesQuery() {
+    public static String getAllRecipesQuery() {
         return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " ORDER BY " + COLUMN_TITLE + " COLLATE NOCASE";
     }
 
-    static String getFavoriteRecipesQuery() {
+    public static String getFavoriteRecipesQuery() {
         return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " WHERE " + COLUMN_FAVORITE + " = 1 ORDER BY " + COLUMN_TITLE + " COLLATE NOCASE";
     }
 
-    static String getRecipesSearchQuery(String searchTerm) {
+    public static String getRecipesSearchQuery(String searchTerm) {
         return "SELECT " + RECIPE_COLUMNS + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TITLE + " LIKE '%" + searchTerm + "%' OR " + COLUMN_KEYWORDS + " LIKE '%" + searchTerm + "%' ORDER BY " + COLUMN_TITLE + " COLLATE NOCASE";
     }
 
-    static String getRecipeWhereClause(int id) {
+    public static String getRecipeWhereClause(int id) {
         return TABLE_NAME + "." + _ID + " = " + String.valueOf(id);
     }
 
-    static ContentValues getRecipeAsContentValues(Recipe recipe) {
+    public static ContentValues getRecipeAsContentValues(Recipe recipe) {
 
         final long currentTime = new Date().getTime();
 
@@ -105,7 +105,7 @@ final class RecipeTable implements BaseColumns {
     }
 
     @NonNull
-    final static Func1<Cursor, Recipe> ONE_RECIPE_MAPPER = new Func1<Cursor, Recipe>() {
+    public final static Func1<Cursor, Recipe> ONE_RECIPE_MAPPER = new Func1<Cursor, Recipe>() {
         @Override
         public Recipe call(Cursor cursor) {
 
@@ -127,7 +127,7 @@ final class RecipeTable implements BaseColumns {
     };
 
     @NonNull
-    final static Func1<Cursor, List<Recipe>> RECIPE_MAPPER = new Func1<Cursor, List<Recipe>>() {
+    public final static Func1<Cursor, List<Recipe>> RECIPE_MAPPER = new Func1<Cursor, List<Recipe>>() {
         @Override
         public List<Recipe> call(Cursor cursor) {
 
@@ -157,7 +157,7 @@ final class RecipeTable implements BaseColumns {
         }
     };
 
-    static String keywordsListToString(List<String> keywords) {
+    public static String keywordsListToString(List<String> keywords) {
 
         if (keywords == null || keywords.isEmpty()) {
             return "";
@@ -183,7 +183,7 @@ final class RecipeTable implements BaseColumns {
 
     }
 
-    static List<String> keywordsStringToList(String keywords) {
+    public static List<String> keywordsStringToList(String keywords) {
 
         if (keywords == null || keywords.isEmpty()) {
             return Collections.emptyList();

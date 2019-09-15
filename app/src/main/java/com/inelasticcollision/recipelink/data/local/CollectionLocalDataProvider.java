@@ -8,6 +8,7 @@
 
 package com.inelasticcollision.recipelink.data.local;
 
+import com.inelasticcollision.recipelink.data.local.table.CollectionTable;
 import com.inelasticcollision.recipelink.data.models.Collection;
 import com.squareup.sqlbrite.BriteDatabase;
 

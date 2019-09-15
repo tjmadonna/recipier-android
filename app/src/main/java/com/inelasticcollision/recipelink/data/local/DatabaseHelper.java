@@ -12,6 +12,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.inelasticcollision.recipelink.data.local.table.CollectionTable;
+import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
+import com.inelasticcollision.recipelink.data.local.table.RelationshipTable;
+
 class DatabaseHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.

@@ -6,7 +6,7 @@
  * Copyright © 2017 Tyler Madonna. All rights reserved.
  */
 
-package com.inelasticcollision.recipelink.data.local;
+package com.inelasticcollision.recipelink.data.local.table;
 
 import android.database.Cursor;
 import android.provider.BaseColumns;
@@ -19,31 +19,31 @@ import java.util.List;
 
 import rx.functions.Func1;
 
-final class CollectionTable implements BaseColumns {
+public final class CollectionTable implements BaseColumns {
 
     // Table name
-    static final String TABLE_NAME = "collection";
+    public static final String TABLE_NAME = "collection";
 
     // Columns
-    static final String COLUMN_TITLE = "title";
-    static final String COLUMN_PHOTO_ID = "photo_id";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_PHOTO_ID = "photo_id";
 
     // Columns for a collection
-    static final String COLLECTION_COLUMNS =
+    public static final String COLLECTION_COLUMNS =
             TABLE_NAME + "." + _ID  + ", " +
                     COLUMN_TITLE;
 
     // Columns indices a collection
-    static final int COL_COLLECTION_ID = 0;
-    static final int COL_COLLECTION_TITLE = 1;
+    public static final int COL_COLLECTION_ID = 0;
+    public static final int COL_COLLECTION_TITLE = 1;
 
     // Queries
 
-    static String getAllCollectionsQuery() {
+    public static String getAllCollectionsQuery() {
         return "SELECT " + COLLECTION_COLUMNS + " FROM " + TABLE_NAME + " ORDER BY " + COLUMN_TITLE + " ASC";
     }
 
-    final static Func1<Cursor, List<Collection>> COLLECTION_MAPPER = new Func1<Cursor, List<Collection>>() {
+    public final static Func1<Cursor, List<Collection>> COLLECTION_MAPPER = new Func1<Cursor, List<Collection>>() {
         @Override
         public List<Collection> call(Cursor cursor) {
 

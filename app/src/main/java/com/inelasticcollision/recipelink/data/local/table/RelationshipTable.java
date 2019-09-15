@@ -6,7 +6,7 @@
  * Copyright © 2017 Tyler Madonna. All rights reserved.
  */
 
-package com.inelasticcollision.recipelink.data.local;
+package com.inelasticcollision.recipelink.data.local.table;
 
 import android.database.Cursor;
 import android.provider.BaseColumns;
@@ -20,34 +20,34 @@ import java.util.List;
 
 import rx.functions.Func1;
 
-final class RelationshipTable implements BaseColumns {
+public final class RelationshipTable implements BaseColumns {
 
     // Table name
-    static final String TABLE_NAME = "recipe_collection_relationship";
+    public static final String TABLE_NAME = "recipe_collection_relationship";
 
     // Columns
-    static final String COLUMN_RECIPE_ID = "recipe_id";
-    static final String COLUMN_COLLECTION_ID = "collection_id";
+    public static final String COLUMN_RECIPE_ID = "recipe_id";
+    public static final String COLUMN_COLLECTION_ID = "collection_id";
 
     // Columns for a recipe relationship
-    static final String RELATIONSHIP_COLUMNS =
+    public static final String RELATIONSHIP_COLUMNS =
             TABLE_NAME + "." + _ID + ", " +
                     COLUMN_RECIPE_ID + ", " +
                     COLUMN_COLLECTION_ID;
 
 
     // Columns indices for a recipe relationship
-    static final int COL_RELATIONSHIP_ID = 0;
-    static final int COL_RELATIONSHIP_RECIPE_ID = 1;
-    static final int COL_RELATIONSHIP_COLLECTION_ID = 2;
+    public static final int COL_RELATIONSHIP_ID = 0;
+    public static final int COL_RELATIONSHIP_RECIPE_ID = 1;
+    public static final int COL_RELATIONSHIP_COLLECTION_ID = 2;
 
     // Queries
 
-    static String getAllRelationshipQuery() {
+    public static String getAllRelationshipQuery() {
         return "SELECT " + RELATIONSHIP_COLUMNS + " FROM " + TABLE_NAME + " ORDER BY " + COLUMN_RECIPE_ID + " ASC";
     }
 
-    final static Func1<Cursor, List<Relationship>> RELATIONSHIP_MAPPER = new Func1<Cursor, List<Relationship>>() {
+    public final static Func1<Cursor, List<Relationship>> RELATIONSHIP_MAPPER = new Func1<Cursor, List<Relationship>>() {
         @Override
         public List<Relationship> call(Cursor cursor) {
 

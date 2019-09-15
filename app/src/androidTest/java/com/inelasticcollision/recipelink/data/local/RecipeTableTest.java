@@ -11,6 +11,7 @@ package com.inelasticcollision.recipelink.data.local;
 import android.content.ContentValues;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
 import com.inelasticcollision.recipelink.data.models.Recipe;
 
 import org.junit.After;
