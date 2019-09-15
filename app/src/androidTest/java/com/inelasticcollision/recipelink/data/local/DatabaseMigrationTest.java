@@ -19,9 +19,7 @@ import com.inelasticcollision.recipelink.data.local.provider.RecipeLocalDataProv
 import com.inelasticcollision.recipelink.data.local.table.legacy.CollectionTable;
 import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
 import com.inelasticcollision.recipelink.data.local.table.legacy.RelationshipTable;
-import com.inelasticcollision.recipelink.data.models.Collection;
 import com.inelasticcollision.recipelink.data.models.Recipe;
-import com.inelasticcollision.recipelink.data.models.Relationship;
 import com.inelasticcollision.recipelink.data.preference.PreferenceProvider;
 import com.inelasticcollision.recipelink.data.preference.SharedPreferenceProvider;
 import com.squareup.sqlbrite.BriteDatabase;
