@@ -15,9 +15,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.inelasticcollision.recipelink.data.local.helper.DatabaseHelper;
 import com.inelasticcollision.recipelink.data.local.provider.RecipeLocalDataProvider;
-import com.inelasticcollision.recipelink.data.local.table.CollectionTable;
+import com.inelasticcollision.recipelink.data.local.table.legacy.CollectionTable;
 import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
-import com.inelasticcollision.recipelink.data.local.table.RelationshipTable;
+import com.inelasticcollision.recipelink.data.local.table.legacy.RelationshipTable;
 import com.inelasticcollision.recipelink.data.models.Recipe;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;

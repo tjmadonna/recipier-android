@@ -11,9 +11,9 @@ package com.inelasticcollision.recipelink.data.local;
 import android.content.ContentValues;
 import androidx.annotation.NonNull;
 
-import com.inelasticcollision.recipelink.data.local.table.CollectionTable;
+import com.inelasticcollision.recipelink.data.local.table.legacy.CollectionTable;
 import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
-import com.inelasticcollision.recipelink.data.local.table.RelationshipTable;
+import com.inelasticcollision.recipelink.data.local.table.legacy.RelationshipTable;
 import com.inelasticcollision.recipelink.data.models.Collection;
 import com.inelasticcollision.recipelink.data.models.Recipe;
 import com.inelasticcollision.recipelink.data.models.Relationship;

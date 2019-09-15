@@ -13,7 +13,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.inelasticcollision.recipelink.data.local.helper.DatabaseHelper;
-import com.inelasticcollision.recipelink.data.local.table.CollectionTable;
+import com.inelasticcollision.recipelink.data.local.table.legacy.CollectionTable;
 
 import org.junit.After;
 import org.junit.Assert;

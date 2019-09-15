@@ -12,9 +12,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.inelasticcollision.recipelink.data.local.table.CollectionTable;
 import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
-import com.inelasticcollision.recipelink.data.local.table.RelationshipTable;
 
 class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -30,8 +28,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         createRecipeTable(db);
-        createCollectionTable(db);
-        createRecipeCategoryRelationshipTable(db);
     }
 
     @Override
@@ -39,12 +35,9 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
         switch (oldVersion) {
             case 1:
-                createCollectionTable(db);
-                createRecipeCategoryRelationshipTable(db);
             case 2:
 
         }
-
     }
 
     private void createRecipeTable(SQLiteDatabase db) {
@@ -63,24 +56,4 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_RECIPE_TABLE);
     }
-
-    private void createCollectionTable(SQLiteDatabase db) {
-        final String SQL_CREATE_COLLECTION_TABLE = "CREATE TABLE " + CollectionTable.TABLE_NAME + " (" +
-                CollectionTable._ID + " INTEGER PRIMARY KEY, " +
-                CollectionTable.COLUMN_TITLE + " TEXT NOT NULL, " +
-                CollectionTable.COLUMN_PHOTO_ID + " TEXT NOT NULL, " +
-                " UNIQUE (" + CollectionTable.COLUMN_TITLE + ") ON CONFLICT ABORT);";
-
-        db.execSQL(SQL_CREATE_COLLECTION_TABLE);
-    }
-
-    private void createRecipeCategoryRelationshipTable(SQLiteDatabase db) {
-        final String SQL_CREATE_RELATIONSHIP_TABLE = "CREATE TABLE " + RelationshipTable.TABLE_NAME + " (" +
-                RelationshipTable._ID + " INTEGER PRIMARY KEY, " +
-                RelationshipTable.COLUMN_RECIPE_ID + " INTEGER NOT NULL, " +
-                RelationshipTable.COLUMN_COLLECTION_ID + " INTEGER NOT NULL);";
-
-        db.execSQL(SQL_CREATE_RELATIONSHIP_TABLE);
-    }
-
 }
