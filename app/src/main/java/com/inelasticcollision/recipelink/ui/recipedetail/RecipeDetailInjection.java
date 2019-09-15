@@ -10,7 +10,7 @@ package com.inelasticcollision.recipelink.ui.recipedetail;
 
 import android.content.Context;
 
-import com.inelasticcollision.recipelink.data.local.BriteDatabaseHelper;
+import com.inelasticcollision.recipelink.data.local.helper.BriteDatabaseHelper;
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
 import com.inelasticcollision.recipelink.data.local.RecipeLocalDataProvider;
 import com.squareup.sqlbrite.BriteDatabase;

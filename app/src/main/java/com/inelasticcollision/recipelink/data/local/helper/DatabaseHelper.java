@@ -6,7 +6,7 @@
  * Copyright © 2017 Tyler Madonna. All rights reserved.
  */
 
-package com.inelasticcollision.recipelink.data.local;
+package com.inelasticcollision.recipelink.data.local.helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

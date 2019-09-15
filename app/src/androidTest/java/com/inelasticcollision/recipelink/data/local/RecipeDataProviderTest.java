@@ -13,6 +13,7 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.inelasticcollision.recipelink.data.local.helper.DatabaseHelper;
 import com.inelasticcollision.recipelink.data.local.table.CollectionTable;
 import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
 import com.inelasticcollision.recipelink.data.local.table.RelationshipTable;

@@ -12,6 +12,8 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.inelasticcollision.recipelink.data.local.helper.DatabaseHelper;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
