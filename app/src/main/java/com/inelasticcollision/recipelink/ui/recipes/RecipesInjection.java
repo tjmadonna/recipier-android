@@ -12,7 +12,7 @@ import android.content.Context;
 
 import com.inelasticcollision.recipelink.data.local.helper.BriteDatabaseHelper;
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
-import com.inelasticcollision.recipelink.data.local.RecipeLocalDataProvider;
+import com.inelasticcollision.recipelink.data.local.provider.RecipeLocalDataProvider;
 import com.squareup.sqlbrite.BriteDatabase;
 
 class RecipesInjection {
