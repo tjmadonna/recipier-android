@@ -8,7 +8,7 @@
 
 package com.inelasticcollision.recipelink.recipedetail;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
@@ -18,7 +18,6 @@ import com.inelasticcollision.recipelink.data.models.Recipe;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 

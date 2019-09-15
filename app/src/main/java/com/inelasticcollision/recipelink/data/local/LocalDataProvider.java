@@ -8,7 +8,7 @@
 
 package com.inelasticcollision.recipelink.data.local;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.inelasticcollision.recipelink.data.models.Recipe;
 

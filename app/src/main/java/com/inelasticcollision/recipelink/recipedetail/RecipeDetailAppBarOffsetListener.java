@@ -9,7 +9,7 @@
 package com.inelasticcollision.recipelink.recipedetail;
 
 import android.animation.Animator;
-import android.support.design.widget.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout;
 import android.view.View;
 
 final class RecipeDetailAppBarOffsetListener implements AppBarLayout.OnOffsetChangedListener {

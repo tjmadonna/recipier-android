@@ -9,7 +9,7 @@
 package com.inelasticcollision.recipelink.data.local;
 
 import android.content.ContentValues;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.inelasticcollision.recipelink.data.models.Recipe;
 

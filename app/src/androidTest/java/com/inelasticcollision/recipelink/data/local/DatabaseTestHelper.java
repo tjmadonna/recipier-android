@@ -9,8 +9,7 @@
 package com.inelasticcollision.recipelink.data.local;
 
 import android.content.ContentValues;
-import android.support.annotation.NonNull;
-import android.util.Log;
+import androidx.annotation.NonNull;
 
 import com.inelasticcollision.recipelink.data.models.Collection;
 import com.inelasticcollision.recipelink.data.models.Recipe;

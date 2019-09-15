@@ -11,7 +11,7 @@ package com.inelasticcollision.recipelink.data.local;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.inelasticcollision.recipelink.data.models.Recipe;
 

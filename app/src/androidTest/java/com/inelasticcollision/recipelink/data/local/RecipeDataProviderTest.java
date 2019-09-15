@@ -10,10 +10,9 @@ package com.inelasticcollision.recipelink.data.local;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.inelasticcollision.recipelink.data.models.Collection;
 import com.inelasticcollision.recipelink.data.models.Recipe;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;

@@ -10,7 +10,7 @@ package com.inelasticcollision.recipelink.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.design.widget.CollapsingToolbarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import android.util.AttributeSet;
 
 import com.inelasticcollision.recipelink.R;

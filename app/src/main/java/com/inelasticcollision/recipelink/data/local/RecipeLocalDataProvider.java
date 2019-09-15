@@ -9,7 +9,7 @@
 package com.inelasticcollision.recipelink.data.local;
 
 import android.content.ContentValues;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.inelasticcollision.recipelink.data.models.Recipe;
 import com.squareup.sqlbrite.BriteDatabase;
