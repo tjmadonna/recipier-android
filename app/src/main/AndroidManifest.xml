@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:theme="@style/AppTheme.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".newrecipe.NewRecipeActivity"
+            android:name=".ui.newrecipe.NewRecipeActivity"
             android:label="@string/title_new_recipe"
             android:theme="@style/AppTheme.NewRecipe">
             <intent-filter>
@@ -44,21 +44,21 @@
         </activity>
 
         <activity
-            android:name=".editrecipe.EditRecipeActivity"
+            android:name=".ui.editrecipe.EditRecipeActivity"
             android:label="@string/title_edit_recipe"
             android:theme="@style/AppTheme.NewRecipe" />
 
         <activity
-            android:name=".recipedetail.RecipeDetailActivity"
+            android:name=".ui.recipedetail.RecipeDetailActivity"
             android:theme="@style/AppTheme.RecipeDetail" />
 
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_settings"
             android:theme="@style/AppTheme.Settings" />
 
         <activity
-            android:name=".main.MigrationActivity"
+            android:name=".ui.main.MigrationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Main" />

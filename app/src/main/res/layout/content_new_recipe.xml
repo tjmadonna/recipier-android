@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:visibility="visible">
 
-            <com.inelasticcollision.recipelink.widgets.AspectRatioView
+            <com.inelasticcollision.recipelink.ui.common.widgets.AspectRatioView
                 android:id="@+id/new_recipe_image_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                     android:indeterminate="true"
                     android:visibility="gone" />
 
-            </com.inelasticcollision.recipelink.widgets.AspectRatioView>
+            </com.inelasticcollision.recipelink.ui.common.widgets.AspectRatioView>
 
             <Button
                 android:id="@+id/new_recipe_change_image"
@@ -168,7 +168,7 @@
 
             </FrameLayout>
 
-            <com.inelasticcollision.recipelink.widgets.KeywordsLinearLayout
+            <com.inelasticcollision.recipelink.ui.common.widgets.KeywordsLinearLayout
                 android:id="@+id/new_recipe_collections_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

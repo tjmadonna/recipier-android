@@ -16,7 +16,7 @@
         android:shortcutShortLabel="@string/title_shortcut_favorite_short">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.inelasticcollision.recipelink.main.MainActivity"
+            android:targetClass="com.inelasticcollision.recipelink.ui.main.MainActivity"
             android:targetPackage="com.inelasticcollision.recipelink">
 
             <extra
@@ -37,7 +37,7 @@
         android:shortcutShortLabel="@string/title_shortcut_search_short">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.inelasticcollision.recipelink.main.MainActivity"
+            android:targetClass="com.inelasticcollision.recipelink.ui.main.MainActivity"
             android:targetPackage="com.inelasticcollision.recipelink">
 
             <extra

@@ -12,5 +12,5 @@
     android:id="@+id/recipe_detail_activity_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.inelasticcollision.recipelink.newrecipe.NewRecipeActivity"
+    tools:context=".ui.newrecipe.NewRecipeActivity"
     tools:ignore="MergeRootFrame" />

@@ -7,7 +7,7 @@
   ~ Copyright © 2017 Tyler Madonna. All rights reserved.
   -->
 
-<com.inelasticcollision.recipelink.widgets.ForegroundRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.inelasticcollision.recipelink.ui.common.widgets.ForegroundRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
@@ -59,4 +59,4 @@
         android:maxLines="1"
         tools:text="budgetbytes.com" />
 
-</com.inelasticcollision.recipelink.widgets.ForegroundRelativeLayout>
+</com.inelasticcollision.recipelink.ui.common.widgets.ForegroundRelativeLayout>

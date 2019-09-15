@@ -89,7 +89,7 @@
 
         </FrameLayout>
 
-        <com.inelasticcollision.recipelink.widgets.KeywordsLinearLayout
+        <com.inelasticcollision.recipelink.ui.common.widgets.KeywordsLinearLayout
             android:id="@+id/recipe_collections_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
