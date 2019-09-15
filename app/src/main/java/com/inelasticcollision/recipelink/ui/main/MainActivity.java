@@ -108,17 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void migrateDatabase() {
-
-        PreferenceProvider preferenceProvider = new SharedPreferenceProvider(PreferenceManager.getDefaultSharedPreferences(this));
-
-        if (preferenceProvider.shouldMigrateToVersion12Database()) {
-            Intent intent = MigrationActivity.createIntent(this);
-            startActivity(intent);
-        }
-
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -129,8 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mListener.activateSearchView();
             mActivateSearchView = false;
         }
-
-        migrateDatabase();
 
     }
 
