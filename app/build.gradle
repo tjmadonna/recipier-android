@@ -13,6 +13,16 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    // Import api keys from keystore.properties file
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'REMOTE_SERVICE_API_KEY', keystoreProperties['RemoteServiceApiKey']
+        it.buildConfigField 'String', 'REMOTE_SERVICE_BASE_URL', keystoreProperties['RemoteServiceBaseUrl']
+    }
+
     buildTypes {
         debug {
             minifyEnabled false

@@ -16,7 +16,7 @@ import retrofit2.http.Query;
 
 public interface ExtractionService {
 
-    @GET("details?key=aVmGgN9pLir9e2mxdRZnHsqanZut3moCnTmz28bm")
+    @GET("api/v1/fullinfo")
     Observable<Response> extractRecipe(@Query("url") String url);
 
 }
