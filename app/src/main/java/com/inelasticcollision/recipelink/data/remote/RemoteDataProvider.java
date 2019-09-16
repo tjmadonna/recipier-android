@@ -10,7 +10,7 @@ package com.inelasticcollision.recipelink.data.remote;
 
 import com.inelasticcollision.recipelink.data.remote.models.Result;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface RemoteDataProvider {
 

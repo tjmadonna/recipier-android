@@ -10,10 +10,10 @@ package com.inelasticcollision.recipelink.data.local.helper;
 
 import android.content.Context;
 
-import com.squareup.sqlbrite.BriteDatabase;
-import com.squareup.sqlbrite.SqlBrite;
+import com.squareup.sqlbrite2.BriteDatabase;
+import com.squareup.sqlbrite2.SqlBrite;
 
-import rx.schedulers.Schedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class BriteDatabaseHelper {
 
@@ -26,7 +26,7 @@ public class BriteDatabaseHelper {
             DatabaseHelper helper = new DatabaseHelper(context);
 
             SqlBrite sqlBrite = new SqlBrite.Builder().build();
-
+            
             INSTANCE = sqlBrite.wrapDatabaseHelper(helper, Schedulers.io());
 
         }

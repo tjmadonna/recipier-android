@@ -18,11 +18,11 @@ import com.inelasticcollision.recipelink.data.remote.models.Result;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 class NewRecipePresenter implements NewRecipeContract.Presenter {
 
@@ -32,7 +32,7 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
 
     private final RemoteDataProvider mRemoteDataProvider;
 
-    private final CompositeSubscription mSubscriptions;
+    private final CompositeDisposable mCompositeDisposable;
 
     private NewRecipeSavedState mState;
 
@@ -40,7 +40,7 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
         mView = view;
         mLocalDataProvider = localDataProvider;
         mRemoteDataProvider = remoteDataProvider;
-        mSubscriptions = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
         restoreState(view, state);
     }
 
@@ -62,7 +62,7 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
 
     @Override
     public void onUnsubscribe() {
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
     }
 
     @Override
@@ -72,52 +72,35 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
 
         mView.showMainLoadingIndicator(true);
 
-        Subscription subscription = mRemoteDataProvider.getRecipeInformation(url)
+        Disposable disposable = mRemoteDataProvider.getRecipeInformation(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Result>() {
-
+                .subscribeWith(new DisposableObserver<Result>() {
                     @Override
                     public void onNext(Result result) {
-
                         mState.images = result.getImages();
-
                         String imageUrl = result.getImages().get(0);
-
                         mState.selectedImage = imageUrl;
-
                         mView.showMainImage(imageUrl);
-
                         mView.showTitle(result.getTitle());
-
                         mView.showUrl(url);
-
                         mState.needsExtracting = false;
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
                         Log.e("NewRecipePresenter", e.getMessage(), e);
-
                         mView.showExtractionErrorMessage();
-
                         mView.showMainLoadingIndicator(false);
-
                         mState.needsExtracting = false;
-
                     }
 
                     @Override
-                    public void onCompleted() {
-
+                    public void onComplete() {
                     }
-
                 });
 
-        mSubscriptions.add(subscription);
-
+        mCompositeDisposable.add(disposable);
     }
 
     @Override
@@ -171,50 +154,44 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
             keywords = new ArrayList<>();
         }
 
-        Recipe recipe = new Recipe(title, url, mState.selectedImage , mState.favorite ? 1 : 0, keywords, notes);
+        Recipe recipe = new Recipe(title, url, mState.selectedImage, mState.favorite ? 1 : 0, keywords, notes);
 
-        Subscription subscription = mLocalDataProvider.saveRecipe(recipe)
+        Disposable disposable = mLocalDataProvider.saveRecipe(recipe)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Long>() {
-
+                .subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long aLong) {
-
                         if (aLong > 0) {
                             mView.finishView();
                             return;
                         }
-
                         mView.showDatabaseErrorMessage();
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
                         Log.e("NewRecipePresenter", e.getMessage(), e);
-
                         mView.showDatabaseErrorMessage();
-
                     }
 
                     @Override
-                    public void onCompleted() {
-
+                    public void onComplete() {
                     }
-
                 });
 
-        mSubscriptions.add(subscription);
-
+        mCompositeDisposable.add(disposable);
     }
 
     @Override
-    public void handleCloseClick() { mView.showCloseDialog(); }
+    public void handleCloseClick() {
+        mView.showCloseDialog();
+    }
 
     @Override
-    public void handleCloseView() { mView.finishView(); }
+    public void handleCloseView() {
+        mView.finishView();
+    }
 
     @Override
     public NewRecipeSavedState handleSavedState() {

@@ -8,7 +8,6 @@
 
 package com.inelasticcollision.recipelink.ui.recipes;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.Log;
 
@@ -17,12 +16,12 @@ import com.inelasticcollision.recipelink.data.models.Recipe;
 
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 class RecipesPresenter implements RecipesContract.Presenter {
 
@@ -30,12 +29,12 @@ class RecipesPresenter implements RecipesContract.Presenter {
 
     private final LocalDataProvider mDataProvider;
 
-    private final CompositeSubscription mSubscriptions;
+    private final CompositeDisposable mCompositeDisposable;
 
     RecipesPresenter(RecipesContract.View view, LocalDataProvider dataProvider) {
         mView = view;
         mDataProvider = dataProvider;
-        mSubscriptions = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -45,13 +44,13 @@ class RecipesPresenter implements RecipesContract.Presenter {
 
     @Override
     public void onUnsubscribe() {
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
     }
 
     @Override
     public void handleLoadRecipes(int sortType, @Nullable String search) {
 
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
 
         Observable<List<Recipe>> recipeObservable = null;
 
@@ -85,44 +84,34 @@ class RecipesPresenter implements RecipesContract.Presenter {
 
         if (recipeObservable != null) {
 
-            Subscription subscription = recipeObservable
+            Disposable disposable = recipeObservable
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<List<Recipe>>() {
-
+                    .subscribeWith(new DisposableObserver<List<Recipe>>() {
                         @Override
-                        public void onNext(@NonNull List<Recipe> recipes) {
-
+                        public void onNext(List<Recipe> recipes) {
                             if (recipes.size() < 1) {
                                 mView.showRecipes(recipes);
                                 mView.showEmptyContentMessage();
                                 return;
                             }
-
                             mView.showRecipes(recipes);
-
                         }
 
                         @Override
                         public void onError(Throwable e) {
-
                             Log.e("RecipesPresenter", e.getMessage(), e);
-
                             mView.showEmptyContentMessage();
-
                         }
 
                         @Override
-                        public void onCompleted() {
+                        public void onComplete() {
 
                         }
-
                     });
 
-            mSubscriptions.add(subscription);
-
+            mCompositeDisposable.add(disposable);
         }
-
     }
 
     @Override

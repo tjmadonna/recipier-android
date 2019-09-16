@@ -10,9 +10,9 @@ package com.inelasticcollision.recipelink.data.remote;
 
 import com.inelasticcollision.recipelink.data.remote.models.Response;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 public interface ExtractionService {
 

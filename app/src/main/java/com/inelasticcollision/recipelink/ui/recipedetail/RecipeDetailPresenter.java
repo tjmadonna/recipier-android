@@ -8,18 +8,16 @@
 
 package com.inelasticcollision.recipelink.ui.recipedetail;
 
-import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
 import com.inelasticcollision.recipelink.data.models.Recipe;
 
-
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
 
@@ -29,41 +27,35 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
 
     private final int mRecipeId;
 
-    private final CompositeSubscription mSubscriptions;
+    private final CompositeDisposable mCompositeDisposable;
 
     public RecipeDetailPresenter(RecipeDetailContract.View view, LocalDataProvider dataProvider, int recipeId) {
         mView = view;
         mDataProvider = dataProvider;
         mRecipeId = recipeId;
-        mSubscriptions = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     @Override
     public void handleLoadRecipes() {
 
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
 
-        Subscription subscription = mDataProvider.loadRecipe(mRecipeId)
+        Disposable disposable = mDataProvider.loadRecipe(mRecipeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Recipe>() {
-
+                .subscribeWith(new DisposableObserver<Recipe>() {
                     @Override
-                    public void onNext(@Nullable Recipe recipe) {
-
+                    public void onNext(Recipe recipe) {
                         if (recipe == null) {
                             mView.showErrorMessage();
                             return;
                         }
 
                         mView.showImageLoadingIndicator(true);
-
                         mView.showMainImage(recipe.getImageUrl());
-
                         mView.showFavoriteIcon(recipe.isFavorite());
-
                         mView.showTitle(recipe.getTitle());
-
                         mView.showUrl(recipe.getUrl());
 
                         if (recipe.getNotes().isEmpty()) {
@@ -77,27 +69,21 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
                         } else {
                             mView.showKeywords(recipe.getKeywords());
                         }
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
                         Log.e("RecipeDetailPresenter", e.getMessage(), e);
-
                         mView.showErrorMessage();
-
                     }
 
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
 
                     }
-
                 });
 
-        mSubscriptions.add(subscription);
-
+        mCompositeDisposable.add(disposable);
     }
 
     @Override
@@ -112,13 +98,12 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
 
     @Override
     public void handleDeleteRecipe() {
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
 
-        Subscription subscription = mDataProvider.deleteRecipe(mRecipeId)
+        Disposable disposable = mDataProvider.deleteRecipe(mRecipeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Boolean>() {
-
+                .subscribeWith(new DisposableObserver<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         if (aBoolean) {
@@ -134,20 +119,18 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
                     }
 
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
 
                     }
-
                 });
 
-        mSubscriptions.add(subscription);
-
+        mCompositeDisposable.add(disposable);
     }
 
     @Override
     public void onSubscribe() { }
 
     @Override
-    public void onUnsubscribe() { mSubscriptions.clear(); }
+    public void onUnsubscribe() { mCompositeDisposable.clear(); }
 
 }

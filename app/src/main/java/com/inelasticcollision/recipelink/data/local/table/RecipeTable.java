@@ -11,6 +11,7 @@ package com.inelasticcollision.recipelink.data.local.table;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
+
 import androidx.annotation.NonNull;
 
 import com.inelasticcollision.recipelink.data.models.Recipe;
@@ -21,7 +22,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import rx.functions.Func1;
+import io.reactivex.annotations.Nullable;
+import io.reactivex.functions.Function;
 
 public final class RecipeTable implements BaseColumns {
 
@@ -105,10 +107,9 @@ public final class RecipeTable implements BaseColumns {
     }
 
     @NonNull
-    public final static Func1<Cursor, Recipe> ONE_RECIPE_MAPPER = new Func1<Cursor, Recipe>() {
+    public final static Function<Cursor, Recipe> SINGLE_RECIPE_MAPPER = new Function<Cursor, Recipe>() {
         @Override
-        public Recipe call(Cursor cursor) {
-
+        public Recipe apply(@Nullable Cursor cursor) throws Exception {
             if (cursor == null) {
                 return null;
             }
@@ -122,15 +123,13 @@ public final class RecipeTable implements BaseColumns {
                     cursor.getInt(COL_RECIPE_FAVORITE),
                     keywordsStringToList(cursor.getString(COL_RECIPE_KEYWORDS)),
                     cursor.getString(COL_RECIPE_NOTES));
-
         }
     };
 
     @NonNull
-    public final static Func1<Cursor, List<Recipe>> RECIPE_MAPPER = new Func1<Cursor, List<Recipe>>() {
+    public final static Function<Cursor, List<Recipe>> RECIPE_MAPPER = new Function<Cursor, List<Recipe>>() {
         @Override
-        public List<Recipe> call(Cursor cursor) {
-
+        public List<Recipe> apply(@Nullable Cursor cursor) throws Exception {
             if (cursor == null) {
                 return Collections.emptyList();
             }

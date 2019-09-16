@@ -9,19 +9,19 @@
 package com.inelasticcollision.recipelink.data.local.provider;
 
 import android.content.ContentValues;
+
 import androidx.annotation.Nullable;
 
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
 import com.inelasticcollision.recipelink.data.local.table.RecipeTable;
 import com.inelasticcollision.recipelink.data.models.Recipe;
-import com.squareup.sqlbrite.BriteDatabase;
+import com.squareup.sqlbrite2.BriteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 public class RecipeLocalDataProvider implements LocalDataProvider {
 
@@ -67,7 +67,7 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     public Observable<Recipe> loadRecipe(int id) {
         return mDatabase
                 .createQuery(RecipeTable.TABLE_NAME, RecipeTable.getRecipeIdQuery(id))
-                .mapToOneOrDefault(RecipeTable.ONE_RECIPE_MAPPER, null);
+                .mapToOne(RecipeTable.SINGLE_RECIPE_MAPPER);
     }
 
     // Recipe save
@@ -119,7 +119,6 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
         }
 
         return insertCount;
-
     }
 
     // Recipe delete
@@ -127,10 +126,10 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     @Override
     public Observable<Boolean> deleteRecipe(final int id) {
         return Observable.just(mDatabase.delete(RecipeTable.TABLE_NAME, RecipeTable.getRecipeWhereClause(id)))
-                .flatMap(new Func1<Integer, Observable<Boolean>>() {
+                .map(new Function<Integer, Boolean>() {
                     @Override
-                    public Observable<Boolean> call(Integer integer) {
-                        return Observable.just(integer > 0);
+                    public Boolean apply(Integer integer) throws Exception {
+                        return integer > 0;
                     }
                 });
     }
