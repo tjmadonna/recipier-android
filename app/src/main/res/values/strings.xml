@@ -43,7 +43,7 @@
     <string name="prompt_error_no_email">There are no email apps installed</string>
     <string name="prompt_app_updating">Updating Recipe Link. Please wait&#8230;</string>
     <string name="prompt_no_notes">No notes found</string>
-    <string name="prompt_no_keywords">No keywords found</string>
+    <string name="prompt_no_keywords">No collection found</string>
     <string name="prompt_delete_recipe">Delete recipe?</string>
     <string name="prompt_discard_recipe">Discard recipe?</string>
     <string name="prompt_discard_changes">Discard changes?</string>
