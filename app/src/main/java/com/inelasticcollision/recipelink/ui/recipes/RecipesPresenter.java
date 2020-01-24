@@ -76,7 +76,7 @@ class RecipesPresenter implements RecipesContract.Presenter {
 
                 Log.d("Presenter", "Getting recipes for search type " + search);
 
-                recipeObservable = mDataProvider.searchRecipes(search);
+                recipeObservable = mDataProvider.getRecipesBySearchTerm(search);
 
                 break;
 

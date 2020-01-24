@@ -53,7 +53,7 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     }
 
     @Override
-    public Observable<List<Recipe>> searchRecipes(@Nullable String searchTerm) {
+    public Observable<List<Recipe>> getRecipesBySearchTerm(@Nullable String searchTerm) {
 
         if (searchTerm == null) {
             searchTerm = "";
