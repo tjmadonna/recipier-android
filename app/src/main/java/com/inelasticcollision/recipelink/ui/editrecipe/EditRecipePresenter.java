@@ -18,9 +18,11 @@ import com.inelasticcollision.recipelink.data.remote.models.Result;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -202,25 +204,16 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
         Disposable disposable = mLocalDataProvider.saveRecipe(recipe)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<Long>() {
+                .subscribeWith(new DisposableCompletableObserver() {
                     @Override
-                    public void onNext(Long aLong) {
-                        if (aLong > 0) {
-                            mView.finishView();
-                            return;
-                        }
-                        mView.showErrorMessage();
+                    public void onComplete() {
+                        mView.finishView();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e("NewRecipePresenter", e.getMessage(), e);
-                        mView.showErrorMessage(e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                        mView.showErrorMessage();
                     }
                 });
 

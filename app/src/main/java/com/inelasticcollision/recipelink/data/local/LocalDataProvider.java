@@ -14,6 +14,7 @@ import com.inelasticcollision.recipelink.data.models.Recipe;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 public interface LocalDataProvider {
@@ -26,7 +27,7 @@ public interface LocalDataProvider {
 
     Observable<Recipe> loadRecipe(int id);
 
-    Observable<Long> saveRecipe(Recipe recipe);
+    Completable saveRecipe(Recipe recipe);
 
     Observable<Boolean> deleteRecipe(int id);
 

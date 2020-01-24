@@ -9,6 +9,7 @@
 package com.inelasticcollision.recipelink.data.local.provider;
 
 import android.content.ContentValues;
+import android.database.sqlite.SQLiteException;
 
 import androidx.annotation.Nullable;
 
@@ -19,7 +20,10 @@ import com.squareup.sqlbrite2.BriteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableSource;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
@@ -73,10 +77,18 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     // Recipe save
 
     @Override
-    public Observable<Long> saveRecipe(Recipe recipe) {
+    public Completable saveRecipe(final Recipe recipe) {
+        return Completable.defer(new Callable<CompletableSource>() {
+            @Override
+            public CompletableSource call() throws Exception {
 
-        return Observable.just(saveRecipeHelper(recipe));
-
+                if (saveRecipeHelper(recipe) > 0) {
+                    return Completable.complete();
+                } else {
+                    return Completable.error(new SQLiteException("Unable to save recipes"));
+                }
+            }
+        });
     }
 
     private Long saveRecipeHelper(Recipe recipe) {
