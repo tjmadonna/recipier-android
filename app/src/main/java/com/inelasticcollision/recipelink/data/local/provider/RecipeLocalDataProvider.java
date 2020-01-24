@@ -38,7 +38,7 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     // Recipe queries
 
     @Override
-    public Observable<List<Recipe>> loadAllRecipes() {
+    public Observable<List<Recipe>> getAllRecipes() {
         return mDatabase
                 .createQuery(RecipeTable.TABLE_NAME, RecipeTable.getAllRecipesQuery())
                 .mapToOneOrDefault(RecipeTable.RECIPE_MAPPER, new ArrayList<Recipe>(0));

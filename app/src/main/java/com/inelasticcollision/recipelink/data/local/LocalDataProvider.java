@@ -20,7 +20,7 @@ import io.reactivex.Single;
 
 public interface LocalDataProvider {
 
-    Observable<List<Recipe>> loadAllRecipes();
+    Observable<List<Recipe>> getAllRecipes();
 
     Observable<List<Recipe>> loadFavoriteRecipes();
 

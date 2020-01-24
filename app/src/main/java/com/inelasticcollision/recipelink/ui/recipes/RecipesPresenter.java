@@ -60,7 +60,7 @@ class RecipesPresenter implements RecipesContract.Presenter {
 
                 Log.d("Presenter", "Getting all recipes");
 
-                recipeObservable = mDataProvider.loadAllRecipes();
+                recipeObservable = mDataProvider.getAllRecipes();
 
                 break;
 
