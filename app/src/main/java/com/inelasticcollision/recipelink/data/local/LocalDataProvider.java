@@ -22,7 +22,7 @@ public interface LocalDataProvider {
 
     Observable<List<Recipe>> getAllRecipes();
 
-    Observable<List<Recipe>> loadFavoriteRecipes();
+    Observable<List<Recipe>> getFavoriteRecipes();
 
     Observable<List<Recipe>> searchRecipes(@Nullable String searchTerm);
 

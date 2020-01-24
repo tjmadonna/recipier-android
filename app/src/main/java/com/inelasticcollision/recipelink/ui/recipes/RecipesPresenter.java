@@ -68,7 +68,7 @@ class RecipesPresenter implements RecipesContract.Presenter {
 
                 Log.d("Presenter", "Getting favorite recipes");
 
-                recipeObservable = mDataProvider.loadFavoriteRecipes();
+                recipeObservable = mDataProvider.getFavoriteRecipes();
 
                 break;
 
