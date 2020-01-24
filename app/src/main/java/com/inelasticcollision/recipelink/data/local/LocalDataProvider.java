@@ -26,7 +26,7 @@ public interface LocalDataProvider {
 
     Observable<List<Recipe>> getRecipesBySearchTerm(@Nullable String searchTerm);
 
-    Single<Recipe> loadRecipe(int id);
+    Single<Recipe> getRecipeById(int id);
 
     Completable saveRecipe(Recipe recipe);
 

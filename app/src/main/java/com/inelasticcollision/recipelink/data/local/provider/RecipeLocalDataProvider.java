@@ -68,7 +68,7 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     }
 
     @Override
-    public Single<Recipe> loadRecipe(int id) {
+    public Single<Recipe> getRecipeById(int id) {
         return mDatabase
                 .createQuery(RecipeTable.TABLE_NAME, RecipeTable.getRecipeIdQuery(id))
                 .mapToOne(RecipeTable.SINGLE_RECIPE_MAPPER)

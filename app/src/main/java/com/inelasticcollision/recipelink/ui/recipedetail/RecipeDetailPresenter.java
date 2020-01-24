@@ -42,7 +42,7 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
 
         mCompositeDisposable.clear();
 
-        Disposable disposable = mDataProvider.loadRecipe(mRecipeId)
+        Disposable disposable = mDataProvider.getRecipeById(mRecipeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Recipe>() {

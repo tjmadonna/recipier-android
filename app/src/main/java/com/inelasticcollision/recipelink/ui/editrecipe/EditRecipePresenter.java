@@ -79,7 +79,7 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
 
         mCompositeDisposable.clear();
 
-        Disposable disposable = mLocalDataProvider.loadRecipe(mState.id)
+        Disposable disposable = mLocalDataProvider.getRecipeById(mState.id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Recipe>() {
