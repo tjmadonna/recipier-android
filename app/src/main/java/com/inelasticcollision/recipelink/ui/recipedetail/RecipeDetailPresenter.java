@@ -16,6 +16,8 @@ import com.inelasticcollision.recipelink.data.models.Recipe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.observers.CallbackCompletableObserver;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -103,24 +105,15 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
         Disposable disposable = mDataProvider.deleteRecipe(mRecipeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<Boolean>() {
+                .subscribeWith(new DisposableCompletableObserver() {
                     @Override
-                    public void onNext(Boolean aBoolean) {
-                        if (aBoolean) {
-                            mView.finishView();
-                        } else {
-                            Log.e("RecipeDetailFragment", "Recipe couldn't be deleted");
-                        }
+                    public void onComplete() {
+                        mView.finishView();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("RecipeDetailFragment", e.getMessage(), e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                        Log.e("RecipeDetailFragment", "Recipe couldn't be deleted");
                     }
                 });
 

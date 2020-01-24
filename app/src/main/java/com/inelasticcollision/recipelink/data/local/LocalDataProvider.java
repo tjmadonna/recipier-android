@@ -29,6 +29,6 @@ public interface LocalDataProvider {
 
     Completable saveRecipe(Recipe recipe);
 
-    Observable<Boolean> deleteRecipe(int id);
+    Completable deleteRecipe(int id);
 
 }

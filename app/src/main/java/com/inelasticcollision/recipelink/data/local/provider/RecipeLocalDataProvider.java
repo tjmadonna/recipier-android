@@ -136,14 +136,17 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     // Recipe delete
 
     @Override
-    public Observable<Boolean> deleteRecipe(final int id) {
-        return Observable.just(mDatabase.delete(RecipeTable.TABLE_NAME, RecipeTable.getRecipeWhereClause(id)))
-                .map(new Function<Integer, Boolean>() {
-                    @Override
-                    public Boolean apply(Integer integer) throws Exception {
-                        return integer > 0;
-                    }
-                });
+    public Completable deleteRecipe(final int id) {
+        return Completable.defer(new Callable<CompletableSource>() {
+            @Override
+            public CompletableSource call() throws Exception {
+            if (mDatabase.delete(RecipeTable.TABLE_NAME, RecipeTable.getRecipeWhereClause(id)) > 0) {
+                return Completable.complete();
+            } else {
+                return Completable.error(new SQLiteException("Unable to delete recipe"));
+            }
+            }
+        });
     }
 
 }
