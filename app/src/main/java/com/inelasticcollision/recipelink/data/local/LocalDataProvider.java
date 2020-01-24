@@ -16,6 +16,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface LocalDataProvider {
 
@@ -25,7 +26,7 @@ public interface LocalDataProvider {
 
     Observable<List<Recipe>> searchRecipes(@Nullable String searchTerm);
 
-    Observable<Recipe> loadRecipe(int id);
+    Single<Recipe> loadRecipe(int id);
 
     Completable saveRecipe(Recipe recipe);
 

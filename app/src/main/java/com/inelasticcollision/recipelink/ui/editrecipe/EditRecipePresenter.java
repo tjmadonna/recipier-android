@@ -18,12 +18,12 @@ import com.inelasticcollision.recipelink.data.remote.models.Result;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 class EditRecipePresenter implements EditRecipeContract.Presenter {
@@ -82,9 +82,9 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
         Disposable disposable = mLocalDataProvider.loadRecipe(mState.id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<Recipe>() {
+                .subscribeWith(new DisposableSingleObserver<Recipe>() {
                     @Override
-                    public void onNext(Recipe recipe) {
+                    public void onSuccess(Recipe recipe) {
                         handleExtractImages(recipe.getUrl());
                         String imageUrl = recipe.getImageUrl();
                         mState.dateAdded = recipe.getDateAdded();
@@ -103,10 +103,6 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
                     public void onError(Throwable e) {
                         Log.e("EditRecipePresenter", e.getMessage(), e);
                         mView.showErrorMessage(e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
                     }
                 });
 

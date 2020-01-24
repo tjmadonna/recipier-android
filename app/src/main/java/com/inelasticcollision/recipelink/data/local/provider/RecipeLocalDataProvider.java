@@ -25,7 +25,7 @@ import java.util.concurrent.Callable;
 import io.reactivex.Completable;
 import io.reactivex.CompletableSource;
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
+import io.reactivex.Single;
 
 public class RecipeLocalDataProvider implements LocalDataProvider {
 
@@ -68,10 +68,11 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
     }
 
     @Override
-    public Observable<Recipe> loadRecipe(int id) {
+    public Single<Recipe> loadRecipe(int id) {
         return mDatabase
                 .createQuery(RecipeTable.TABLE_NAME, RecipeTable.getRecipeIdQuery(id))
-                .mapToOne(RecipeTable.SINGLE_RECIPE_MAPPER);
+                .mapToOne(RecipeTable.SINGLE_RECIPE_MAPPER)
+                .singleOrError();
     }
 
     // Recipe save
