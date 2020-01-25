@@ -27,7 +27,6 @@ public abstract class RecipeDao implements LocalDataProvider {
     @Query("SELECT * FROM recipes WHERE favorite = 1 ORDER BY title COLLATE NOCASE")
     public abstract io.reactivex.Observable<List<Recipe>> getFavoriteRecipes();
 
-    @Transaction
     public io.reactivex.Observable<List<Recipe>> getRecipesBySearchTerm(@Nullable String searchTerm) {
         if (searchTerm == null || searchTerm.isEmpty()) {
             return getAllRecipes();
