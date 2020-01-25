@@ -12,6 +12,7 @@ import androidx.room.TypeConverters;
 import com.inelasticcollision.recipelink.data.local.converter.DateTypeConverter;
 import com.inelasticcollision.recipelink.data.local.converter.StringListTypeConverter;
 import com.inelasticcollision.recipelink.data.local.dao.RecipeDao;
+import com.inelasticcollision.recipelink.data.local.migration.AppDatabaseMigration;
 import com.inelasticcollision.recipelink.data.models.Recipe;
 
 @Database(entities = {Recipe.class}, version = 3)
@@ -23,7 +24,8 @@ public abstract class AppDatabase extends RoomDatabase {
     @Nullable
     private static volatile AppDatabase instance = null;
 
-    AppDatabase() { }
+    AppDatabase() {
+    }
 
     @NonNull
     private static final Object lock = new Object();
@@ -37,8 +39,9 @@ public abstract class AppDatabase extends RoomDatabase {
                     instance = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,
-                            DATABASE_NAME
-                    ).build();
+                            DATABASE_NAME)
+                            .addMigrations(AppDatabaseMigration.MIGRATION_2_3)
+                            .build();
                 }
             }
         }
