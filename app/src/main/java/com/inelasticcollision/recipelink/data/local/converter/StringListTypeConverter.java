@@ -15,7 +15,7 @@ public class StringListTypeConverter {
     @Nullable
     @TypeConverter
     public static List<String> fromString(@Nullable String string) {
-        if (string == null) {
+        if (string == null || string.isEmpty()) {
             return null;
         }
 
