@@ -147,8 +147,8 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
             return;
         }
 
-        if (tags == null) {
-            tags = new ArrayList<>();
+        if (notes != null && notes.isEmpty()) {
+            notes = null;
         }
 
         Recipe recipe = new Recipe(title, url, mState.selectedImage, mState.favorite, notes, tags);
