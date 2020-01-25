@@ -45,14 +45,15 @@ public class Recipe {
     private final String imageUrl;
 
     @Nullable
-    @ColumnInfo(name = "tags")
-    private final List<String> tags;
-
-    @Nullable
     @ColumnInfo(name = "notes")
     private final String notes;
+
     @ColumnInfo(name = "favorite")
     private boolean favorite;
+
+    @Nullable
+    @ColumnInfo(name = "tags")
+    private final List<String> tags;
 
     public Recipe(@NonNull String id,
                   @NonNull Date lastModified,
