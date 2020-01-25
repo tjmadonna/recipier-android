@@ -30,6 +30,8 @@ public interface LocalDataProvider {
 
     Completable saveRecipe(Recipe recipe);
 
+    Completable updateRecipe(Recipe recipe);
+
     Completable deleteRecipe(int id);
 
 }

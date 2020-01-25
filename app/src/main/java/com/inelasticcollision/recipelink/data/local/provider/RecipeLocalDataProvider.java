@@ -134,6 +134,23 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
         return insertCount;
     }
 
+    // Recipe update
+
+    @Override
+    public Completable updateRecipe(final Recipe recipe) {
+        return Completable.defer(new Callable<CompletableSource>() {
+            @Override
+            public CompletableSource call() throws Exception {
+                ContentValues contentValues = RecipeTable.getRecipeAsContentValues(recipe);
+                if (mDatabase.update(RecipeTable.TABLE_NAME, contentValues, RecipeTable.getRecipeWhereClause(recipe.getId())) > 0) {
+                    return Completable.complete();
+                } else {
+                    return Completable.error(new SQLiteException("Unable to update recipes"));
+                }
+            }
+        });
+    }
+
     // Recipe delete
 
     @Override
@@ -141,11 +158,11 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
         return Completable.defer(new Callable<CompletableSource>() {
             @Override
             public CompletableSource call() throws Exception {
-            if (mDatabase.delete(RecipeTable.TABLE_NAME, RecipeTable.getRecipeWhereClause(id)) > 0) {
-                return Completable.complete();
-            } else {
-                return Completable.error(new SQLiteException("Unable to delete recipe"));
-            }
+                if (mDatabase.delete(RecipeTable.TABLE_NAME, RecipeTable.getRecipeWhereClause(id)) > 0) {
+                    return Completable.complete();
+                } else {
+                    return Completable.error(new SQLiteException("Unable to delete recipe"));
+                }
             }
         });
     }
