@@ -312,7 +312,7 @@ public class NewRecipeActivity extends AppCompatActivity implements NewRecipeCon
 
             supportInvalidateOptionsMenu();
 
-            mFab.setVisibility(View.INVISIBLE);
+            mFab.hide();
 
             if (!show) {
 

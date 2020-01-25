@@ -137,7 +137,7 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
     }
 
     @Override
-    public void handleSaveRecipe(String title, String url, String notes, List<String> keywords) {
+    public void handleSaveRecipe(String title, String url, String notes, List<String> tags) {
 
         if (title == null || title.isEmpty()) {
             return;
@@ -147,15 +147,11 @@ class NewRecipePresenter implements NewRecipeContract.Presenter {
             return;
         }
 
-        if (notes == null) {
-            notes = "";
+        if (tags == null) {
+            tags = new ArrayList<>();
         }
 
-        if (keywords == null) {
-            keywords = new ArrayList<>();
-        }
-
-        Recipe recipe = new Recipe(title, url, mState.selectedImage, mState.favorite ? 1 : 0, keywords, notes);
+        Recipe recipe = new Recipe(title, url, mState.selectedImage, mState.favorite, notes, tags);
 
         Disposable disposable = mLocalDataProvider.saveRecipe(recipe)
                 .subscribeOn(Schedulers.io())
