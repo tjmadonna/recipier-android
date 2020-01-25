@@ -12,7 +12,6 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.app.ActivityCompat;
@@ -26,8 +25,6 @@ import android.view.MenuItem;
 
 import com.inelasticcollision.recipelink.R;
 import com.inelasticcollision.recipelink.data.models.Recipe;
-import com.inelasticcollision.recipelink.data.preference.PreferenceProvider;
-import com.inelasticcollision.recipelink.data.preference.SharedPreferenceProvider;
 import com.inelasticcollision.recipelink.ui.recipedetail.RecipeDetailActivity;
 import com.inelasticcollision.recipelink.ui.recipes.RecipesFragment;
 import com.inelasticcollision.recipelink.ui.settings.SettingsActivity;
