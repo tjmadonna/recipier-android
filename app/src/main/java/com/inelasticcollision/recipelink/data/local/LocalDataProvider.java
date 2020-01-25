@@ -8,6 +8,7 @@
 
 package com.inelasticcollision.recipelink.data.local;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.inelasticcollision.recipelink.data.models.Recipe;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface LocalDataProvider {
 
@@ -25,12 +27,12 @@ public interface LocalDataProvider {
 
     Observable<List<Recipe>> getRecipesBySearchTerm(@Nullable String searchTerm);
 
-    Observable<Recipe> getRecipeById(int id);
+    Single<Recipe> getRecipeById(@NonNull String id);
 
-    Completable saveRecipe(Recipe recipe);
+    Completable saveRecipe(@NonNull Recipe recipe);
 
-    Completable updateRecipe(Recipe recipe);
+    Completable updateRecipe(@NonNull Recipe recipe);
 
-    Completable deleteRecipe(int id);
+    Completable deleteRecipe(@NonNull String id);
 
 }
