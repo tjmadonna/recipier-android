@@ -16,8 +16,9 @@ import com.inelasticcollision.recipelink.data.models.Recipe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.observers.CallbackCompletableObserver;
 import io.reactivex.observers.DisposableCompletableObserver;
-import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
@@ -45,9 +46,9 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
         Disposable disposable = mDataProvider.getRecipeById(mRecipeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Recipe>() {
+                .subscribeWith(new DisposableObserver<Recipe>() {
                     @Override
-                    public void onSuccess(Recipe recipe) {
+                    public void onNext(Recipe recipe) {
                         if (recipe == null) {
                             mView.showErrorMessage();
                             return;
@@ -76,6 +77,11 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
                     public void onError(Throwable e) {
                         Log.e("RecipeDetailPresenter", e.getMessage(), e);
                         mView.showErrorMessage();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
 
@@ -115,12 +121,9 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
     }
 
     @Override
-    public void onSubscribe() {
-    }
+    public void onSubscribe() { }
 
     @Override
-    public void onUnsubscribe() {
-        mCompositeDisposable.clear();
-    }
+    public void onUnsubscribe() { mCompositeDisposable.clear(); }
 
 }
