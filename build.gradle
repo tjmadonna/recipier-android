@@ -12,7 +12,6 @@ buildscript {
         roomVersion = "2.2.3"
         rxAndroidVersion = "2.1.1"
         rxJavaVersion = "2.2.12"
-        sqlBriteVersion = "2.0.0"
         vectorDrawableVersion = "1.1.0"
 
         // Test dependencies
