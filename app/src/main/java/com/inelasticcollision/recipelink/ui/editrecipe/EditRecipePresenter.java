@@ -197,7 +197,7 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
 
         Recipe recipe = new Recipe(mState.id, mState.dateAdded, title, url, mState.selectedImage, mState.favorite ? 1 : 0, keywords, notes);
 
-        Disposable disposable = mLocalDataProvider.saveRecipe(recipe)
+        Disposable disposable = mLocalDataProvider.updateRecipe(recipe)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableCompletableObserver() {
