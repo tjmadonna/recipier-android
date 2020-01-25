@@ -15,18 +15,13 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Entity(tableName = "recipes")
 public class Recipe {
-
-    @Ignore
-    public static final int ID_NONE = -1;
-
-    @Ignore
-    public static final int DATE_SAVED_NEVER = -1;
 
     @NonNull
     @PrimaryKey(autoGenerate = false)
@@ -48,12 +43,14 @@ public class Recipe {
     @Nullable
     @ColumnInfo(name = "image_url")
     private final String imageUrl;
+
+    @Nullable
+    @ColumnInfo(name = "tags")
+    private final List<String> tags;
+
     @Nullable
     @ColumnInfo(name = "notes")
     private final String notes;
-    @NonNull
-    @ColumnInfo(name = "tags")
-    private final List<String> tags;
     @ColumnInfo(name = "favorite")
     private boolean favorite;
 
@@ -64,7 +61,7 @@ public class Recipe {
                   @Nullable String imageUrl,
                   boolean favorite,
                   @Nullable String notes,
-                  @NonNull List<String> tags) {
+                  @Nullable List<String> tags) {
         this.id = id;
         this.lastModified = lastModified;
         this.title = title;
@@ -81,7 +78,7 @@ public class Recipe {
                   @Nullable String imageUrl,
                   boolean favorite,
                   @Nullable String notes,
-                  @NonNull List<String> tags) {
+                  @Nullable List<String> tags) {
         this.id = UUID.randomUUID().toString();
         this.lastModified = new Date();
         this.title = title;
@@ -128,6 +125,9 @@ public class Recipe {
 
     @NonNull
     public List<String> getTags() {
+        if (tags == null) {
+            return Collections.emptyList();
+        }
         return tags;
     }
 
