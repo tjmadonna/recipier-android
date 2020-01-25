@@ -11,8 +11,9 @@ package com.inelasticcollision.recipelink.ui.newrecipe;
 import android.content.Context;
 
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
+import com.inelasticcollision.recipelink.data.local.db.AppDatabase;
+import com.inelasticcollision.recipelink.data.remote.ExtractionRemoteDataProvider;
 import com.inelasticcollision.recipelink.data.remote.RemoteDataProvider;
-import com.inelasticcollision.recipelink.di.AppDependencyProvider;
 
 import java.util.ArrayList;
 
@@ -28,9 +29,9 @@ class NewRecipeInjection {
 
     static void inject(Context context, NewRecipeContract.View view, NewRecipeSavedState state) {
 
-        LocalDataProvider localDataProvider = AppDependencyProvider.provideLocalDataProvider(context);
+        LocalDataProvider localDataProvider = AppDatabase.getInstance(context).recipeDao();
 
-        RemoteDataProvider remoteDataProvider = AppDependencyProvider.provideRemoteDataProvider();
+        RemoteDataProvider remoteDataProvider = ExtractionRemoteDataProvider.getInstance();
 
         NewRecipeContract.Presenter presenter = new NewRecipePresenter(view, localDataProvider, remoteDataProvider, state);
 

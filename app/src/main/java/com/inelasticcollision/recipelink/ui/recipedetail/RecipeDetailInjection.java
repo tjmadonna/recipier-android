@@ -11,13 +11,13 @@ package com.inelasticcollision.recipelink.ui.recipedetail;
 import android.content.Context;
 
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
-import com.inelasticcollision.recipelink.di.AppDependencyProvider;
+import com.inelasticcollision.recipelink.data.local.db.AppDatabase;
 
 class RecipeDetailInjection {
 
     static void inject(Context context, RecipeDetailContract.View view, String recipeId) {
 
-        LocalDataProvider localDataProvider = AppDependencyProvider.provideLocalDataProvider(context);
+        LocalDataProvider localDataProvider = AppDatabase.getInstance(context).recipeDao();
 
         RecipeDetailContract.Presenter presenter = new RecipeDetailPresenter(view, localDataProvider, recipeId);
 
