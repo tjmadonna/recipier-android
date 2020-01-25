@@ -2,23 +2,21 @@ package com.inelasticcollision.recipelink.data.local.converter;
 
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.TypeConverter;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class StringListTypeConverter {
 
     private static final String DELIMITER = "|";
 
-    @NonNull
+    @Nullable
     @TypeConverter
     public static List<String> fromString(@Nullable String string) {
         if (string == null) {
-            return Collections.emptyList();
+            return null;
         }
 
         return Arrays.asList(string.split("\\" + DELIMITER));
@@ -26,8 +24,8 @@ public class StringListTypeConverter {
 
     @Nullable
     @TypeConverter
-    public static String stringListToString(@NonNull List<String> stringList) {
-        if (stringList.isEmpty()) {
+    public static String stringListToString(@Nullable List<String> stringList) {
+        if (stringList == null || stringList.isEmpty()) {
             return null;
         }
 
