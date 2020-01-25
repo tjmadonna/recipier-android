@@ -9,6 +9,7 @@ buildscript {
         legacySupportVersion = "1.0.0"
         materialVersion = "1.0.0"
         retrofitVersion = "2.6.1"
+        roomVersion = "2.2.3"
         rxAndroidVersion = "2.1.1"
         rxJavaVersion = "2.2.12"
         sqlBriteVersion = "2.0.0"
