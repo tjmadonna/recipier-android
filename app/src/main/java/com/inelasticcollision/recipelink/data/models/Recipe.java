@@ -8,68 +8,111 @@
 
 package com.inelasticcollision.recipelink.data.models;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+@Entity(tableName = "recipes")
 public class Recipe {
 
+    @Ignore
     public static final int ID_NONE = -1;
 
+    @Ignore
     public static final int DATE_SAVED_NEVER = -1;
 
-    private int id;
+    @NonNull
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "id")
+    private final String id;
 
-    private long dateAdded;
+    @NonNull
+    @ColumnInfo(name = "last_modified")
+    private final Date lastModified;
 
-    private String title;
+    @NonNull
+    @ColumnInfo(name = "title")
+    private final String title;
 
-    private String url;
+    @NonNull
+    @ColumnInfo(name = "url")
+    private final String url;
 
-    private String imageUrl;
-
+    @Nullable
+    @ColumnInfo(name = "image_url")
+    private final String imageUrl;
+    @Nullable
+    @ColumnInfo(name = "notes")
+    private final String notes;
+    @NonNull
+    @ColumnInfo(name = "tags")
+    private final List<String> tags;
+    @ColumnInfo(name = "favorite")
     private boolean favorite;
 
-    private String notes;
-
-    private List<String> keywords;
-
-    public Recipe(String title, String url, String imageUrl, int favorite, List<String> keywords, String notes) {
-        this.id = ID_NONE;
-        this.dateAdded = DATE_SAVED_NEVER;
-        this.title = title;
-        this.url = url;
-        this.imageUrl = imageUrl;
-        this.favorite = (favorite == 1);
-        this.keywords = keywords;
-        this.notes = notes;
-    }
-
-    public Recipe(int id, long dateAdded, String title, String url, String imageUrl, int favorite, List<String> keywords, String notes) {
+    public Recipe(@NonNull String id,
+                  @NonNull Date lastModified,
+                  @NonNull String title,
+                  @NonNull String url,
+                  @Nullable String imageUrl,
+                  boolean favorite,
+                  @Nullable String notes,
+                  @NonNull List<String> tags) {
         this.id = id;
-        this.dateAdded = dateAdded;
+        this.lastModified = lastModified;
         this.title = title;
         this.url = url;
         this.imageUrl = imageUrl;
-        this.favorite = (favorite == 1);
-        this.keywords = keywords;
+        this.favorite = favorite;
         this.notes = notes;
+        this.tags = tags;
     }
 
-    public int getId() {
+    @Ignore
+    public Recipe(@NonNull String title,
+                  @NonNull String url,
+                  @Nullable String imageUrl,
+                  boolean favorite,
+                  @Nullable String notes,
+                  @NonNull List<String> tags) {
+        this.id = UUID.randomUUID().toString();
+        this.lastModified = new Date();
+        this.title = title;
+        this.url = url;
+        this.imageUrl = imageUrl;
+        this.favorite = favorite;
+        this.notes = notes;
+        this.tags = tags;
+    }
+
+    @NonNull
+    public String getId() {
         return id;
     }
 
-    public long getDateAdded() {
-        return dateAdded;
+    @NonNull
+    public Date getLastModified() {
+        return lastModified;
     }
 
+    @NonNull
     public String getTitle() {
         return title;
     }
 
+    @NonNull
     public String getUrl() {
         return url;
     }
 
+    @Nullable
     public String getImageUrl() {
         return imageUrl;
     }
@@ -78,27 +121,19 @@ public class Recipe {
         return favorite;
     }
 
-    public int getFavoriteAsInt() {
-        return favorite ? 1 : 0;
-    }
-
+    @Nullable
     public String getNotes() {
         return notes;
     }
 
-    public List<String> getKeywords() {
-        return keywords;
+    @NonNull
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
-    }
-
+    @Ignore
     @Override
     public boolean equals(Object object) {
-
         return (object == this) || (object instanceof Recipe) && url.equals(((Recipe) object).getUrl());
-
     }
-
 }
