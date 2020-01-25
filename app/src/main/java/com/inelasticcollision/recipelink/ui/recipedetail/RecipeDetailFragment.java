@@ -66,11 +66,11 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
 
     private ProgressBar mImageProgressBar;
 
-    public static RecipeDetailFragment newInstance(int recipeId) {
+    public static RecipeDetailFragment newInstance(String recipeId) {
         RecipeDetailFragment fragment = new RecipeDetailFragment();
 
         Bundle args = new Bundle(1);
-        args.putInt(ARGS_RECIPE_ID, recipeId);
+        args.putString(ARGS_RECIPE_ID, recipeId);
 
         fragment.setArguments(args);
 
@@ -85,7 +85,7 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
 
         setHasOptionsMenu(true);
 
-        int recipeId = getArguments().getInt(ARGS_RECIPE_ID, -1);
+        String recipeId = getArguments().getString(ARGS_RECIPE_ID);
 
         RecipeDetailInjection.inject(getActivity(), this, recipeId);
 
@@ -213,7 +213,7 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
     }
 
     @Override
-    public void showEditRecipeActivity(int recipeId) {
+    public void showEditRecipeActivity(String recipeId) {
         Intent intent = EditRecipeActivity.createIntent(getActivity(), recipeId);
         getActivity().startActivity(intent);
     }

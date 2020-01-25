@@ -15,7 +15,7 @@ import com.inelasticcollision.recipelink.di.AppDependencyProvider;
 
 class RecipeDetailInjection {
 
-    static void inject(Context context, RecipeDetailContract.View view, int recipeId) {
+    static void inject(Context context, RecipeDetailContract.View view, String recipeId) {
 
         LocalDataProvider localDataProvider = AppDependencyProvider.provideLocalDataProvider(context);
 

@@ -27,11 +27,11 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
 
     private final LocalDataProvider mDataProvider;
 
-    private final int mRecipeId;
+    private final String mRecipeId;
 
     private final CompositeDisposable mCompositeDisposable;
 
-    public RecipeDetailPresenter(RecipeDetailContract.View view, LocalDataProvider dataProvider, int recipeId) {
+    public RecipeDetailPresenter(RecipeDetailContract.View view, LocalDataProvider dataProvider, String recipeId) {
         mView = view;
         mDataProvider = dataProvider;
         mRecipeId = recipeId;
@@ -60,16 +60,16 @@ class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
                         mView.showTitle(recipe.getTitle());
                         mView.showUrl(recipe.getUrl());
 
-                        if (recipe.getNotes().isEmpty()) {
+                        if (recipe.getNotes() == null) {
                             mView.showEmptyNotes();
                         } else {
                             mView.showNotes(recipe.getNotes());
                         }
 
-                        if (recipe.getKeywords().isEmpty()) {
+                        if (recipe.getTags().isEmpty()) {
                             mView.showEmptyKeywords();
                         } else {
-                            mView.showKeywords(recipe.getKeywords());
+                            mView.showKeywords(recipe.getTags());
                         }
                     }
 

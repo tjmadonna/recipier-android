@@ -34,7 +34,7 @@ interface RecipeDetailContract {
 
         void showErrorMessage();
 
-        void showEditRecipeActivity(int recipeId);
+        void showEditRecipeActivity(String recipeId);
 
         void showDeleteRecipeDialog();
 

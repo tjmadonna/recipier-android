@@ -20,7 +20,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     private static final String EXTRA_RECIPE_ID = "extra_recipe_id";
 
-    public static Intent createIntent(Context context, int recipeId) {
+    public static Intent createIntent(Context context, String recipeId) {
         Intent intent = new Intent(context, RecipeDetailActivity.class);
         intent.putExtra(EXTRA_RECIPE_ID, recipeId);
         return intent;
@@ -33,12 +33,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_detail);
 
         if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                String recipeId = getIntent().getExtras().getString(EXTRA_RECIPE_ID);
 
-            int recipeId = getIntent().getExtras().getInt(EXTRA_RECIPE_ID, -1);
-
-            getFragmentManager().beginTransaction()
-                    .add(R.id.recipe_detail_activity_container, RecipeDetailFragment.newInstance(recipeId), RecipeDetailFragment.TAG)
-                    .commit();
+                getFragmentManager().beginTransaction()
+                        .add(R.id.recipe_detail_activity_container, RecipeDetailFragment.newInstance(recipeId), RecipeDetailFragment.TAG)
+                        .commit();
+            }
 
         }
 
