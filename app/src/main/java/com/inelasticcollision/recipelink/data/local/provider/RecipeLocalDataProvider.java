@@ -93,48 +93,6 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
         });
     }
 
-    private Long saveRecipeHelper(Recipe recipe) {
-
-        ContentValues contentValues = RecipeTable.getRecipeAsContentValues(recipe);
-
-        switch (recipe.getId()) {
-
-            case Recipe.ID_NONE:
-
-                return mDatabase.insert(RecipeTable.TABLE_NAME, contentValues);
-
-            default:
-
-                return (long) mDatabase.update(RecipeTable.TABLE_NAME, contentValues, RecipeTable.getRecipeWhereClause(recipe.getId()));
-
-        }
-
-    }
-
-    public int bulkSaveRecipe(List<Recipe> recipes) {
-
-        final BriteDatabase.Transaction transaction = mDatabase.newTransaction();
-
-        int insertCount = 0;
-
-        try {
-
-            for (Recipe recipe : recipes) {
-
-                insertCount += saveRecipeHelper(recipe);
-
-            }
-
-            transaction.markSuccessful();
-        } finally {
-
-            transaction.end();
-
-        }
-
-        return insertCount;
-    }
-
     // Recipe update
 
     @Override
