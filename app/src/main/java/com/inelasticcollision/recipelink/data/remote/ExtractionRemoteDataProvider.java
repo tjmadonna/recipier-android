@@ -8,8 +8,6 @@
 
 package com.inelasticcollision.recipelink.data.remote;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -44,7 +42,7 @@ public class ExtractionRemoteDataProvider implements RemoteDataProvider {
     }
 
     @NonNull
-    public static ExtractionRemoteDataProvider getInstance(@NonNull Context context) {
+    public static ExtractionRemoteDataProvider getInstance() {
         if (instance == null) {
             synchronized (lock) {
                 if (instance == null) {
