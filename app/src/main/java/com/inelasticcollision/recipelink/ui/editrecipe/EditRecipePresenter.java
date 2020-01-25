@@ -16,9 +16,9 @@ import com.inelasticcollision.recipelink.data.remote.RemoteDataProvider;
 import com.inelasticcollision.recipelink.data.remote.models.Result;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -87,7 +87,6 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
                     public void onNext(Recipe recipe) {
                         handleExtractImages(recipe.getUrl());
                         String imageUrl = recipe.getImageUrl();
-                        mState.dateAdded = recipe.getDateAdded();
                         mState.selectedImage = recipe.getImageUrl();
                         mState.favorite = recipe.isFavorite();
                         mView.showMainImage(imageUrl);
@@ -95,7 +94,7 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
                         mView.showUrl(recipe.getUrl());
                         mView.showFab(recipe.isFavorite());
                         mView.showNotes(recipe.getNotes());
-                        mView.showKeywords(recipe.getKeywords());
+                        mView.showKeywords(recipe.getTags());
                         mState.needsRecipeQuery = false;
                     }
 
@@ -191,15 +190,11 @@ class EditRecipePresenter implements EditRecipeContract.Presenter {
             return;
         }
 
-        if (notes == null) {
-            notes = "";
-        }
-
         if (keywords == null) {
             keywords = new ArrayList<>();
         }
 
-        Recipe recipe = new Recipe(mState.id, mState.dateAdded, title, url, mState.selectedImage, mState.favorite ? 1 : 0, keywords, notes);
+        Recipe recipe = new Recipe(mState.id, new Date(), title, url, mState.selectedImage, mState.favorite, notes, keywords);
 
         Disposable disposable = mLocalDataProvider.updateRecipe(recipe)
                 .subscribeOn(Schedulers.io())

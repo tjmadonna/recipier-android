@@ -15,9 +15,7 @@ import java.util.List;
 
 class EditRecipeSavedState implements Parcelable {
 
-    int id;
-
-    long dateAdded;
+    String id;
 
     String url;
 
@@ -36,21 +34,8 @@ class EditRecipeSavedState implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeLong(this.dateAdded);
-        dest.writeString(this.url);
-        dest.writeByte(this.favorite ? (byte) 1 : (byte) 0);
-        dest.writeStringList(this.images);
-        dest.writeString(this.selectedImage);
-        dest.writeByte(this.needsRecipeQuery ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.needsImageExtracting ? (byte) 1 : (byte) 0);
-    }
-
-    EditRecipeSavedState(int id, long dateAdded, String url, boolean favorite, List<String> images, String selectedImage, boolean needsRecipeQuery, boolean needsImageExtracting) {
+    EditRecipeSavedState(String id, String url, boolean favorite, List<String> images, String selectedImage, boolean needsRecipeQuery, boolean needsImageExtracting) {
         this.id = id;
-        this.dateAdded = dateAdded;
         this.url = url;
         this.favorite = favorite;
         this.images = images;
@@ -60,14 +45,24 @@ class EditRecipeSavedState implements Parcelable {
     }
 
     protected EditRecipeSavedState(Parcel in) {
-        this.id = in.readInt();
-        this.dateAdded = in.readLong();
+        this.id = in.readString();
         this.url = in.readString();
         this.favorite = in.readByte() != 0;
         this.images = in.createStringArrayList();
         this.selectedImage = in.readString();
         this.needsRecipeQuery = in.readByte() != 0;
         this.needsImageExtracting = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.url);
+        dest.writeByte(this.favorite ? (byte) 1 : (byte) 0);
+        dest.writeStringList(this.images);
+        dest.writeString(this.selectedImage);
+        dest.writeByte(this.needsRecipeQuery ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.needsImageExtracting ? (byte) 1 : (byte) 0);
     }
 
     public static final Creator<EditRecipeSavedState> CREATOR = new Creator<EditRecipeSavedState>() {

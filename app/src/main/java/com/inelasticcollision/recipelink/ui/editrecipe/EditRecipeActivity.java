@@ -68,7 +68,7 @@ public class EditRecipeActivity extends AppCompatActivity implements EditRecipeC
 
     private EditRecipeContract.Presenter mPresenter;
 
-    public static Intent createIntent(Context context, int recipeId) {
+    public static Intent createIntent(Context context, String recipeId) {
         Intent intent = new Intent(context, EditRecipeActivity.class);
         intent.putExtra(EXTRA_RECIPE_ID, recipeId);
         return intent;
@@ -96,7 +96,7 @@ public class EditRecipeActivity extends AppCompatActivity implements EditRecipeC
 
             Bundle extras = getIntent().getExtras();
 
-            int recipeId = extras.getInt(EXTRA_RECIPE_ID, -1);
+            String recipeId = extras.getString(EXTRA_RECIPE_ID);
 
             EditRecipeInjection.inject(this, this, recipeId);
 

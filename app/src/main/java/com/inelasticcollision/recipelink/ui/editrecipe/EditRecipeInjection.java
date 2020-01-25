@@ -11,7 +11,6 @@ package com.inelasticcollision.recipelink.ui.editrecipe;
 import android.content.Context;
 
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
-import com.inelasticcollision.recipelink.data.models.Recipe;
 import com.inelasticcollision.recipelink.data.remote.RemoteDataProvider;
 import com.inelasticcollision.recipelink.di.AppDependencyProvider;
 
@@ -19,9 +18,9 @@ import java.util.ArrayList;
 
 class EditRecipeInjection {
 
-    static void inject(Context context, EditRecipeContract.View view, int recipeId) {
+    static void inject(Context context, EditRecipeContract.View view, String recipeId) {
 
-        EditRecipeSavedState state = new EditRecipeSavedState(recipeId, Recipe.DATE_SAVED_NEVER, "", false, new ArrayList<String>(0), "", true, true);
+        EditRecipeSavedState state = new EditRecipeSavedState(recipeId, "", false, new ArrayList<String>(0), "", true, true);
 
         inject(context, view, state);
 
