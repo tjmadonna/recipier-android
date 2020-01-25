@@ -82,8 +82,9 @@ public class RecipeLocalDataProvider implements LocalDataProvider {
         return Completable.defer(new Callable<CompletableSource>() {
             @Override
             public CompletableSource call() throws Exception {
+                ContentValues contentValues = RecipeTable.getRecipeAsContentValues(recipe);
 
-                if (saveRecipeHelper(recipe) > 0) {
+                if (mDatabase.insert(RecipeTable.TABLE_NAME, contentValues) > 0) {
                     return Completable.complete();
                 } else {
                     return Completable.error(new SQLiteException("Unable to save recipes"));
