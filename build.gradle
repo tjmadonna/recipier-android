@@ -7,7 +7,7 @@ buildscript {
         appCompatVersion = "1.1.0"
         glideVersion = "3.8.0"
         legacySupportVersion = "1.0.0"
-        materialVersion = "1.0.0"
+        materialVersion = "1.1.0-rc02"
         retrofitVersion = "2.6.1"
         roomVersion = "2.2.3"
         rxAndroidVersion = "2.1.1"
