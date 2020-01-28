@@ -9,7 +9,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -31,22 +31,22 @@
     <style name="AppTheme.Settings" parent="@style/AppTheme" />
 
     <!-- Action bar styles -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <!-- Dialog styles -->
-    <style name="AppTheme.DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AppTheme.DialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <!-- Text styles -->
-    <style name="TextAppearance.ListItemPrimary" parent="TextAppearance.AppCompat.Body1">
+    <style name="TextAppearance.ListItemPrimary" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextAppearance.ListItemSecondary" parent="TextAppearance.AppCompat.Body1">
+    <style name="TextAppearance.ListItemSecondary" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:textSize">14sp</item>
     </style>
