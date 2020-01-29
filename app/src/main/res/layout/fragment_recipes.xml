@@ -7,9 +7,9 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipes_recycler"
@@ -28,11 +28,11 @@
             style="@style/TextAppearance.ListItemPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_macro"
             android:layout_marginEnd="@dimen/spacing_normal"
-            android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginRight="@dimen/spacing_normal"
-            android:layout_marginStart="@dimen/spacing_normal"
             android:gravity="center_horizontal|top"
             android:text="@string/prompt_no_recipes_found" />
 
@@ -40,25 +40,26 @@
             style="@style/TextAppearance.ListItemSecondary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginRight="@dimen/spacing_normal"
             android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
             android:gravity="center_horizontal|top"
             android:text="@string/prompt_share_from_browser_prompt" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/recipes_empty_learn_how_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginRight="@dimen/spacing_normal"
+            android:layout_gravity="center_horizontal|top"
             android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
             android:text="@string/action_learn_how"
-            android:layout_gravity="center_horizontal|top"/>
+            app:backgroundTint="?colorPrimaryVariant"/>
 
     </LinearLayout>
 
