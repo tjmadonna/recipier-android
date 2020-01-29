@@ -22,6 +22,10 @@
     <color name="onSurface">#000000</color>
     <color name="onError">#FFFFFF</color>
 
+    <color name="nav_header_gradient_start">?colorPrimaryDark</color>
+    <color name="nav_header_gradient_end">?colorPrimary</color>
+    <color name="nav_item_selected_background">#333F51B5</color>
+
     <color name="light_content_scrim">#0d000000</color>
     <color name="activated">#E0E0E0</color>
 

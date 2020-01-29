@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ content_nav_header.xml
   ~ RecipeLink-SQLBrite
   ~
@@ -13,10 +12,10 @@
     android:background="@drawable/background_nav_header"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/spacing_normal"
     android:paddingLeft="@dimen/spacing_normal"
-    android:paddingRight="@dimen/spacing_normal"
     android:paddingTop="@dimen/spacing_normal"
+    android:paddingRight="@dimen/spacing_normal"
+    android:paddingBottom="@dimen/spacing_normal"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
@@ -27,10 +26,11 @@
         android:src="@mipmap/ic_launcher" />
 
     <TextView
+        style="@style/TextAppearance.ListItemPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textColor="?colorOnPrimary" />
 
 </LinearLayout>

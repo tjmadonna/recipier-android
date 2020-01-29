@@ -3,7 +3,7 @@
     <color name="primary">#292929</color>
     <color name="primaryVariant">#7986CB</color>
     <color name="primaryDark">#000000</color>
-    <color name="secondary">#FFC107</color>
+    <color name="secondary">#FFD54F</color>
     <color name="secondaryVariant">#FFD54F</color>
     <color name="accent">#FFC107</color>
     <color name="background">#121212</color>
@@ -14,4 +14,9 @@
     <color name="onBackground">#FFFFFF</color>
     <color name="onSurface">#FFFFFF</color>
     <color name="onError">#FFFFFF</color>
+
+    <color name="nav_header_gradient_start">#80000000</color>
+    <color name="nav_header_gradient_end">#80000000</color>
+    <color name="nav_item_selected_background">#4D000000</color>
+
 </resources>
