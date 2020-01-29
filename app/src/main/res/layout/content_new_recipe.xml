@@ -39,7 +39,7 @@
                     android:contentDescription="@null"
                     android:focusable="false"
                     android:scaleType="centerCrop"
-                    tools:src="@color/colorPrimaryDark" />
+                    tools:src="?colorPrimaryDark" />
 
                 <ProgressBar
                     android:id="@+id/new_recipe_image_progress"
@@ -52,15 +52,15 @@
 
             </com.inelasticcollision.recipelink.ui.common.widgets.AspectRatioView>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/new_recipe_change_image"
-                style="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_recipe_image_container"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:gravity="center"
-                android:text="@string/action_change_photo" />
+                android:text="@string/action_change_photo"
+                app:cornerRadius="0dp" />
 
             <FrameLayout
                 android:id="@+id/new_recipe_title_container"

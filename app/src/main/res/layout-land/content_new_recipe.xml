@@ -25,15 +25,15 @@
             android:layout_height="match_parent"
             android:layout_weight="4">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/new_recipe_change_image"
-                style="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:gravity="center"
-                android:text="@string/action_change_photo" />
+                android:text="@string/action_change_photo"
+                app:cornerRadius="0dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                     android:contentDescription="@null"
                     android:focusable="false"
                     android:scaleType="centerCrop"
-                    tools:src="@color/colorPrimaryDark" />
+                    tools:src="?colorPrimaryDark" />
 
                 <ProgressBar
                     android:id="@+id/new_recipe_image_progress"
@@ -80,16 +80,16 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:minHeight="40dp"
-                    android:paddingBottom="@dimen/spacing_mini"
-                    android:paddingTop="@dimen/spacing_normal">
+                    android:paddingTop="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_mini">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
-                        android:layout_marginLeft="@dimen/list_item_icon_left_padding"
-                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                        android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:contentDescription="@null"
                         android:tint="?android:textColorPrimary"
                         app:srcCompat="@drawable/ic_title_black_24dp" />
@@ -99,12 +99,13 @@
                         style="@style/TextAppearance.ListItemPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
-                        android:layout_marginLeft="@dimen/list_item_text_left_padding"
-                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:layout_marginStart="@dimen/list_item_text_left_padding"
+                        android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:hint="@string/hint_title"
                         android:paddingTop="@dimen/spacing_none"
+                        android:textColor="?android:textColorPrimary"
                         tools:text="Ultimate BBQ Chicken Quesadillas" />
 
                 </FrameLayout>
@@ -115,16 +116,16 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/new_recipe_title_container"
                     android:minHeight="40dp"
-                    android:paddingBottom="@dimen/spacing_mini"
-                    android:paddingTop="@dimen/spacing_mini">
+                    android:paddingTop="@dimen/spacing_mini"
+                    android:paddingBottom="@dimen/spacing_mini">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
-                        android:layout_marginLeft="@dimen/list_item_icon_left_padding"
-                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                        android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:contentDescription="@null"
                         android:tint="?android:textColorPrimary"
                         app:srcCompat="@drawable/ic_link_black_24dp" />
@@ -134,10 +135,10 @@
                         style="@style/TextAppearance.ListItemPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
-                        android:layout_marginLeft="@dimen/list_item_text_left_padding"
-                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:layout_marginStart="@dimen/list_item_text_left_padding"
+                        android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:hint="@string/hint_url"
                         android:inputType="textUri"
                         android:paddingTop="@dimen/spacing_none"
@@ -151,16 +152,16 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/new_recipe_url_container"
                     android:minHeight="40dp"
-                    android:paddingBottom="@dimen/spacing_mini"
-                    android:paddingTop="@dimen/spacing_mini">
+                    android:paddingTop="@dimen/spacing_mini"
+                    android:paddingBottom="@dimen/spacing_mini">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
-                        android:layout_marginLeft="@dimen/list_item_icon_left_padding"
-                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:layout_marginStart="@dimen/list_item_icon_left_padding"
+                        android:layout_marginLeft="@dimen/list_item_icon_left_padding"
+                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:contentDescription="@null"
                         android:tint="?android:textColorPrimary"
                         app:srcCompat="@drawable/ic_short_text_black_24dp" />
@@ -170,10 +171,10 @@
                         style="@style/TextAppearance.ListItemPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
-                        android:layout_marginLeft="@dimen/list_item_text_left_padding"
-                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:layout_marginStart="@dimen/list_item_text_left_padding"
+                        android:layout_marginLeft="@dimen/list_item_text_left_padding"
+                        android:layout_marginEnd="@dimen/list_item_icon_left_padding"
+                        android:layout_marginRight="@dimen/list_item_icon_left_padding"
                         android:hint="@string/hint_notes"
                         android:paddingTop="@dimen/spacing_none"
                         tools:text="This is an example of a note. Sometimes these notes use multiple lines." />
