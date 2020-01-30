@@ -10,13 +10,16 @@ package com.inelasticcollision.recipelink.ui.common.dialogs.imagepicker;
 
 import android.app.Dialog;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.widget.FrameLayout;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.inelasticcollision.recipelink.R;
 
 import java.util.ArrayList;
@@ -66,12 +69,11 @@ public class ImagePickerDialog extends DialogFragment {
 
         frame.addView(recyclerView);
 
-        return new AlertDialog.Builder(getActivity())
+        return new MaterialAlertDialogBuilder(requireContext(), R.style.AppTheme_DialogStyle)
                 .setTitle(R.string.title_change_image)
                 .setView(frame)
                 .setNegativeButton(R.string.action_cancel, null)
                 .create();
-
     }
 
     @Override
