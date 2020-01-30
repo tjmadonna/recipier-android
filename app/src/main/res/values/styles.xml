@@ -23,7 +23,6 @@
         <item name="colorOnBackground">@color/onBackground</item>
         <item name="colorOnSurface">@color/onSurface</item>
         <item name="colorOnError">@color/onError</item>
-        <item name="alertDialogTheme">@style/AppTheme.DialogStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -46,7 +45,11 @@
 
     <!-- Dialog styles -->
     <style name="AppTheme.DialogStyle" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
-        <item name="colorAccent">?colorAccent</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AppTheme.Dialog.Button</item>
+    </style>
+
+    <style name="AppTheme.Dialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/dialog_button_text</item>
     </style>
 
     <!-- Text styles -->

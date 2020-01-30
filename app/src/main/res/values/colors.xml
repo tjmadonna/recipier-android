@@ -8,7 +8,7 @@
 
 <resources>
     <color name="primary">#3F51B5</color>
-    <color name="primaryVariant">#303F9F</color>
+    <color name="primaryVariant">#7986CB</color>
     <color name="primaryDark">#303F9F</color>
     <color name="secondary">#FFC107</color>
     <color name="secondaryVariant">#FFD54F</color>
@@ -25,6 +25,8 @@
     <color name="nav_header_gradient_start">?colorPrimaryDark</color>
     <color name="nav_header_gradient_end">?colorPrimary</color>
     <color name="nav_item_selected_background">#333F51B5</color>
+
+    <color name="dialog_button_text">@color/primary</color>
 
     <color name="light_content_scrim">#0d000000</color>
     <color name="activated">#E0E0E0</color>
