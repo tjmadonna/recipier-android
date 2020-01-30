@@ -186,7 +186,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/new_recipe_notes_container"
-                    app:editable="true" />
+                    app:addKeywordTextColor="?android:textColorSecondary"
+                    app:editable="true"
+                    app:keywordTextColor="?android:textColorPrimary" />
 
             </RelativeLayout>
 
