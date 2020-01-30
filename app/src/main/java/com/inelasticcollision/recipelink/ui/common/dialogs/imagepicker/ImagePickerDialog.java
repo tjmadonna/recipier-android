@@ -13,7 +13,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,9 +50,13 @@ public class ImagePickerDialog extends DialogFragment {
 
         List<String> images = getArguments().getStringArrayList(ARGS_IMAGES);
 
-        FrameLayout frame = new FrameLayout(getActivity());
+        FrameLayout frame = new FrameLayout(requireContext());
 
-        RecyclerView recyclerView = (RecyclerView) getActivity().getLayoutInflater().inflate(R.layout.dialog_image_picker, frame, false);
+        RecyclerView recyclerView = (RecyclerView) requireActivity().getLayoutInflater().inflate(R.layout.dialog_image_picker, frame, false);
+
+        int spacing = requireContext().getResources().getDimensionPixelSize(R.dimen.grid_item_spacing);
+
+        recyclerView.addItemDecoration(new SpacingItemDecoration(2, spacing, false));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 

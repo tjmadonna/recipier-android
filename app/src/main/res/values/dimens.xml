@@ -36,5 +36,6 @@
     <dimen name="list_item_icon_left_padding">16dp</dimen>
     <dimen name="list_item_text_left_padding">72dp</dimen>
 
+    <dimen name="grid_item_spacing">8dp</dimen>
 
 </resources>

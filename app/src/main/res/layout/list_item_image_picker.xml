@@ -6,24 +6,19 @@
   ~ Copyright © 2017 Tyler Madonna. All rights reserved.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.inelasticcollision.recipelink.ui.common.widgets.AspectRatioView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:aspectRatio="@dimen/aspect_16_9">
 
     <ImageView
         android:id="@+id/image_picker_list_item"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="H,4:3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:src="?colorPrimary" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.inelasticcollision.recipelink.ui.common.widgets.AspectRatioView>
