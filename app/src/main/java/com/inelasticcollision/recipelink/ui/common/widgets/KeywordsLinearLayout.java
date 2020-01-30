@@ -34,7 +34,7 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
 
     private KeywordsLinearLayoutListener mListener;
 
-    private List<String> mKeywords = new ArrayList<>();
+    private ArrayList<String> mKeywords = new ArrayList<>();
 
     public KeywordsLinearLayout(Context context) {
         this(context, null, 0);
@@ -119,7 +119,7 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
             keywords = new ArrayList<>();
         }
 
-        mKeywords = keywords;
+        mKeywords = new ArrayList<>(keywords);
 
         updateLayout();
 
