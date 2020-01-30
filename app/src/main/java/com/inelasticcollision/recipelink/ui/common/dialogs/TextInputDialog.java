@@ -11,13 +11,15 @@ package com.inelasticcollision.recipelink.ui.common.dialogs;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.app.AlertDialog;
+
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.inelasticcollision.recipelink.R;
 import com.inelasticcollision.recipelink.utils.StringHelper;
 
@@ -65,7 +67,8 @@ public class TextInputDialog extends DialogFragment {
 
         frame.addView(inputView);
 
-        return new AlertDialog.Builder(getActivity())
+
+        return new MaterialAlertDialogBuilder(requireContext(), R.style.AppTheme_DialogStyle)
                 .setTitle(arguments.getString(ARGS_TITLE, ""))
                 .setView(frame)
                 .setPositiveButton(R.string.action_ok, new DialogInterface.OnClickListener() {
@@ -83,7 +86,6 @@ public class TextInputDialog extends DialogFragment {
                 })
                 .setNegativeButton(R.string.action_cancel, null)
                 .create();
-
     }
 
     @Override
