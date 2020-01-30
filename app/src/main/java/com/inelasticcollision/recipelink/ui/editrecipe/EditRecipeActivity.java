@@ -14,9 +14,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
@@ -337,7 +338,7 @@ public class EditRecipeActivity extends AppCompatActivity implements EditRecipeC
 
     @Override
     public void showCloseDialog() {
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this, R.style.AppTheme_DialogStyle)
                 .setMessage(R.string.prompt_discard_changes)
                 .setPositiveButton(R.string.action_discard, new DialogInterface.OnClickListener() {
                     @Override
