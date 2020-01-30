@@ -76,7 +76,7 @@ class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.ImageVi
 
         ImageViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView;
+            image = (ImageView) itemView.findViewById(R.id.image_picker_list_item);
             itemView.setOnClickListener(this);
         }
 
