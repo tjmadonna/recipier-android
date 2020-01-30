@@ -75,6 +75,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
     implementation "androidx.vectordrawable:vectordrawable:$vectorDrawableVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
     // Material design
     implementation "com.google.android.material:material:$materialVersion"
