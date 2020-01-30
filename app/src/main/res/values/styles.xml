@@ -46,6 +46,8 @@
     <!-- Dialog styles -->
     <style name="AppTheme.DialogStyle" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="buttonBarNegativeButtonStyle">@style/AppTheme.Dialog.Button</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AppTheme.Dialog.Button</item>
+        <item name="buttonBarNeutralButtonStyle">@style/AppTheme.Dialog.Button</item>
     </style>
 
     <style name="AppTheme.Dialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
