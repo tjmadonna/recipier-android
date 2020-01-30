@@ -15,6 +15,8 @@
 
     <declare-styleable name="KeywordsLinearLayout">
         <attr name="editable" format="boolean" />
+        <attr name="keywordTextColor" format="color"/>
+        <attr name="addKeywordTextColor" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="ForegroundRelativeLayout">

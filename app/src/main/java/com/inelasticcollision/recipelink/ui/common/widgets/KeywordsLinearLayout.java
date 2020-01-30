@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,11 +53,11 @@ public class KeywordsLinearLayout extends LinearLayout implements View.OnClickLi
 
         mEditable = a.getBoolean(R.styleable.KeywordsLinearLayout_editable, false);
 
+        mKeywordsTextColor = a.getColor(R.styleable.KeywordsLinearLayout_keywordTextColor, android.R.attr.textColorPrimary);
+
+        mAddKeywordTextColor = a.getColor(R.styleable.KeywordsLinearLayout_addKeywordTextColor, android.R.attr.textColorPrimary);
+
         a.recycle();
-
-        mKeywordsTextColor = ContextCompat.getColor(context, R.color.primaryTextColor);
-
-        mAddKeywordTextColor = ContextCompat.getColor(context, R.color.secondaryTextColor);
 
         updateLayout();
 
