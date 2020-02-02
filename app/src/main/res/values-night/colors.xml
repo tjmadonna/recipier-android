@@ -3,9 +3,9 @@
     <color name="primary">#292929</color>
     <color name="primaryVariant">#9FA8DA</color>
     <color name="primaryDark">#000000</color>
-    <color name="secondary">#FFC107</color>
-    <color name="secondaryVariant">#FFC107</color>
-    <color name="accent">#FFC107</color>
+    <color name="secondary">#FFE082</color>
+    <color name="secondaryVariant">#FFE082</color>
+    <color name="accent">#FFE082</color>
     <color name="background">#121212</color>
     <color name="surface">#121212</color>
     <color name="error">#CF6679</color>
@@ -15,10 +15,12 @@
     <color name="onSurface">#FFFFFF</color>
     <color name="onError">#FFFFFF</color>
 
-    <color name="dialog_button_text">@color/primaryVariant</color>
-
     <color name="nav_header_gradient_start">#80000000</color>
     <color name="nav_header_gradient_end">#80000000</color>
     <color name="nav_item_selected_background">#4D000000</color>
+
+    <color name="widget_accent">@color/secondary</color>
+    <color name="edit_text_underline">@color/widget_accent</color>
+    <color name="dialog_button_text">@color/widget_accent</color>
 
 </resources>
