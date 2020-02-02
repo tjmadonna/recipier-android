@@ -1,13 +1,10 @@
 package com.inelasticcollision.recipelink.data.local.dao;
 
-import android.database.Observable;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.inelasticcollision.recipelink.data.local.LocalDataProvider;
@@ -31,7 +28,7 @@ public abstract class RecipeDao implements LocalDataProvider {
         if (searchTerm == null || searchTerm.isEmpty()) {
             return getAllRecipes();
         } else {
-            return searchRecipes(searchTerm);
+            return searchRecipes("%" + searchTerm + "%");
         }
     }
 
