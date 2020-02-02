@@ -85,7 +85,8 @@
                 android:layout_marginLeft="@dimen/list_item_text_left_padding"
                 android:layout_marginEnd="@dimen/list_item_icon_left_padding"
                 android:layout_marginRight="@dimen/list_item_icon_left_padding"
-                tools:text="This is an example of a note" />
+                android:textColorHint="?android:textColorSecondary"
+                tools:hint="This is a hint" />
 
         </FrameLayout>
 

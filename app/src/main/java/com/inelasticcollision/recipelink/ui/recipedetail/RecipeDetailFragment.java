@@ -266,16 +266,14 @@ public class RecipeDetailFragment extends Fragment implements RecipeDetailContra
 
     @Override
     public void showNotes(String notes) {
-        int textColorSecondary = ContextCompat.getColor(getActivity(), R.color.primaryTextColor);
-        mNotesView.setTextColor(textColorSecondary);
         mNotesView.setText(notes);
+        mNotesView.setHint(null);
     }
 
     @Override
     public void showEmptyNotes() {
-        int textColorSecondary = ContextCompat.getColor(getActivity(), R.color.secondaryTextColor);
-        mNotesView.setTextColor(textColorSecondary);
-        mNotesView.setText(getString(R.string.prompt_no_notes));
+        mNotesView.setText(null);
+        mNotesView.setHint(getString(R.string.prompt_no_notes));
     }
 
     @Override
