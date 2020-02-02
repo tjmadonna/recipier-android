@@ -36,7 +36,7 @@
 
     <style name="AppTheme.NewRecipe" parent="AppTheme.NoActionBar" />
 
-    <style name="AppTheme.Settings" parent="AppTheme" />
+    <style name="AppTheme.Settings" parent="AppTheme.NoActionBar" />
 
     <!-- Action bar styles -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
