@@ -30,6 +30,8 @@
     <color name="edit_text_underline">@color/widget_accent</color>
     <color name="dialog_button_text">@color/widget_accent</color>
 
+    <color name="pref_dialog_background">@color/background</color>
+
     <color name="light_content_scrim">#0d000000</color>
     <color name="activated">#E0E0E0</color>
 

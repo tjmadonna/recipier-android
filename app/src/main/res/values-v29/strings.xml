@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pref_theme_item_system">System default</string>
+
+    <string-array name="pref_options_theme">
+        <item>@string/pref_theme_item_light</item>
+        <item>@string/pref_theme_item_dark</item>
+        <item>@string/pref_theme_item_system</item>
+    </string-array>
+
+</resources>

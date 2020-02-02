@@ -23,6 +23,8 @@
         <item name="colorOnBackground">@color/onBackground</item>
         <item name="colorOnSurface">@color/onSurface</item>
         <item name="colorOnError">@color/onError</item>
+
+        <item name="android:alertDialogTheme">@style/AppTheme.PreferenceDialogStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -52,6 +54,14 @@
 
     <style name="AppTheme.Dialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@color/dialog_button_text</item>
+    </style>
+
+    <style name="AppTheme.PreferenceDialogStyle" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="android:background">@color/pref_dialog_background</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="colorPrimary">@color/dialog_button_text</item>
+        <item name="colorAccent">@color/dialog_button_text</item>
+        <item name="materialButtonStyle">@style/AppTheme.Dialog.Button</item>
     </style>
 
     <!-- Text styles -->

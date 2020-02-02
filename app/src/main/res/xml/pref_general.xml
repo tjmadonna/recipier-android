@@ -8,6 +8,18 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="@string/title_pref_section_theme">
+
+        <ListPreference
+            android:defaultValue="@string/pref_options_values_default_theme"
+            android:entries="@array/pref_options_theme"
+            android:entryValues="@array/pref_options_values_theme"
+            android:key="theme"
+            android:summary="%s"
+            android:title="@string/title_pref_item_theme" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/title_pref_section_contact">
 
         <Preference

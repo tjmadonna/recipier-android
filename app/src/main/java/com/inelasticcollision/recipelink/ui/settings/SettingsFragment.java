@@ -13,9 +13,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -35,6 +38,39 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_general);
+
+        ListPreference themePreference = (ListPreference) findPreference("theme");
+
+        themePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                return true;
+            }
+        });
+
+        themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                switch ((String)newValue) {
+                    case "0":
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        break;
+
+                    case "1":
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        break;
+
+                    case "2":
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                        } else {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
 
         // Set version preference summary to version name from gradle file
         String versionName = BuildConfig.VERSION_NAME;
