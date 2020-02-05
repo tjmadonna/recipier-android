@@ -77,11 +77,17 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // Android X
+    // AndroidX
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion" // Mark for deletion
     implementation "androidx.vectordrawable:vectordrawable:$vectorDrawableVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    // AndroidX Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$savedstate_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     // Material design
     implementation "com.google.android.material:material:$materialVersion"
@@ -109,6 +115,7 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
     testImplementation "org.powermock:powermock-module-junit4:$powerMockito"
     testImplementation "org.powermock:powermock-api-mockito:$powerMockito"
+    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
     // Android Testing Support Library's runner and rules
     androidTestImplementation 'androidx.test:core:1.2.0'
