@@ -9,6 +9,8 @@ interface RecipeLocalDataSource {
 
     fun getFavoriteRecipes(): LiveData<List<Recipe>>
 
+    fun getRecipesWithCollection(collection: String): LiveData<List<Recipe>>
+
     fun getRecipesBySearchTerm(searchTerm: String?): LiveData<List<Recipe>>
 
     fun getRecipeById(id: String, callback: (Result<Recipe>) -> Unit)
