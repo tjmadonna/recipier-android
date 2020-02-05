@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -71,9 +74,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     // Android X
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion" // Mark for deletion
     implementation "androidx.vectordrawable:vectordrawable:$vectorDrawableVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
@@ -84,17 +90,17 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     // RxJava/RxAndroid
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion" // Mark for deletion
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion" // Mark for deletion
 
     // Room
     implementation "androidx.room:room-runtime:$roomVersion"
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion" // Mark for deletion
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion" // Mark for deletion
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Dependencies for local unit tests
