@@ -16,8 +16,4 @@
         <item name="android:windowEnterTransition">@android:transition/fade</item>
     </style>
 
-    <style name="AppTheme.Main" parent="AppTheme.NoActionBar">
-        <item name="android:windowContentTransitions">true</item>
-    </style>
-
 </resources>
