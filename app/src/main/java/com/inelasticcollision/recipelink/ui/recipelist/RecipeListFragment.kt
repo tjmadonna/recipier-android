@@ -6,9 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inelasticcollision.recipelink.R
 import com.inelasticcollision.recipelink.common.extensions.visible
-import com.inelasticcollision.recipelink.data.models.Recipe
 import com.inelasticcollision.recipelink.ui.common.filtertype.RecipeFilterType
 import com.inelasticcollision.recipelink.ui.recipelist.adapter.RecipeListAdapter
+import com.inelasticcollision.recipelink.ui.recipelist.state.RecipeListState
 import kotlinx.android.synthetic.main.fragment_recipe_list.*
 
 class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
@@ -20,6 +20,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupObservers()
+        setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
@@ -34,22 +35,29 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
     }
 
     private fun setupObservers() {
-        viewModel.filterType.observe(viewLifecycleOwner, Observer { filterType ->
-            when (filterType) {
-                is RecipeFilterType.All -> toolbar_recipe_list.title = getString(R.string.title_recipes_all)
-                is RecipeFilterType.Favorite -> toolbar_recipe_list.title = getString(R.string.title_recipes_favorite)
-                is RecipeFilterType.Collection -> toolbar_recipe_list.title = filterType.collectionName
+        viewModel.state.observe(viewLifecycleOwner, Observer { state ->
+            when (state) {
+                is RecipeListState.Data -> handleDateState(state)
+                is RecipeListState.EmptyData -> toolbar_recipe_list.title = getString(R.string.title_recipes_favorite)
             }
         })
-
-        viewModel.recipes.observe(viewLifecycleOwner, Observer { recipes ->
-            recipeListAdapter.submitRecipes(recipes)
-            v_empty_recipe_list.visible = recipes.isEmpty()
-        })
     }
 
-    private fun handleRecipeListItemClick(recipe: Recipe) {
-
+    private fun handleDateState(state: RecipeListState.Data) {
+        setTitle(state.filterType)
+        recipeListAdapter.submitRecipes(state.recipes)
+        v_empty_recipe_list.visible = false
     }
 
+    private fun handleNoDateState(state: RecipeListState.EmptyData) {
+        setTitle(state.filterType)
+        recipeListAdapter.submitRecipes(emptyList())
+        v_empty_recipe_list.visible = true
+    }
+
+    private fun setTitle(filterType: RecipeFilterType) = when (filterType) {
+        is RecipeFilterType.All -> toolbar_recipe_list.title = getString(R.string.title_recipes_all)
+        is RecipeFilterType.Favorite -> toolbar_recipe_list.title = getString(R.string.title_recipes_favorite)
+        is RecipeFilterType.Collection -> toolbar_recipe_list.title = filterType.collectionName
+    }
 }

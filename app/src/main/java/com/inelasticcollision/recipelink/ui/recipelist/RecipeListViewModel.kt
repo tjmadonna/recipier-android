@@ -3,13 +3,13 @@ package com.inelasticcollision.recipelink.ui.recipelist
 import androidx.lifecycle.*
 import com.inelasticcollision.recipelink.data.local.RecipeLocalDataSource
 import com.inelasticcollision.recipelink.ui.common.filtertype.RecipeFilterType
-import com.inelasticcollision.recipelink.data.models.Recipe
+import com.inelasticcollision.recipelink.ui.recipelist.state.RecipeListState
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
 
 class RecipeListViewModel(
-        private val state: SavedStateHandle,
+        private val savedState: SavedStateHandle,
         private val recipeLocalDataSource: RecipeLocalDataSource
 ) : ViewModel() {
 
@@ -19,21 +19,19 @@ class RecipeListViewModel(
 
     private var job: Job? = null
 
-    private val _filterType = MutableLiveData<RecipeFilterType>(
-            state.get(FILTER_TYPE_STATE) ?: RecipeFilterType.All
-    )
+    private val _state = MutableLiveData<RecipeListState>()
 
-    val filterType: LiveData<RecipeFilterType>
-        get() = _filterType
+    val state: LiveData<RecipeListState>
+        get() = _state
 
-    private val _recipes = MutableLiveData<List<Recipe>>()
-
-    val recipes: LiveData<List<Recipe>>
-        get() = _recipes
+    init {
+        val savedFilterType = savedState.get<RecipeFilterType>(FILTER_TYPE_STATE)
+                ?: RecipeFilterType.All
+        setFilterType(savedFilterType)
+    }
 
     fun setFilterType(filterType: RecipeFilterType) {
-        _filterType.value = filterType
-        state.set(FILTER_TYPE_STATE, filterType)
+        savedState.set(FILTER_TYPE_STATE, filterType)
         getRecipesForFilterType(filterType)
     }
 
@@ -46,7 +44,11 @@ class RecipeListViewModel(
                 is RecipeFilterType.Favorite -> recipeLocalDataSource.getFavoriteRecipes()
                 is RecipeFilterType.Collection -> recipeLocalDataSource.getRecipesWithCollection(filterType.collectionName)
             }.collect {
-                _recipes.value = it
+                if (it.isNotEmpty()) {
+                    _state.value = RecipeListState.Data(filterType, it)
+                } else {
+                    _state.value = RecipeListState.EmptyData(filterType)
+                }
             }
         }
     }
