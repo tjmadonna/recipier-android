@@ -41,7 +41,9 @@
     <style name="AppTheme.Settings" parent="AppTheme.NoActionBar" />
 
     <!-- Action bar styles -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
@@ -76,7 +78,6 @@
     </style>
 
     <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textSize">20sp</item>
     </style>
 
