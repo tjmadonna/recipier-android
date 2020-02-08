@@ -8,10 +8,5 @@
   -->
 
 <resources>
-
-    <style name="AppTheme.RecipeDetail" parent="AppTheme.NoActionBar">
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:statusBarColor">?colorPrimaryDark</item>
-    </style>
-
+    
 </resources>

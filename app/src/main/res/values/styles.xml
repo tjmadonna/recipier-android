@@ -34,8 +34,6 @@
 
     <style name="AppTheme.Main" parent="AppTheme.NoActionBar" />
 
-    <style name="AppTheme.RecipeDetail" parent="AppTheme.NoActionBar" />
-
     <style name="AppTheme.NewRecipe" parent="AppTheme.NoActionBar" />
 
     <style name="AppTheme.Settings" parent="AppTheme.NoActionBar" />

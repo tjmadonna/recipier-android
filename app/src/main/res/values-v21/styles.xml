@@ -20,10 +20,4 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="AppTheme.RecipeDetail" parent="AppTheme.NoActionBar">
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowEnterTransition">@android:transition/slide_right</item>
-    </style>
-
 </resources>
