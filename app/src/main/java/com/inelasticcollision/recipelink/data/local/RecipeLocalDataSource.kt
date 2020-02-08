@@ -1,24 +1,25 @@
 package com.inelasticcollision.recipelink.data.local
 
-import androidx.lifecycle.LiveData
+import com.inelasticcollision.recipelink.common.Result
 import com.inelasticcollision.recipelink.data.models.Recipe
+import kotlinx.coroutines.flow.Flow
 
 interface RecipeLocalDataSource {
 
-    fun getAllRecipes(): LiveData<List<Recipe>>
+    fun getAllRecipes(): Flow<List<Recipe>>
 
-    fun getFavoriteRecipes(): LiveData<List<Recipe>>
+    fun getFavoriteRecipes(): Flow<List<Recipe>>
 
-    fun getRecipesWithCollection(collection: String): LiveData<List<Recipe>>
+    fun getRecipesWithCollection(collection: String): Flow<List<Recipe>>
 
-    fun getRecipesBySearchTerm(searchTerm: String?): LiveData<List<Recipe>>
+    fun getRecipesBySearchTerm(searchTerm: String?): Flow<List<Recipe>>
 
-    fun getRecipeById(id: String, callback: (Result<Recipe>) -> Unit)
+    suspend fun getRecipeById(id: String): Recipe
 
-    fun saveRecipe(recipe: Recipe, callback: (Throwable?) -> Unit)
+    suspend fun saveRecipe(recipe: Recipe): Result<Unit>
 
-    fun updateRecipe(recipe: Recipe, callback: (Throwable?) -> Unit)
+    suspend fun updateRecipe(recipe: Recipe): Result<Unit>
 
-    fun deleteRecipe(id: String, callback: (Throwable?) -> Unit)
+    suspend fun deleteRecipe(id: String): Result<Unit>
 
 }
