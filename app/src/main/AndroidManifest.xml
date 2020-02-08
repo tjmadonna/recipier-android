@@ -44,11 +44,6 @@
         </activity>
 
         <activity
-            android:name=".ui.editrecipe.EditRecipeActivity"
-            android:label="@string/title_edit_recipe"
-            android:theme="@style/AppTheme.NewRecipe" />
-
-        <activity
             android:name=".ui.recipedetail.RecipeDetailActivity"
             android:theme="@style/AppTheme.RecipeDetail" />
 
@@ -56,12 +51,6 @@
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_settings"
             android:theme="@style/AppTheme.Settings" />
-
-        <activity
-            android:name=".ui.main.MigrationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Main" />
 
     </application>
 
