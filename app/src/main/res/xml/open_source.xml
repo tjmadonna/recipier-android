@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map>
+    <entry key="android_jetpack">
+        Apache License 2.0|https://github.com/androidx/androidx/blob/androidx-master-dev/LICENSE.txt
+    </entry>
+    <entry key="coil">
+        Apache License 2.0|https://github.com/coil-kt/coil/blob/master/LICENSE.txt
+    </entry>
+    <entry key="dagger">
+        Apache License 2.0|https://github.com/google/dagger/blob/master/LICENSE.txt
+    </entry>
+    <entry key="kotlin_coroutines">
+        Apache License 2.0|https://github.com/Kotlin/kotlinx.coroutines/blob/master/LICENSE.txt
+    </entry>
+    <entry key="moshi">
+        Apache License 2.0|https://github.com/square/moshi/blob/master/LICENSE.txt
+    </entry>
+    <entry key="retrofit">
+        Apache License 2.0|https://github.com/square/retrofit/blob/master/LICENSE.txt
+    </entry>
+</Map>

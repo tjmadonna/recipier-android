@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph_add_recipe"
+    app:startDestination="@id/addRecipeFragment">
+
+    <fragment
+        android:id="@+id/addRecipeFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.addrecipe.AddRecipeFragment"
+        android:label="@string/add_recipe"
+        tools:layout="@layout/fragment_add_recipe">
+        <action
+            android:id="@+id/action_addRecipeFragment_to_imagePickerFragment2"
+            app:destination="@id/imagePickerFragment2"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/imagePickerFragment2"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.imagepicker.ImagePickerFragment"
+        android:label="fragment_image_picker"
+        tools:layout="@layout/fragment_image_picker">
+        <argument
+            android:name="imageUrls"
+            app:argType="string[]" />
+    </fragment>
+
+</navigation>

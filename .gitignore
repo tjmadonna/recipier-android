@@ -1,5 +1,6 @@
 # App Specific
 keystore.properties
+apikeys.properties
 
 # Release directory
 release/

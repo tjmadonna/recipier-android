@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Contact">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="contact_developer"
+            app:summary="Ask a question or report a bug"
+            app:title="Contact developer" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="About">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="rate"
+            app:summary="Rate and leave a review"
+            app:title="Rate app" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="licenses"
+            app:summary="License details for open source software"
+            app:title="Open source licenses" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="version"
+            app:selectable="false"
+            app:summary="1.0"
+            app:title="Version" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

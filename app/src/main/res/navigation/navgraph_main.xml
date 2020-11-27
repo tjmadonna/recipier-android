@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph_main"
+    app:startDestination="@id/recipeListFragment">
+
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.recipelist.RecipeListFragment"
+        tools:layout="@layout/fragment_recipe_list">
+
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+        <action
+            android:id="@+id/action_recipeListFragment_to_searchRecipeFragment"
+            app:destination="@id/searchRecipeFragment" />
+
+        <action
+            android:id="@+id/action_recipeListFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/stay_in_center"
+            app:popEnterAnim="@anim/stay_in_center"
+            app:popExitAnim="@anim/to_bottom" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.recipedetail.RecipeDetailFragment"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_confirmDeleteDialogFragment"
+            app:destination="@id/confirmDeleteDialogFragment" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_editRecipeFragment"
+            app:destination="@id/editRecipeFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/stay_in_center"
+            app:popEnterAnim="@anim/stay_in_center"
+            app:popExitAnim="@anim/to_bottom" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchRecipeFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.searchrecipe.SearchRecipeFragment"
+        android:label="SearchRecipeFragment"
+        tools:layout="@layout/fragment_search_recipe">
+        <action
+            android:id="@+id/action_searchRecipeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/confirmDeleteDialogFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.confirmdelete.ConfirmDeleteDialogFragment"
+        android:label="ConfirmDeleteDialogFragment" />
+
+    <fragment
+        android:id="@+id/editRecipeFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.editrecipe.EditRecipeFragment"
+        tools:layout="@layout/fragment_edit_recipe">
+        <argument
+            android:name="recipeId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editRecipeFragment_to_imagePickerFragment"
+            app:destination="@id/imagePickerFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/imagePickerFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.imagepicker.ImagePickerFragment"
+        android:label="fragment_image_picker"
+        tools:layout="@layout/fragment_image_picker">
+        <argument
+            android:name="imageUrls"
+            app:argType="string[]" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.settings.SettingsParentFragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_openSourceLicensesFragment"
+            app:destination="@id/openSourceLicensesFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/openSourceLicensesFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.opensource.OpenSourceLicensesFragment"
+        android:label="OpenSourceLicensesFragment" />
+
+</navigation>
