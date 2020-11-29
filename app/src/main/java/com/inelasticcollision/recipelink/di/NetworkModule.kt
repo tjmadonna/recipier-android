@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -22,28 +23,30 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(BuildConfig.NETWORK_SERVICE_BASE_URL)
-                .client(httpClient)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build()
+            .baseUrl(BuildConfig.NETWORK_SERVICE_BASE_URL)
+            .client(httpClient)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
     }
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor { chain ->
-                    val originalRequest = chain.request()
-                    val originalUrl = originalRequest.url()
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
+            .addInterceptor { chain ->
+                val originalRequest = chain.request()
+                val originalUrl = originalRequest.url()
 
-                    val newUrl = originalUrl.newBuilder()
-                            .addQueryParameter("key", BuildConfig.NETWORK_SERVICE_API_KEY)
-                            .build()
-                    val newRequest = originalRequest.newBuilder()
-                            .url(newUrl)
-                            .build()
+                val newUrl = originalUrl.newBuilder()
+                    .addQueryParameter("key", BuildConfig.NETWORK_SERVICE_API_KEY)
+                    .build()
+                val newRequest = originalRequest.newBuilder()
+                    .url(newUrl)
+                    .build()
 
-                    chain.proceed(newRequest)
-                }
-                .build()
+                chain.proceed(newRequest)
+            }
+            .build()
     }
 }
