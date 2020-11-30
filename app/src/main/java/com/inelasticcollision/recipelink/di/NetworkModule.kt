@@ -36,13 +36,8 @@ object NetworkModule {
             .retryOnConnectionFailure(true)
             .addInterceptor { chain ->
                 val originalRequest = chain.request()
-                val originalUrl = originalRequest.url()
-
-                val newUrl = originalUrl.newBuilder()
-                    .addQueryParameter("key", BuildConfig.NETWORK_SERVICE_API_KEY)
-                    .build()
                 val newRequest = originalRequest.newBuilder()
-                    .url(newUrl)
+                    .addHeader("x-api-key", BuildConfig.NETWORK_SERVICE_API_KEY)
                     .build()
 
                 chain.proceed(newRequest)
