@@ -63,19 +63,21 @@ android {
     def apiKeysProperties = new Properties()
     apiKeysProperties.load(new FileInputStream(apiKeysPropertiesFile))
 
-    buildTypes.each {
-        it.buildConfigField "String", "NETWORK_SERVICE_API_KEY", apiKeysProperties["NetworkServiceApiKey"]
-        it.buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", apiKeysProperties["NetworkServiceRecipeInfoRoute"]
-        it.buildConfigField "String", "NETWORK_SERVICE_BASE_URL", apiKeysProperties["NetworkServiceBaseUrl"]
-    }
-
     buildTypes {
         debug {
+            buildConfigField "String", "NETWORK_SERVICE_API_KEY", apiKeysProperties["DebugNetworkServiceApiKey"]
+            buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", apiKeysProperties["DebugNetworkServiceRecipeInfoRoute"]
+            buildConfigField "String", "NETWORK_SERVICE_BASE_URL", apiKeysProperties["DebugNetworkServiceBaseUrl"]
+
             applicationIdSuffix ".debug"
             manifestPlaceholders = [appName: "@string/recipier_debug"]
             minifyEnabled false
         }
         release {
+            buildConfigField "String", "NETWORK_SERVICE_API_KEY", apiKeysProperties["ReleaseNetworkServiceApiKey"]
+            buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", apiKeysProperties["ReleaseNetworkServiceRecipeInfoRoute"]
+            buildConfigField "String", "NETWORK_SERVICE_BASE_URL", apiKeysProperties["ReleaseNetworkServiceBaseUrl"]
+
             manifestPlaceholders = [appName: "@string/recipier_release"] // Set release app name
             minifyEnabled true // Enable code shrinking, obfuscation, and optimization
             shrinkResources true // Enable resource shrinking
