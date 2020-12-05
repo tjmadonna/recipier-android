@@ -45,6 +45,7 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
             when (item.itemId) {
                 R.id.menu_favorite -> toggleFavorite()
                 R.id.menu_edit -> navigateToEditRecipe()
+                R.id.menu_share -> shareRecipe()
                 R.id.menu_delete -> navigateToConfirmDelete()
                 else -> return@setOnMenuItemClickListener false
             }
@@ -117,6 +118,16 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
         val direction =
             RecipeDetailFragmentDirections.actionRecipeDetailFragmentToEditRecipeFragment(args.recipeId)
         findNavController().navigate(direction)
+    }
+
+    private fun shareRecipe() {
+        viewModel.recipe?.let { recipe ->
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_SUBJECT, recipe.title)
+            intent.putExtra(Intent.EXTRA_TEXT, recipe.url)
+            startActivity(Intent.createChooser(intent, getString(R.string.share_recipe)))
+        }
     }
 
     private fun navigateToRecipeList() {

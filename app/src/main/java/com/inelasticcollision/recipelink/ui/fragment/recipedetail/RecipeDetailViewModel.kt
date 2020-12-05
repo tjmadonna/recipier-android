@@ -29,6 +29,9 @@ class RecipeDetailViewModel @ViewModelInject constructor(
     val state: LiveData<RecipeDetailState>
         get() = _state
 
+    val recipe: Recipe?
+        get() = (_state.value as? RecipeDetailState.Data)?.recipe
+
     private val recipeId: String?
         get() = savedStateHandle.get(RECIPE_ID_SAVED_STATE) ?: run {
             _state.value = RecipeDetailState.Error
