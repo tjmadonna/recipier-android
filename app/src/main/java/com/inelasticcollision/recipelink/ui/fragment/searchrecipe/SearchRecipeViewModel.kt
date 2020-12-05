@@ -17,6 +17,7 @@ class SearchRecipeViewModel @ViewModelInject constructor(
 
     companion object {
         private const val SEARCH_TERM_SAVED_STATE = "searchTermSavedState"
+        private const val KEYBOARD_SHOWING_SAVED_STATE = "keyboardShowingSavedState"
     }
 
     private val _state = MutableLiveData<SearchRecipeState>()
@@ -24,9 +25,13 @@ class SearchRecipeViewModel @ViewModelInject constructor(
     val state: LiveData<SearchRecipeState>
         get() = _state
 
-    var searchTermSavedState: String?
+    private var searchTermSavedState: String?
         get() = savedStateHandle.get(SEARCH_TERM_SAVED_STATE)
         set(value) = savedStateHandle.set(SEARCH_TERM_SAVED_STATE, value)
+
+    private var keyboardShowingSavedState: Boolean
+        get() = savedStateHandle.get(KEYBOARD_SHOWING_SAVED_STATE) ?: true
+        set(value) = savedStateHandle.set(KEYBOARD_SHOWING_SAVED_STATE, value)
 
     init {
         setSearchTerm(searchTermSavedState)
@@ -35,6 +40,7 @@ class SearchRecipeViewModel @ViewModelInject constructor(
     fun setIntent(intent: SearchRecipeIntent) {
         when (intent) {
             is SearchRecipeIntent.Search -> setSearchTerm(intent.text)
+            is SearchRecipeIntent.ChangeKeyboardShowing -> setKeyboardShowing(intent.isShowing)
         }
     }
 
@@ -42,6 +48,10 @@ class SearchRecipeViewModel @ViewModelInject constructor(
         searchTermSavedState = searchTerm
         searchRecipes.cancel()
         searchRecipes.execute(SearchRecipesObserver(), searchTerm)
+    }
+
+    private fun setKeyboardShowing(isShowing: Boolean) {
+        keyboardShowingSavedState = isShowing
     }
 
     override fun onCleared() {
@@ -56,9 +66,9 @@ class SearchRecipeViewModel @ViewModelInject constructor(
 
         override fun onSuccess(value: List<Recipe>) {
             if (value.isNotEmpty()) {
-                _state.value = SearchRecipeState.Data(value)
+                _state.value = SearchRecipeState.Data(value, keyboardShowingSavedState)
             } else {
-                _state.value = SearchRecipeState.NoData
+                _state.value = SearchRecipeState.NoData(keyboardShowingSavedState)
             }
         }
 

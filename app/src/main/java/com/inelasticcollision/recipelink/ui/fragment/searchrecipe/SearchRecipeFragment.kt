@@ -10,6 +10,9 @@ import com.inelasticcollision.recipelink.R
 import com.inelasticcollision.recipelink.data.model.Recipe
 import com.inelasticcollision.recipelink.databinding.FragmentSearchRecipeBinding
 import com.inelasticcollision.recipelink.ui.widget.DebouncedEditText
+import com.inelasticcollision.recipelink.util.closeKeyboard
+import com.inelasticcollision.recipelink.util.listener.KeyboardEventListener
+import com.inelasticcollision.recipelink.util.openKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +34,11 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
         setupToolbar()
         setupViews()
         setupObservers()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        closeKeyboard(binding?.searchEditText)
     }
 
     override fun onDestroyView() {
@@ -61,27 +69,46 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
     private fun setupObservers() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is SearchRecipeState.Data -> renderDataState(state.recipes)
-                is SearchRecipeState.NoData -> renderNoDataState()
+                is SearchRecipeState.Data -> renderDataState(state.recipes, state.keyboardShowing)
+                is SearchRecipeState.NoData -> renderNoDataState(state.keyboardShowing)
                 is SearchRecipeState.Error -> renderErrorState()
             }
         }
+
+        KeyboardEventListener(this) { isShowing ->
+            if (isShowing) {
+                binding?.searchEditText?.requestFocus()
+            } else {
+                binding?.searchEditText?.clearFocus()
+            }
+            viewModel.setIntent(SearchRecipeIntent.ChangeKeyboardShowing(isShowing))
+        }
     }
 
-    private fun renderDataState(recipes: List<Recipe>) {
+    private fun renderDataState(recipes: List<Recipe>, keyboardShowing: Boolean) {
         adapter.submitRecipeList(recipes)
         binding?.toolbar?.setTitle(R.string.all)
         binding?.toolbar?.menu?.findItem(R.id.menu_filter_all)?.isChecked = true
         binding?.noRecipesImageView?.visibility = View.GONE
         binding?.noRecipesTextView?.visibility = View.GONE
+        setKeyboardShowing(keyboardShowing)
     }
 
-    private fun renderNoDataState() {
+    private fun renderNoDataState(keyboardShowing: Boolean) {
         adapter.submitRecipeList(emptyList())
         binding?.toolbar?.setTitle(R.string.all)
         binding?.toolbar?.menu?.findItem(R.id.menu_filter_all)?.isChecked = true
         binding?.noRecipesImageView?.visibility = View.VISIBLE
         binding?.noRecipesTextView?.visibility = View.VISIBLE
+        setKeyboardShowing(keyboardShowing)
+    }
+
+    private fun setKeyboardShowing(isShowing: Boolean) {
+        if (isShowing) {
+            openKeyboard(binding?.searchEditText)
+        } else {
+            closeKeyboard(binding?.searchEditText)
+        }
     }
 
     private fun renderErrorState() {
