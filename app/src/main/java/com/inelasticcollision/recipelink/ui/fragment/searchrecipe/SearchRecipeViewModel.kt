@@ -52,6 +52,12 @@ class SearchRecipeViewModel @ViewModelInject constructor(
 
     private fun setKeyboardShowing(isShowing: Boolean) {
         keyboardShowingSavedState = isShowing
+        val currentState = _state.value
+        _state.value = when (currentState) {
+            is SearchRecipeState.Data -> SearchRecipeState.Data(currentState.recipes, isShowing)
+            is SearchRecipeState.NoData -> SearchRecipeState.NoData(isShowing)
+            else -> currentState
+        }
     }
 
     override fun onCleared() {
