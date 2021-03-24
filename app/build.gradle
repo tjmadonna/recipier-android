@@ -181,11 +181,7 @@ dependencies {
 
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
-
-    def hiltLifecycleVersion = "1.0.0-alpha03"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleVersion"
-    kapt "androidx.hilt:hilt-compiler:$hiltLifecycleVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:4.13.1"

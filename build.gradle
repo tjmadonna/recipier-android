@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        hiltVersion = '2.30.1-alpha'
+        hiltVersion = '2.33-beta'
         kotlinVersion = '1.4.31'
         navVersion = "2.3.4"
     }
