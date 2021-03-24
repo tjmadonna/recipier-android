@@ -15,6 +15,7 @@
 
     <color name="surfaceOutline">#E6E6E6</color>
     <color name="toolbarColor">@color/primary</color>
+    <color name="settingsCategory">#1A237E</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

@@ -15,4 +15,5 @@
 
     <color name="surfaceOutline">#161616</color>
     <color name="toolbarColor">#1F1F1F</color>
+    <color name="settingsCategory">#FFECB3</color>
 </resources>
