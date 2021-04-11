@@ -1,8 +1,6 @@
 package com.inelasticcollision.recipelink.ui.fragment.recipelist
 
 import android.os.Parcelable
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -11,7 +9,9 @@ import com.inelasticcollision.recipelink.data.model.Recipe
 import com.inelasticcollision.recipelink.data.usecase.GetAllRecipes
 import com.inelasticcollision.recipelink.data.usecase.GetFavoriteRecipes
 import com.inelasticcollision.recipelink.data.usecase.UseCaseObserver
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.parcelize.Parcelize
+import javax.inject.Inject
 
 sealed class RecipeFilterType : Parcelable {
     @Parcelize
@@ -21,10 +21,11 @@ sealed class RecipeFilterType : Parcelable {
     object Favorites : RecipeFilterType()
 }
 
-class RecipeListViewModel @ViewModelInject constructor(
+@HiltViewModel
+class RecipeListViewModel @Inject constructor(
     private val getAllRecipes: GetAllRecipes,
     private val getFavoriteRecipes: GetFavoriteRecipes,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     companion object {

@@ -1,8 +1,6 @@
 package com.inelasticcollision.recipelink.ui.fragment.recipedetail
 
 import android.util.Log
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -12,12 +10,15 @@ import com.inelasticcollision.recipelink.data.usecase.DeleteRecipe
 import com.inelasticcollision.recipelink.data.usecase.GetRecipe
 import com.inelasticcollision.recipelink.data.usecase.ToggleFavoriteRecipe
 import com.inelasticcollision.recipelink.data.usecase.UseCaseObserver
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RecipeDetailViewModel @ViewModelInject constructor(
+@HiltViewModel
+class RecipeDetailViewModel @Inject constructor(
     private val getRecipe: GetRecipe,
     private val toggleFavoriteRecipe: ToggleFavoriteRecipe,
     private val deleteRecipe: DeleteRecipe,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     companion object {
@@ -28,6 +29,9 @@ class RecipeDetailViewModel @ViewModelInject constructor(
 
     val state: LiveData<RecipeDetailState>
         get() = _state
+
+    val recipe: Recipe?
+        get() = (_state.value as? RecipeDetailState.Data)?.recipe
 
     private val recipeId: String?
         get() = savedStateHandle.get(RECIPE_ID_SAVED_STATE) ?: run {

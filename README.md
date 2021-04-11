@@ -18,7 +18,7 @@ Recipier stores your online recipes in a clean interface that allows you to quic
   <p align="center">Fragment showing the user's list of saved recipes</p>
 </p>
 
-<p align="center">
+<p style="padding-top: 50px;" align="center">
   <img src="./art/phone-image-2.png"" alt="Recipe Detail Screen" width="25%" align="center"/>
   <p align="center">Fragment showing the details of a saved recipe</p>
 </p>

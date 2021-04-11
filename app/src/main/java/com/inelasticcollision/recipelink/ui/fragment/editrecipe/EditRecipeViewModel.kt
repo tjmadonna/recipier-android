@@ -1,8 +1,6 @@
 package com.inelasticcollision.recipelink.ui.fragment.editrecipe
 
 import android.util.Log
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -13,12 +11,15 @@ import com.inelasticcollision.recipelink.data.usecase.GetRecipe
 import com.inelasticcollision.recipelink.data.usecase.GetRecipeInfo
 import com.inelasticcollision.recipelink.data.usecase.UpdateRecipe
 import com.inelasticcollision.recipelink.data.usecase.UseCaseObserver
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EditRecipeViewModel @ViewModelInject constructor(
+@HiltViewModel
+class EditRecipeViewModel @Inject constructor(
     private val getRecipe: GetRecipe,
     private val getRecipeInfo: GetRecipeInfo,
     private val updateRecipe: UpdateRecipe,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = MutableLiveData<EditRecipeState>()

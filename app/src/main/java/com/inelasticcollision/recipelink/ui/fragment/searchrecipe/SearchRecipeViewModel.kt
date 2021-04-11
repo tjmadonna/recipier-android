@@ -1,7 +1,5 @@
 package com.inelasticcollision.recipelink.ui.fragment.searchrecipe
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -9,10 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.inelasticcollision.recipelink.data.model.Recipe
 import com.inelasticcollision.recipelink.data.usecase.SearchRecipes
 import com.inelasticcollision.recipelink.data.usecase.UseCaseObserver
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SearchRecipeViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SearchRecipeViewModel @Inject constructor(
     private val searchRecipes: SearchRecipes,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     companion object {
