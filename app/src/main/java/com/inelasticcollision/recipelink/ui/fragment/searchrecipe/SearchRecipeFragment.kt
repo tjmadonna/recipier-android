@@ -87,8 +87,6 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
 
     private fun renderDataState(recipes: List<Recipe>, keyboardShowing: Boolean) {
         adapter.submitRecipeList(recipes)
-        binding?.toolbar?.setTitle(R.string.all)
-        binding?.toolbar?.menu?.findItem(R.id.menu_filter_all)?.isChecked = true
         binding?.noRecipesImageView?.visibility = View.GONE
         binding?.noRecipesTextView?.visibility = View.GONE
         setKeyboardShowing(keyboardShowing)
@@ -96,8 +94,6 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
 
     private fun renderNoDataState(keyboardShowing: Boolean) {
         adapter.submitRecipeList(emptyList())
-        binding?.toolbar?.setTitle(R.string.all)
-        binding?.toolbar?.menu?.findItem(R.id.menu_filter_all)?.isChecked = true
         binding?.noRecipesImageView?.visibility = View.VISIBLE
         binding?.noRecipesTextView?.visibility = View.VISIBLE
         setKeyboardShowing(keyboardShowing)
