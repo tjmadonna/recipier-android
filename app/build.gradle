@@ -6,12 +6,12 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: "dagger.hilt.android.plugin"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.inelasticcollision.recipelink"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 23
         versionName "3.0.2"
 
@@ -128,27 +128,24 @@ android {
 dependencies {
     implementation fileTree(include: ["*.jar"], dir: "libs")
 
-    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation "androidx.preference:preference-ktx:1.1.1"
-    implementation "com.google.android.material:material:1.4.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.3"
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation "androidx.preference:preference-ktx:1.2.0"
+    implementation "com.google.android.material:material:1.5.0"
 
     // Multidex
     implementation "androidx.multidex:multidex:2.0.1"
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-
     // Kotlin coroutines
-    def coroutinesVersion = "1.3.9"
+    def coroutinesVersion = "1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     // Coil
-    implementation 'io.coil-kt:coil:1.2.2'
+    implementation 'io.coil-kt:coil:1.4.0'
 
     // Lifecycle components
-    def lifecycleVersion = "2.3.1"
+    def lifecycleVersion = "2.4.1"
     def archVersion = "2.1.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion"
@@ -157,14 +154,14 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$archVersion"
 
     // Room
-    def roomVersion = "2.3.0"
+    def roomVersion = "2.4.1"
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
 
     // Moshi
-    def moshiVersion = "1.12.0"
+    def moshiVersion = "1.13.0"
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
@@ -184,7 +181,7 @@ dependencies {
 
     // Dependencies for local unit tests
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:3.11.2'
+    testImplementation 'org.mockito:mockito-core:4.3.1'
 
     // Android Testing Support Library"s runner and rules
     androidTestImplementation "androidx.test:runner:1.4.0"
