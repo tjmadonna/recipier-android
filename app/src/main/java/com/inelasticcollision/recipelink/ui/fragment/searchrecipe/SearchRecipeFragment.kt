@@ -4,19 +4,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inelasticcollision.recipelink.R
 import com.inelasticcollision.recipelink.data.model.Recipe
 import com.inelasticcollision.recipelink.databinding.FragmentSearchRecipeBinding
-import com.inelasticcollision.recipelink.ui.widget.DebouncedEditText
+import com.inelasticcollision.recipelink.ui.widget.DebounceTextContainer
 import com.inelasticcollision.recipelink.util.closeKeyboard
 import com.inelasticcollision.recipelink.util.listener.KeyboardEventListener
 import com.inelasticcollision.recipelink.util.openKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
+class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe),
+    DebounceTextContainer.OnContentChangeListener {
 
     // Properties
 
@@ -25,6 +27,8 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
     private val viewModel: SearchRecipeViewModel by viewModels()
 
     private val adapter = SearchRecipeAdapter()
+
+    private var searchTextContainer: DebounceTextContainer? = null
 
     // Lifecycle
 
@@ -58,12 +62,10 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
         binding?.recyclerView?.adapter = adapter
         binding?.recyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
-        binding?.searchEditText?.onTextChangeListener =
-            object : DebouncedEditText.OnTextChangeListener {
-                override fun onTextChange(text: String?) {
-                    viewModel.setIntent(SearchRecipeIntent.Search(text))
-                }
-            }
+        binding?.searchEditText?.let {
+            searchTextContainer = DebounceTextContainer(it, lifecycleScope)
+            searchTextContainer?.onContentChangeListener = this
+        }
     }
 
     private fun setupObservers() {
@@ -110,4 +112,12 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe) {
     private fun renderErrorState() {
         adapter.submitRecipeList(emptyList())
     }
+
+    // DebounceTextContainer.OnContentChangeListener
+
+    override fun onTextChange(container: DebounceTextContainer, text: String?) {
+        viewModel.setIntent(SearchRecipeIntent.Search(text))
+    }
+
+    override fun onFocusChange(container: DebounceTextContainer, isFocused: Boolean) = Unit
 }
