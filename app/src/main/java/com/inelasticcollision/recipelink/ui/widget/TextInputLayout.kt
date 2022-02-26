@@ -4,49 +4,32 @@ import android.animation.LayoutTransition
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.view.children
 import com.inelasticcollision.recipelink.R
 import com.inelasticcollision.recipelink.databinding.ItemTagsTextInputBinding
-import kotlinx.coroutines.*
+import com.inelasticcollision.recipelink.util.textString
+import kotlinx.coroutines.CoroutineScope
 import java.util.*
 
-class TextInputLayout : LinearLayout, DebouncedEditText.OnTextChangeListener,
-    View.OnFocusChangeListener {
+class TextInputLayout : LinearLayout, DebounceTextContainer.OnContentChangeListener {
 
     interface OnTextInputChangeListener {
         fun onTextInputChanged(text: List<String>)
     }
 
-    private var viewFocusDelay: Long = 250 // ms
-
-    private var job: Job? = null
-
-    private val coroutineScope: CoroutineScope? = CoroutineScope(Dispatchers.Main + SupervisorJob())
-
-    private val recycledViewQueue: Queue<DebouncedEditText> = LinkedList()
+    lateinit var coroutineScope: CoroutineScope
 
     var editable: Boolean = true
 
     var onTextInputChangedListener: OnTextInputChangeListener? = null
 
-    fun setOnTextInputChangeListener(listener: ((List<String>) -> Unit)?) {
-        if (listener == null) {
-            onTextInputChangedListener = null
-            return
-        }
-
-        onTextInputChangedListener = object : OnTextInputChangeListener {
-            override fun onTextInputChanged(text: List<String>) {
-                listener.invoke((text))
-            }
-        }
-    }
+    private val recycledViewQueue: Queue<DebounceTextContainer> = LinkedList()
 
     @Suppress("UNCHECKED_CAST")
-    private val childrenList: List<DebouncedEditText>
-        get() = children.toList() as List<DebouncedEditText>
+    private val childrenList: List<EditText>
+        get() = children.toList() as List<EditText>
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -79,41 +62,43 @@ class TextInputLayout : LinearLayout, DebouncedEditText.OnTextChangeListener,
     fun setTextInput(inputStrings: List<String>) {
         if (editable) {
             for (inputString in inputStrings) {
-                val inputView = getView()
-                inputView.setText(inputString)
-                initializeListenersOnView(inputView)
-                addView(inputView)
+                val container = getViewContainer()
+                container.editText.setText(inputString)
+                initializeListenersForContainer(container)
+                addView(container.editText)
             }
-            val inputView = getView()
-            initializeListenersOnView(inputView)
-            addView(inputView)
+            val container = getViewContainer()
+            initializeListenersForContainer(container)
+            addView(container.editText)
         }
     }
 
-    private fun getView(): DebouncedEditText {
-        return recycledViewQueue.poll() ?: createView()
+    private fun getViewContainer(): DebounceTextContainer {
+        return recycledViewQueue.poll() ?: createViewContainer()
     }
 
-    private fun initializeListenersOnView(view: DebouncedEditText) {
-        view.onTextChangeListener = this
-        view.onFocusChangeListener = this
+    private fun initializeListenersForContainer(container: DebounceTextContainer) {
+        container.onContentChangeListener = this
     }
 
-    private fun createView(): DebouncedEditText {
-        val binding = ItemTagsTextInputBinding.inflate(LayoutInflater.from(context), this, false)
-        return binding.root
+    private fun createViewContainer(): DebounceTextContainer {
+        val binding = ItemTagsTextInputBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            false
+        )
+        return DebounceTextContainer(binding.root, coroutineScope)
     }
 
-    private fun recycleView(view: DebouncedEditText) {
-        view.onTextChangeListener = null
-        view.onFocusChangeListener = null
-        view.textString = ""
-        recycledViewQueue.add(view)
+    private fun recycleViewContainer(container: DebounceTextContainer) {
+        container.onContentChangeListener = null
+        container.editText.textString = ""
+        recycledViewQueue.add(container)
     }
 
     private fun getTextInputStrings(): List<String> {
         return childrenList
-            .mapNotNull { view -> (view as? DebouncedEditText)?.textString }
+            .mapNotNull { view -> (view as? EditText)?.textString }
             .filter { input -> input.isNotEmpty() }
     }
 
@@ -124,39 +109,24 @@ class TextInputLayout : LinearLayout, DebouncedEditText.OnTextChangeListener,
         }
     }
 
-    // DebouncedEditText.OnTextChangeListener
+    // DebounceTextContainer.OnTextChangeListener
 
-    override fun onTextChange(text: String?) {
+    override fun onTextChange(container: DebounceTextContainer, text: String?) {
         notifyTextInputChanged()
         addLastTextInputIfNecessary()
     }
 
-    // View.OnFocusChangeListener
-
-    override fun onFocusChange(view: View?, hasFocus: Boolean) {
-        if (!hasFocus) {
-            (view as? DebouncedEditText)?.let { inputView ->
-                val childrenList = childrenList
-                if (childrenList.size <= 1) {
-                    return@let
-                }
-                val viewIndex = childrenList.indexOf(inputView)
-                if (viewIndex != childrenList.lastIndex && inputView.textString.isNullOrEmpty()) {
-                    removeView(inputView)
-                    recycleView(inputView)
-                }
+    override fun onFocusChange(container: DebounceTextContainer, isFocused: Boolean) {
+        if (!isFocused) {
+            val inputView = container.editText
+            val childrenList = childrenList
+            if (childrenList.size <= 1) {
+                return
             }
-        } else {
-            view?.let { focusedView ->
-                job?.cancel()
-                job = coroutineScope?.launch {
-                    // This fixes a bug where the edit text will come unfocused when a view in the
-                    // layout is deleted. Looking for a more reliable solution
-                    delay(viewFocusDelay)
-                    if (focusedView != focusedChild) {
-                        focusedView.requestFocus()
-                    }
-                }
+            val viewIndex = childrenList.indexOf(inputView)
+            if (viewIndex != childrenList.lastIndex && inputView.textString.isNullOrEmpty()) {
+                removeView(inputView)
+                recycleViewContainer(container)
             }
         }
     }
@@ -165,14 +135,14 @@ class TextInputLayout : LinearLayout, DebouncedEditText.OnTextChangeListener,
         childrenList.lastOrNull()?.let { inputView ->
             val text = inputView.text
             if (text != null && text.isNotEmpty()) {
-                val newInputView = getView()
-                initializeListenersOnView(newInputView)
-                addView(newInputView)
+                val newInputView = getViewContainer()
+                initializeListenersForContainer(newInputView)
+                addView(newInputView.editText)
             }
         } ?: run {
-            val newInputView = getView()
-            initializeListenersOnView(newInputView)
-            addView(newInputView)
+            val newInputView = getViewContainer()
+            initializeListenersForContainer(newInputView)
+            addView(newInputView.editText)
         }
     }
 }

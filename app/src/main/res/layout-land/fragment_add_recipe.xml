@@ -80,7 +80,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.inelasticcollision.recipelink.ui.widget.DebouncedEditText
+            <EditText
                 android:id="@+id/title_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_edit_text" />
 
-            <com.inelasticcollision.recipelink.ui.widget.DebouncedEditText
+            <EditText
                 android:id="@+id/notes_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
