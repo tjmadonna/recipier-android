@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetFavoriteRecipes @Inject constructor(
-        private val recipeDao: RecipeDao,
-        dispatchers: UseCaseDispatchers
+    private val recipeDao: RecipeDao,
+    dispatchers: UseCaseDispatchers
 ) : FlowUseCase<List<Recipe>, Nothing?>(dispatchers) {
 
     override fun buildUseCaseFlow(params: Nothing?): Flow<List<Recipe>> {

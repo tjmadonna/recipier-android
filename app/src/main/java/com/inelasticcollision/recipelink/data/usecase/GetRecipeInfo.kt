@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
 class GetRecipeInfo @Inject constructor(
-        private val networkService: RecipeNetworkService,
-        dispatchers: UseCaseDispatchers
+    private val networkService: RecipeNetworkService,
+    dispatchers: UseCaseDispatchers
 ) : FlowUseCase<RecipeInfo, String>(dispatchers) {
 
     override fun buildUseCaseFlow(params: String?): Flow<RecipeInfo> {

@@ -4,8 +4,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 data class UseCaseDispatchers(
-        val executionDispatcher: CoroutineDispatcher,
-        val postExecutionDispatcher: CoroutineDispatcher
+    val executionDispatcher: CoroutineDispatcher,
+    val postExecutionDispatcher: CoroutineDispatcher
 )
 
 interface UseCaseObserver<T> {
@@ -14,7 +14,7 @@ interface UseCaseObserver<T> {
 }
 
 abstract class FlowUseCase<T, in Params> constructor(
-        private val dispatchers: UseCaseDispatchers
+    private val dispatchers: UseCaseDispatchers
 ) {
 
     private val supervisor = SupervisorJob()
@@ -29,10 +29,10 @@ abstract class FlowUseCase<T, in Params> constructor(
         this.observer = observer
 
         buildUseCaseFlow(params)
-                .flowOn(dispatchers.executionDispatcher)
-                .onEach { value -> observer.onSuccess(value) }
-                .catch { error -> observer.onError(error) }
-                .launchIn(scope)
+            .flowOn(dispatchers.executionDispatcher)
+            .onEach { value -> observer.onSuccess(value) }
+            .catch { error -> observer.onError(error) }
+            .launchIn(scope)
     }
 
     fun cancel() {

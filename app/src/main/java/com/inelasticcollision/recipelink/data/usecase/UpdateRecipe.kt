@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
 class UpdateRecipe @Inject constructor(
-        private val recipeDao: RecipeDao,
-        dispatchers: UseCaseDispatchers
+    private val recipeDao: RecipeDao,
+    dispatchers: UseCaseDispatchers
 ) : FlowUseCase<Unit, Recipe>(dispatchers) {
 
     override fun buildUseCaseFlow(params: Recipe?): Flow<Unit> {
