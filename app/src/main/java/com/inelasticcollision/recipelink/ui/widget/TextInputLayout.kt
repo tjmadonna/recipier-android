@@ -63,7 +63,7 @@ class TextInputLayout : LinearLayout, DebounceTextContainer.OnContentChangeListe
         if (editable) {
             for (inputString in inputStrings) {
                 val container = getViewContainer()
-                container.editText.setText(inputString)
+                container.editText.textString = inputString
                 initializeListenersForContainer(container)
                 addView(container.editText)
             }
@@ -112,6 +112,7 @@ class TextInputLayout : LinearLayout, DebounceTextContainer.OnContentChangeListe
     // DebounceTextContainer.OnTextChangeListener
 
     override fun onTextChange(container: DebounceTextContainer, text: String?) {
+
         notifyTextInputChanged()
         addLastTextInputIfNecessary()
     }
