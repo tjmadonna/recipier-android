@@ -15,6 +15,7 @@ import com.inelasticcollision.recipelink.databinding.FragmentEditRecipeBinding
 import com.inelasticcollision.recipelink.ui.fragment.imagepicker.ImagePickerFragment
 import com.inelasticcollision.recipelink.ui.widget.DebounceTextContainer
 import com.inelasticcollision.recipelink.ui.widget.TextInputLayout
+import com.inelasticcollision.recipelink.util.observeOnce
 import com.inelasticcollision.recipelink.util.textString
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -92,84 +93,72 @@ class EditRecipeFragment : Fragment(R.layout.fragment_edit_recipe),
     }
 
     private fun setupObservers() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is EditRecipeState.Data -> renderDataState(state.viewData)
-                is EditRecipeState.Error -> renderErrorState()
-                is EditRecipeState.Saved -> close()
+
+        viewModel.titleState.observeOnce(viewLifecycleOwner) { title ->
+            binding?.titleEditText?.textString = title
+        }
+
+        viewModel.favoriteState.observe(viewLifecycleOwner) { favorite ->
+            if (favorite) {
+                binding?.toolbar?.menu?.findItem(R.id.menu_favorite)
+                    ?.setIcon(R.drawable.ic_favorite)
+            } else {
+                binding?.toolbar?.menu?.findItem(R.id.menu_favorite)
+                    ?.setIcon(R.drawable.ic_favorite_outline)
             }
+        }
+
+        viewModel.selectedImageState.observe(viewLifecycleOwner) { imageUrl ->
+            binding?.recipeImageView?.load(imageUrl) {
+                listener(
+                    onStart = { },
+                    onSuccess = { _, _ -> },
+                    onError = { _, error -> Log.e("AddRecipe", error.localizedMessage, error) },
+                    onCancel = { }
+                )
+            }
+        }
+
+        viewModel.imagesState.observe(viewLifecycleOwner) { imageUrls ->
+            if (!imageUrls.isNullOrEmpty()) {
+                binding?.changeImageButton?.isVisible = true
+                binding?.changeImageButton?.setOnClickListener {
+                    navigateToChooseImage(imageUrls)
+                }
+            } else {
+                binding?.changeImageButton?.isVisible = false
+                binding?.changeImageButton?.setOnClickListener(null)
+            }
+        }
+
+        viewModel.notesState.observeOnce(viewLifecycleOwner) { notes ->
+            binding?.notesEditText?.textString = notes
+        }
+
+        viewModel.tagsState.observeOnce(viewLifecycleOwner) { tags ->
+            binding?.tagsTextInputLayout?.setTextInput(tags)
+        }
+
+        viewModel.savedStatusState.observe(viewLifecycleOwner) {
+            close()
+        }
+
+        viewModel.errorState.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "A problem occurred", Toast.LENGTH_SHORT).show()
         }
 
         // Get image url from image picker
         val savedStateHandle =
             findNavController().getBackStackEntry(R.id.editRecipeFragment).savedStateHandle
-
         savedStateHandle.getLiveData<String>(ImagePickerFragment.IMAGE_PICKER_SAVED_STATE)
             .observe(viewLifecycleOwner) { value ->
                 savedStateHandle.remove<String>(ImagePickerFragment.IMAGE_PICKER_SAVED_STATE)
-                if (value != null) {
-                    viewModel.setIntent(EditRecipeIntent.ChangeImage(value))
-                }
+                viewModel.setSelectedImage(value)
             }
-    }
-
-    // Render
-
-    private fun renderDataState(viewData: EditRecipeViewData) {
-        binding?.recipeImageView?.load(viewData.selectedImageUrl) {
-            listener(
-                onStart = {
-
-                },
-                onSuccess = { _, _ ->
-
-                },
-                onError = { _, error ->
-                    Log.e("AddRecipe", "===== ${error.localizedMessage}", error)
-                },
-                onCancel = {
-
-                }
-            )
-        }
-
-        binding?.titleEditText?.textString = viewData.title
-
-        binding?.notesEditText?.textString = viewData.notes
-
-        binding?.tagsTextInputLayout?.setTextInput(viewData.tags ?: emptyList())
-        binding?.tagsTextInputLayout?.editable = false
-
-        if (viewData.favorite) {
-            binding?.toolbar?.menu?.findItem(R.id.menu_favorite)
-                ?.setIcon(R.drawable.ic_favorite)
-        } else {
-            binding?.toolbar?.menu?.findItem(R.id.menu_favorite)
-                ?.setIcon(R.drawable.ic_favorite_outline)
-        }
-
-        val imageUrls = viewData.imageUrls
-        setupImageButtonListener(imageUrls)
-
-        binding?.changeImageButton?.isVisible = !imageUrls.isNullOrEmpty()
-    }
-
-    private fun renderErrorState() {
-
-    }
-
-    private fun setupImageButtonListener(imageUrls: List<String>?) {
-        if (!imageUrls.isNullOrEmpty()) {
-            binding?.changeImageButton?.setOnClickListener {
-                navigateToChooseImage(imageUrls)
-            }
-        } else {
-            binding?.changeImageButton?.setOnClickListener(null)
-        }
     }
 
     private fun saveRecipe() {
-        viewModel.setIntent(EditRecipeIntent.SaveRecipe)
+        viewModel.saveRecipe()
     }
 
     private fun close() {
@@ -183,16 +172,16 @@ class EditRecipeFragment : Fragment(R.layout.fragment_edit_recipe),
     }
 
     private fun toggleFavorite() {
-        viewModel.setIntent(EditRecipeIntent.ToggleFavorite)
+        viewModel.toggleFavorite()
     }
 
     // DebounceTextContainer.OnContentChangeListener
 
     override fun onTextChange(container: DebounceTextContainer, text: String?) {
         if (container.editText == binding?.titleEditText) {
-            viewModel.setIntent(EditRecipeIntent.ChangeTitle(text))
+            viewModel.setTitle(text)
         } else if (container.editText == binding?.notesEditText) {
-            viewModel.setIntent(EditRecipeIntent.ChangeNotes(text))
+            viewModel.setNotes(text)
         }
     }
 
@@ -201,6 +190,6 @@ class EditRecipeFragment : Fragment(R.layout.fragment_edit_recipe),
     // TextInputLayout.OnTextInputChangeListener
 
     override fun onTextInputChanged(text: List<String>) {
-        viewModel.setIntent(EditRecipeIntent.ChangeTags(text))
+        viewModel.setTags(text)
     }
 }
