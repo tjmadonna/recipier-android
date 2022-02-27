@@ -18,35 +18,84 @@ class AddRecipeSavedStateManager(
         private const val TAGS_SAVED_STATE = "tagsSavedState"
     }
 
-    var urlSavedState: String?
-        get() = savedStateHandle.get(URL_SAVED_STATE)
-        set(value) = savedStateHandle.set(URL_SAVED_STATE, value)
+    // Url
 
-    var loadingSavedState: Boolean
-        get() = savedStateHandle.get(LOADING_SAVED_STATE) ?: true
-        set(value) = savedStateHandle.set(LOADING_SAVED_STATE, value)
+    val urlState: String?
+        get() = savedStateHandle.get<String>(URL_SAVED_STATE)
 
-    var titleSavedState: String?
-        get() = savedStateHandle.get(TITLE_SAVED_STATE)
-        set(value) = savedStateHandle.set(TITLE_SAVED_STATE, value)
+    fun setUrlState(url: String) {
+        if (savedStateHandle.get<String>(URL_SAVED_STATE) != url) {
+            savedStateHandle.set(URL_SAVED_STATE, url)
+        }
+    }
 
-    var selectedImageSavedState: String?
-        get() = savedStateHandle.get(SELECTED_IMAGE_SAVED_STATE)
-        set(value) = savedStateHandle.set(SELECTED_IMAGE_SAVED_STATE, value)
+    // Loading
 
-    var imagesSavedState: List<String>?
-        get() = savedStateHandle.get(IMAGES_SAVED_STATE)
-        set(value) = savedStateHandle.set(IMAGES_SAVED_STATE, value)
+    val loadingState = savedStateHandle.getLiveData(LOADING_SAVED_STATE, true)
 
-    var favoriteSavedState: Boolean
-        get() = savedStateHandle.get(FAVORITE_SAVED_STATE) ?: false
-        set(value) = savedStateHandle.set(FAVORITE_SAVED_STATE, value)
+    fun setLoadingState(loading: Boolean) {
+        if (savedStateHandle.get<Boolean>(LOADING_SAVED_STATE) != loading) {
+            savedStateHandle.set(LOADING_SAVED_STATE, loading)
+        }
+    }
 
-    var notesSavedState: String?
-        get() = savedStateHandle.get(NOTES_SAVED_STATE)
-        set(value) = savedStateHandle.set(NOTES_SAVED_STATE, value)
+    // Title
 
-    var tagsSavedState: List<String>?
-        get() = savedStateHandle.get(TAGS_SAVED_STATE)
-        set(value) = savedStateHandle.set(TAGS_SAVED_STATE, value)
+    val titleState = savedStateHandle.getLiveData<String?>(TITLE_SAVED_STATE)
+
+    fun setTitleState(title: String?) {
+        if (savedStateHandle.get<String>(TITLE_SAVED_STATE) != title) {
+            savedStateHandle.set(TITLE_SAVED_STATE, title)
+        }
+    }
+
+    // Favorite
+
+    val favoriteState = savedStateHandle.getLiveData(FAVORITE_SAVED_STATE, false)
+
+    fun setFavoriteState(favorite: Boolean) {
+        if (savedStateHandle.get<Boolean>(FAVORITE_SAVED_STATE) != favorite) {
+            savedStateHandle.set(FAVORITE_SAVED_STATE, favorite)
+        }
+    }
+
+    // Selected Image
+
+    val selectedImageState = savedStateHandle.getLiveData<String?>(SELECTED_IMAGE_SAVED_STATE)
+
+    fun setSelectedImageState(selectedImage: String?) {
+        if (savedStateHandle.get<String>(SELECTED_IMAGE_SAVED_STATE) != selectedImage) {
+            savedStateHandle.set(SELECTED_IMAGE_SAVED_STATE, selectedImage)
+        }
+    }
+
+    // Images
+
+    val imagesState = savedStateHandle.getLiveData<List<String>?>(IMAGES_SAVED_STATE)
+
+    fun setImagesState(images: List<String>?) {
+        if (savedStateHandle.get<List<String>>(IMAGES_SAVED_STATE) != images) {
+            savedStateHandle.set(IMAGES_SAVED_STATE, images)
+        }
+    }
+
+    // Notes
+
+    val notesState = savedStateHandle.getLiveData<String?>(NOTES_SAVED_STATE)
+
+    fun setNotesState(notes: String?) {
+        if (savedStateHandle.get<String>(NOTES_SAVED_STATE) != notes) {
+            savedStateHandle.set(NOTES_SAVED_STATE, notes)
+        }
+    }
+
+    // Tags
+
+    val tagsState = savedStateHandle.getLiveData<List<String>>(TAGS_SAVED_STATE, emptyList())
+
+    fun setTagsState(tags: List<String>) {
+        if (savedStateHandle.get<List<String>>(TAGS_SAVED_STATE) != tags) {
+            savedStateHandle.set(TAGS_SAVED_STATE, tags)
+        }
+    }
 }

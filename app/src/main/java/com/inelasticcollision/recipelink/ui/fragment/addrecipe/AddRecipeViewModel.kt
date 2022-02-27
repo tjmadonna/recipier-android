@@ -21,91 +21,71 @@ class AddRecipeViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = MutableLiveData<AddRecipeState>()
-
-    val state: LiveData<AddRecipeState>
-        get() = _state
-
     private val savedStateManager = AddRecipeSavedStateManager(savedStateHandle)
 
+    val loadingState = savedStateManager.loadingState
+    val titleState = savedStateManager.titleState
+    val favoriteState = savedStateManager.favoriteState
+    val selectedImageState = savedStateManager.selectedImageState
+    val imagesState = savedStateManager.imagesState
+    val notesState = savedStateManager.notesState
+    val tagsState = savedStateManager.tagsState
+
+    private val _savedStatusState = MutableLiveData<Unit>()
+    val savedStatusState: LiveData<Unit> = _savedStatusState
+
+    private val _errorState = MutableLiveData<AddRecipeErrorState?>()
+    val errorState: LiveData<AddRecipeErrorState?> = _errorState
+
     init {
-        if (savedStateManager.loadingSavedState) {
-            // Load recipe info
+        if (loadingState.value != false) {
             loadRecipeInfo()
-        } else {
-            // Send view data
-            sendViewData()
         }
     }
 
     private fun loadRecipeInfo() {
-        savedStateManager.urlSavedState?.let { url ->
-            _state.value = AddRecipeState.Loading
+        savedStateManager.urlState?.let { url ->
+            savedStateManager.setLoadingState(true)
             getRecipeInfo.execute(GetRecipeInfoObserver(), url)
         } ?: run {
-            _state.value = AddRecipeState.Error
+            _errorState.value = AddRecipeErrorState.NoRecipeUrlProvided
+            _errorState.value = null
         }
     }
 
-    private fun sendViewData() {
-        val viewData = AddRecipeViewData(
-            title = savedStateManager.titleSavedState,
-            selectedImageUrl = savedStateManager.selectedImageSavedState,
-            imageUrls = savedStateManager.imagesSavedState,
-            favorite = savedStateManager.favoriteSavedState,
-            notes = savedStateManager.notesSavedState,
-            tags = savedStateManager.tagsSavedState
-        )
-        _state.value = AddRecipeState.Data(viewData)
+    fun setTitle(title: String?) {
+        savedStateManager.setTitleState(title)
     }
 
-    fun setIntent(intent: AddRecipeIntent) {
-        when (intent) {
-            is AddRecipeIntent.ChangeTitle -> setTitle(intent.title)
-            is AddRecipeIntent.ChangeNotes -> setNotes(intent.notes)
-            is AddRecipeIntent.ChangeTags -> setTags(intent.tags)
-            is AddRecipeIntent.ToggleFavorite -> toggleFavorite()
-            is AddRecipeIntent.SaveRecipe -> saveRecipe()
-            is AddRecipeIntent.ChangeImage -> setSelectedImage(intent.imageUrl)
-        }
+    fun setNotes(notes: String?) {
+        savedStateManager.setNotesState(notes)
     }
 
-    private fun setTitle(title: String?) {
-        savedStateManager.titleSavedState = title
-        sendViewData()
+    fun toggleFavorite() {
+        val newValue = !(favoriteState.value ?: false)
+        savedStateManager.setFavoriteState(newValue)
     }
 
-    private fun setNotes(notes: String?) {
-        savedStateManager.notesSavedState = notes
-        sendViewData()
+    fun setTags(tags: List<String>) {
+        savedStateManager.setTagsState(tags)
     }
 
-    private fun toggleFavorite() {
-        savedStateManager.favoriteSavedState = !savedStateManager.favoriteSavedState
-        sendViewData()
+    fun setSelectedImage(imageUrl: String?) {
+        savedStateManager.setSelectedImageState(imageUrl)
+        selectedImageState.value
     }
 
-    private fun setTags(tags: List<String>?) {
-        savedStateManager.tagsSavedState = tags
-        sendViewData()
-    }
-
-    private fun setSelectedImage(imageUrl: String) {
-        savedStateManager.selectedImageSavedState = imageUrl
-        sendViewData()
-    }
-
-    private fun saveRecipe() {
-        val title = savedStateManager.titleSavedState
-        val url = savedStateManager.urlSavedState
+    fun saveRecipe() {
+        val title = titleState.value
+        val url = savedStateManager.urlState
         if (title != null && url != null) {
             val recipe = Recipe(
                 title = title,
                 url = url,
-                imageUrl = savedStateManager.selectedImageSavedState,
-                favorite = savedStateManager.favoriteSavedState,
-                notes = savedStateManager.notesSavedState,
-                tags = savedStateManager.tagsSavedState
+                imageUrl = selectedImageState.value,
+                favorite = favoriteState.value ?: false,
+                notes = notesState.value,
+                tags = if (tagsState.value.isNullOrEmpty()) null else tagsState.value
             )
             saveRecipe.execute(SaveRecipeObserver(), recipe)
         }
@@ -116,39 +96,34 @@ class AddRecipeViewModel @Inject constructor(
     private inner class GetRecipeInfoObserver : UseCaseObserver<RecipeInfo> {
 
         override fun onSuccess(value: RecipeInfo) {
-            savedStateManager.titleSavedState = value.title?.capitalizeWords()
-            savedStateManager.selectedImageSavedState = value.mainImage
-            savedStateManager.imagesSavedState = value.images?.toMutableList()?.apply {
-                if (value.title != null) {
-                    // Add main image to beginning of image list
-                    this.add(0, value.title)
-                }
-            }
+            savedStateManager.setTitleState(value.title?.capitalizeWords())
+            savedStateManager.setSelectedImageState(value.mainImage)
+            savedStateManager.setImagesState(value.images?.toMutableList()?.apply {
+                // Add main image to list of images
+                value.mainImage?.let { image -> this.add(0, image) }
+            })
 
-            value.url?.let { url ->
-                savedStateManager.urlSavedState = url
-            }
-            savedStateManager.loadingSavedState = false
+            value.url?.let { url -> savedStateManager.setUrlState(url) }
 
-            sendViewData()
+            savedStateManager.setLoadingState(false)
         }
 
         override fun onError(error: Throwable) {
             Log.e("AddRecipe", error.localizedMessage, error)
-            savedStateManager.loadingSavedState = false
-            _state.value = AddRecipeState.Error
+            savedStateManager.setLoadingState(false)
+            _errorState.value = AddRecipeErrorState.ErrorFetchRecipeInfo
         }
     }
 
     private inner class SaveRecipeObserver : UseCaseObserver<Unit> {
 
         override fun onSuccess(value: Unit) {
-            _state.value = AddRecipeState.Saved
+            _savedStatusState.value = Unit
         }
 
         override fun onError(error: Throwable) {
             Log.e("AddRecipe", error.localizedMessage, error)
-            _state.value = AddRecipeState.Error
+            _errorState.value = AddRecipeErrorState.ErrorSavingRecipe
         }
     }
 }
