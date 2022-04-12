@@ -5,13 +5,20 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.inelasticcollision.recipelink.BuildConfig
 import com.inelasticcollision.recipelink.R
+import com.inelasticcollision.recipelink.databinding.FragmentRecipeListBinding
 import com.inelasticcollision.recipelink.databinding.FragmentSettingsBinding
+import com.inelasticcollision.recipelink.ui.widget.BottomOffsetDecoration
 
 class SettingsParentFragment : Fragment(R.layout.fragment_settings) {
 
@@ -22,12 +29,28 @@ class SettingsParentFragment : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
+        setupGestureNavInsets(binding)
         setupToolbar()
     }
 
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
+    }
+
+    private fun setupGestureNavInsets(binding: FragmentSettingsBinding?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && binding != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    topMargin = insets.top
+                }
+                val fragment = binding.fragmentContainer.getFragment<PreferenceFragmentCompat>()
+                val bottomOffsetDecoration = BottomOffsetDecoration(insets.bottom)
+                fragment.listView.addItemDecoration(bottomOffsetDecoration)
+                WindowInsetsCompat.CONSUMED
+            }
+        }
     }
 
     private fun setupToolbar() {
@@ -85,7 +108,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         // Set licenses preference's on preference listener to open the browser to view the open
         // source licenses
         findPreference<Preference>("licenses")?.setOnPreferenceClickListener {
-            val direction = SettingsParentFragmentDirections.actionSettingsFragmentToOpenSourceLicensesFragment()
+            val direction =
+                SettingsParentFragmentDirections.actionSettingsFragmentToOpenSourceLicensesFragment()
             findNavController().navigate(direction)
             true
         }

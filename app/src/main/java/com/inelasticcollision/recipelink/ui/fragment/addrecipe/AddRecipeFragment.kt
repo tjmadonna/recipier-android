@@ -1,10 +1,15 @@
 package com.inelasticcollision.recipelink.ui.fragment.addrecipe
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -41,6 +46,7 @@ class AddRecipeFragment : Fragment(R.layout.fragment_add_recipe),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddRecipeBinding.bind(view)
+        setupGestureNavInsets(binding)
         setupToolbar()
         setupViews()
         setupObservers()
@@ -52,6 +58,28 @@ class AddRecipeFragment : Fragment(R.layout.fragment_add_recipe),
     }
 
     // Setup
+
+    private fun setupGestureNavInsets(binding: FragmentAddRecipeBinding?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && binding != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    topMargin = insets.top
+                    leftMargin = insets.left
+                    rightMargin = insets.right
+                }
+                binding.saveFab.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    bottomMargin =
+                        resources.getDimensionPixelSize(R.dimen.space_medium) + insets.bottom
+                }
+                binding.bottomMarginSpace.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    height = insets.bottom
+                }
+
+                WindowInsetsCompat.CONSUMED
+            }
+        }
+    }
 
     private fun setupToolbar() {
         binding?.toolbar?.setOnMenuItemClickListener { item ->

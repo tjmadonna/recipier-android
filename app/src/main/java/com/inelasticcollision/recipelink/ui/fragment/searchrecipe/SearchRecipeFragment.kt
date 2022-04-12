@@ -1,7 +1,12 @@
 package com.inelasticcollision.recipelink.ui.fragment.searchrecipe
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -9,7 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inelasticcollision.recipelink.R
 import com.inelasticcollision.recipelink.data.model.Recipe
+import com.inelasticcollision.recipelink.databinding.FragmentRecipeListBinding
 import com.inelasticcollision.recipelink.databinding.FragmentSearchRecipeBinding
+import com.inelasticcollision.recipelink.ui.widget.BottomOffsetDecoration
 import com.inelasticcollision.recipelink.ui.widget.DebounceTextContainer
 import com.inelasticcollision.recipelink.util.closeKeyboard
 import com.inelasticcollision.recipelink.util.listener.KeyboardEventListener
@@ -35,6 +42,7 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchRecipeBinding.bind(view)
+        setupGestureNavInsets(binding)
         setupToolbar()
         setupViews()
         setupObservers()
@@ -51,6 +59,22 @@ class SearchRecipeFragment : Fragment(R.layout.fragment_search_recipe),
     }
 
     // Setup
+
+    private fun setupGestureNavInsets(binding: FragmentSearchRecipeBinding?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && binding != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    topMargin = insets.top
+                    leftMargin = insets.left
+                    rightMargin = insets.right
+                }
+                val bottomOffsetDecoration = BottomOffsetDecoration(insets.bottom)
+                binding.recyclerView.addItemDecoration(bottomOffsetDecoration)
+                WindowInsetsCompat.CONSUMED
+            }
+        }
+    }
 
     private fun setupToolbar() {
         binding?.toolbar?.setNavigationOnClickListener {

@@ -44,91 +44,103 @@
         app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="4dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/item_background"
-            android:paddingHorizontal="12dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title_text_view"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="?android:textColorPrimary"
-                app:layout_constraintEnd_toEndOf="@id/host_text_view"
-                app:layout_constraintStart_toStartOf="@id/host_text_view"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Wild Rice Stuffed Acorn Squash" />
-
-            <TextView
-                android:id="@+id/host_text_view"
-                style="@style/TextAppearance.MaterialComponents.Body1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="?android:textColorSecondary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_text_view"
-                tools:text="budgetbytes.com" />
-
-            <TextView
-                android:id="@+id/notes_title_text_view"
-                style="@style/TextAppearance.MaterialComponents.Overline"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/notes"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/host_text_view" />
-
-            <TextView
-                android:id="@+id/notes_text_view"
-                style="@style/TextAppearance.MaterialComponents.Body1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/no_notes_found"
-                android:textColor="?android:textColorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/notes_title_text_view"
-                tools:text="These are some notes" />
+                android:background="@drawable/item_background"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
-            <TextView
-                android:id="@+id/tags_title_text_view"
-                style="@style/TextAppearance.MaterialComponents.Overline"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/tags"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/notes_text_view" />
+                <TextView
+                    android:id="@+id/title_text_view"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="?android:textColorPrimary"
+                    app:layout_constraintEnd_toEndOf="@id/host_text_view"
+                    app:layout_constraintStart_toStartOf="@id/host_text_view"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Wild Rice Stuffed Acorn Squash" />
 
-            <com.inelasticcollision.recipelink.ui.widget.TextViewLayout
-                android:id="@+id/tags_text_view_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tags_title_text_view" />
+                <TextView
+                    android:id="@+id/host_text_view"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="?android:textColorSecondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title_text_view"
+                    tools:text="budgetbytes.com" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/notes_title_text_view"
+                    style="@style/TextAppearance.MaterialComponents.Overline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/notes"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/host_text_view" />
+
+                <TextView
+                    android:id="@+id/notes_text_view"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/no_notes_found"
+                    android:textColor="?android:textColorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/notes_title_text_view"
+                    tools:text="These are some notes" />
+
+                <TextView
+                    android:id="@+id/tags_title_text_view"
+                    style="@style/TextAppearance.MaterialComponents.Overline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/tags"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/notes_text_view" />
+
+                <com.inelasticcollision.recipelink.ui.widget.TextViewLayout
+                    android:id="@+id/tags_text_view_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tags_title_text_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Space
+                android:id="@+id/bottom_margin_space"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+        </LinearLayout>
 
     </ScrollView>
 
@@ -136,9 +148,9 @@
         android:id="@+id/open_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:layout_marginRight="@dimen/space_medium"
+        android:layout_marginBottom="@dimen/space_medium"
         android:text="@string/open"
         app:cornerFamily="cut"
         app:cornerRadius="16dp"

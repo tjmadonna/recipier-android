@@ -2,8 +2,13 @@ package com.inelasticcollision.recipelink.ui.fragment.recipedetail
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,6 +36,7 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRecipeDetailBinding.bind(view)
+        setupGestureNavInsets(binding)
         setupToolbar()
         setupObservers()
     }
@@ -38,6 +44,27 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
+    }
+
+    private fun setupGestureNavInsets(binding: FragmentRecipeDetailBinding?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && binding != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    topMargin = insets.top
+                    leftMargin = insets.left
+                    rightMargin = insets.right
+                }
+                binding.openFab.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    bottomMargin =
+                        resources.getDimensionPixelSize(R.dimen.space_medium) + insets.bottom
+                }
+                binding.bottomMarginSpace.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    height = resources.getDimensionPixelSize(R.dimen.space_medium) + insets.bottom
+                }
+                WindowInsetsCompat.CONSUMED
+            }
+        }
     }
 
     private fun setupToolbar() {
