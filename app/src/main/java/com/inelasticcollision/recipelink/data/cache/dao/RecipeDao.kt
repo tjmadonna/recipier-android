@@ -7,34 +7,34 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 @Dao
-abstract class RecipeDao {
+interface RecipeDao {
 
     // Recipe methods
     @Query("SELECT * FROM recipes ORDER BY title COLLATE NOCASE ASC")
-    abstract fun getAllRecipes(): Flow<List<Recipe>>
+    fun getAllRecipes(): Flow<List<Recipe>>
 
     @Query("SELECT * FROM recipes WHERE favorite = 1 ORDER BY title COLLATE NOCASE ASC")
-    abstract fun getFavoriteRecipes(): Flow<List<Recipe>>
+    fun getFavoriteRecipes(): Flow<List<Recipe>>
 
     @Query("SELECT * FROM recipes WHERE title LIKE :searchTerm OR url LIKE :searchTerm OR tags LIKE :searchTerm ORDER BY title COLLATE NOCASE ASC")
-    abstract fun getRecipesBySearchTerm(searchTerm: String): Flow<List<Recipe>>
+    fun getRecipesBySearchTerm(searchTerm: String): Flow<List<Recipe>>
 
     @Query("SELECT * FROM recipes WHERE id = :id")
-    abstract fun getRecipeById(id: String): Flow<Recipe?>
+    fun getRecipeById(id: String): Flow<Recipe?>
 
     @Query("UPDATE recipes SET favorite = ((favorite | 1) - (favorite & 1)), last_modified = :lastModified WHERE id = :id")
-    abstract suspend fun toggleFavoriteRecipeWithId(id: String, lastModified: Long = Date().time)
+    suspend fun toggleFavoriteRecipeWithId(id: String, lastModified: Long = Date().time)
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    abstract suspend fun insertRecipe(recipe: Recipe)
+    suspend fun insertRecipe(recipe: Recipe)
 
     @Update(onConflict = OnConflictStrategy.ABORT)
-    abstract suspend fun updateRecipe(recipe: Recipe)
+    suspend fun updateRecipe(recipe: Recipe)
 
     @Query("DELETE FROM recipes WHERE id = :id")
-    abstract suspend fun deleteRecipeById(id: String)
+    suspend fun deleteRecipeById(id: String)
 
     @VisibleForTesting
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    abstract suspend fun insertRecipes(recipes: List<Recipe>)
+    suspend fun insertRecipes(recipes: List<Recipe>)
 }
