@@ -78,9 +78,14 @@ class RecipeDetailViewModel @Inject constructor(
 
     // Use case observers
 
-    private inner class GetRecipeObserver : UseCaseObserver<Recipe> {
+    private inner class GetRecipeObserver : UseCaseObserver<Recipe?> {
 
-        override fun onSuccess(value: Recipe) {
+        override fun onSuccess(value: Recipe?) {
+            if (value == null) {
+                _state.value = RecipeDetailState.Error
+                return
+            }
+
             _state.value = RecipeDetailState.Data(value)
         }
 

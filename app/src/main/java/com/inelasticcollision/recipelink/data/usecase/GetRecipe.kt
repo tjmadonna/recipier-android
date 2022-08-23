@@ -8,9 +8,9 @@ import javax.inject.Inject
 class GetRecipe @Inject constructor(
     private val recipeDao: RecipeDao,
     dispatchers: UseCaseDispatchers
-) : FlowUseCase<Recipe, String>(dispatchers) {
+) : FlowUseCase<Recipe?, String>(dispatchers) {
 
-    override fun buildUseCaseFlow(params: String?): Flow<Recipe> {
+    override fun buildUseCaseFlow(params: String?): Flow<Recipe?> {
         if (params == null) {
             throw IllegalArgumentException("Id cannot be null when attempting to get recipe")
         }

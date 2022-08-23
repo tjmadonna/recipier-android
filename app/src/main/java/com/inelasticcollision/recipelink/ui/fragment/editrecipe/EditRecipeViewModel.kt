@@ -88,9 +88,14 @@ class EditRecipeViewModel @Inject constructor(
         }
     }
 
-    private inner class GetRecipeObserver : UseCaseObserver<Recipe> {
+    private inner class GetRecipeObserver : UseCaseObserver<Recipe?> {
 
-        override fun onSuccess(value: Recipe) {
+        override fun onSuccess(value: Recipe?) {
+            if (value == null) {
+                _errorState.value = EditRecipeErrorState.ErrorGettingRecipe
+                return
+            }
+
             savedStateManager.setTitleState(value.title)
             savedStateManager.setUrlState(value.url)
             savedStateManager.setSelectedImageState(value.imageUrl)
