@@ -63,6 +63,15 @@ android {
     apiKeysProperties.load(new FileInputStream(apiKeysPropertiesFile))
 
     buildTypes {
+        mock {
+            buildConfigField "String", "NETWORK_SERVICE_API_KEY", "\"MyApiKey\""
+            buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", "\"recipes\""
+            buildConfigField "String", "NETWORK_SERVICE_BASE_URL", "\"https://example.com/\""
+
+            applicationIdSuffix ".mock"
+            manifestPlaceholders = [appName: "@string/recipier_debug"]
+            minifyEnabled false
+        }
         debug {
             buildConfigField "String", "NETWORK_SERVICE_API_KEY", apiKeysProperties["DebugNetworkServiceApiKey"]
             buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", apiKeysProperties["DebugNetworkServiceRecipeInfoRoute"]
