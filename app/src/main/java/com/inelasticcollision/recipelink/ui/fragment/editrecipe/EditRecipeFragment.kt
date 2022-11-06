@@ -141,7 +141,10 @@ class EditRecipeFragment : Fragment(R.layout.fragment_edit_recipe),
                 listener(
                     onStart = { },
                     onSuccess = { _, _ -> },
-                    onError = { _, error -> Log.e("AddRecipe", error.localizedMessage, error) },
+                    onError = { _, errorResult ->
+                        val error = errorResult.throwable
+                        Log.e("AddRecipe", error.localizedMessage, error)
+                    },
                     onCancel = { }
                 )
             }
