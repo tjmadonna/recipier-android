@@ -5,6 +5,7 @@ plugins {
     id "kotlin-kapt"
     id "dagger.hilt.android.plugin"
     id "androidx.navigation.safeargs"
+    id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
 }
 
 android {
@@ -44,19 +45,21 @@ android {
             androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
         }
 
-        // Import signing keys from keystore.properties file
-        def keystorePropertiesFile = rootProject.file("keystore.properties")
-        def keystoreProperties = new Properties()
-        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
         signingConfigs {
             release {
-                storeFile rootProject.file(keystoreProperties["ReleaseStoreFile"])
-                storePassword keystoreProperties["ReleaseStorePassword"]
-                keyAlias keystoreProperties["ReleaseKeyAlias"]
-                keyPassword keystoreProperties["ReleaseKeyPassword"]
-                v1SigningEnabled true
-                v2SigningEnabled true
+                if (rootProject.file("release.properties").exists()) {
+                    // Import signing keys
+                    def keystorePropertiesFile = rootProject.file("release.properties")
+                    def keystoreProperties = new Properties()
+                    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+                    storeFile rootProject.file(keystoreProperties["ReleaseStoreFile"])
+                    storePassword keystoreProperties["ReleaseStorePassword"]
+                    keyAlias keystoreProperties["ReleaseKeyAlias"]
+                    keyPassword keystoreProperties["ReleaseKeyPassword"]
+                    v1SigningEnabled true
+                    v2SigningEnabled true
+                }
             }
         }
     }
@@ -67,29 +70,12 @@ android {
     apiKeysProperties.load(new FileInputStream(apiKeysPropertiesFile))
 
     buildTypes {
-        mock {
-            buildConfigField "String", "NETWORK_SERVICE_API_KEY", "\"MyApiKey\""
-            buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", "\"recipes\""
-            buildConfigField "String", "NETWORK_SERVICE_BASE_URL", "\"https://example.com/\""
-
-            applicationIdSuffix ".mock"
-            manifestPlaceholders = [appName: "@string/recipier_debug"]
-            minifyEnabled false
-        }
         debug {
-            buildConfigField "String", "NETWORK_SERVICE_API_KEY", apiKeysProperties["DebugNetworkServiceApiKey"]
-            buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", apiKeysProperties["DebugNetworkServiceRecipeInfoRoute"]
-            buildConfigField "String", "NETWORK_SERVICE_BASE_URL", apiKeysProperties["DebugNetworkServiceBaseUrl"]
-
             applicationIdSuffix ".debug"
             manifestPlaceholders = [appName: "@string/recipier_debug"]
             minifyEnabled false
         }
         release {
-            buildConfigField "String", "NETWORK_SERVICE_API_KEY", apiKeysProperties["ReleaseNetworkServiceApiKey"]
-            buildConfigField "String", "NETWORK_SERVICE_RECIPE_INFO_ROUTE", apiKeysProperties["ReleaseNetworkServiceRecipeInfoRoute"]
-            buildConfigField "String", "NETWORK_SERVICE_BASE_URL", apiKeysProperties["ReleaseNetworkServiceBaseUrl"]
-
             manifestPlaceholders = [appName: "@string/recipier_release"] // Set release app name
             minifyEnabled true // Enable code shrinking, obfuscation, and optimization
             shrinkResources true // Enable resource shrinking
@@ -209,4 +195,9 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+}
+
+// Secrets plugin
+secrets {
+    defaultPropertiesFileName = "local.defaults.properties"
 }

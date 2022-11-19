@@ -13,4 +13,5 @@ plugins {
     id "org.jetbrains.kotlin.android" version "1.6.10" apply false
     id "com.google.dagger.hilt.android" version "$hiltVersion" apply false
     id "androidx.navigation.safeargs" version "$navVersion" apply false
+    id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin" version "2.0.1" apply false
 }

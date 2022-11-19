@@ -1,4 +1,6 @@
 # App Specific
+release.properties
+debug.properties
 keystore.properties
 apikeys.properties
 
