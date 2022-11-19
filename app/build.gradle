@@ -64,11 +64,6 @@ android {
         }
     }
 
-    // Import api keys from apikeys.properties file
-    def apiKeysPropertiesFile = rootProject.file("apikeys.properties")
-    def apiKeysProperties = new Properties()
-    apiKeysProperties.load(new FileInputStream(apiKeysPropertiesFile))
-
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
