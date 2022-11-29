@@ -2,6 +2,9 @@
 
 Recipier stores your online recipes in a clean interface that allows you to quickly search and filter. The app uses a Flask RESTful API backend server, written in Python, to retrieve important recipe information from the webpage.
 
+[<img src="art/googleplay-badge.png" alt="Get it on Google Play">](https://play.google.com/store/apps/details?id=com.inelasticcollision.recipelink&hl=en_US&gl=US)
+
+
 ## Technologies Used
 * Kotlin
 * [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
