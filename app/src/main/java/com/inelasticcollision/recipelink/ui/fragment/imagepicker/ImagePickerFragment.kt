@@ -14,7 +14,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.inelasticcollision.recipelink.R
 import com.inelasticcollision.recipelink.databinding.FragmentImagePickerBinding
-import com.inelasticcollision.recipelink.databinding.FragmentRecipeListBinding
 import com.inelasticcollision.recipelink.ui.widget.BottomOffsetDecoration
 
 class ImagePickerFragment : Fragment(R.layout.fragment_image_picker) {

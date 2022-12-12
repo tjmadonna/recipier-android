@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inelasticcollision.recipelink.R
 import com.inelasticcollision.recipelink.data.model.Recipe
-import com.inelasticcollision.recipelink.databinding.FragmentRecipeListBinding
 import com.inelasticcollision.recipelink.databinding.FragmentSearchRecipeBinding
 import com.inelasticcollision.recipelink.ui.widget.BottomOffsetDecoration
 import com.inelasticcollision.recipelink.ui.widget.DebounceTextContainer
