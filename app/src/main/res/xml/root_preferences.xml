@@ -18,6 +18,12 @@
 
         <Preference
             app:iconSpaceReserved="false"
+            app:key="adding_recipes"
+            app:summary="Learn how to add recipes"
+            app:title="Adding recipes" />
+
+        <Preference
+            app:iconSpaceReserved="false"
             app:key="rate"
             app:summary="Rate and leave a review"
             app:title="Rate app" />

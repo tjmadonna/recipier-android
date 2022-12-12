@@ -30,6 +30,14 @@
             app:popEnterAnim="@anim/stay_in_center"
             app:popExitAnim="@anim/to_bottom" />
 
+        <action
+            android:id="@+id/action_recipeListFragment_to_learnAddingRecipesFragment"
+            app:destination="@id/learnAddingRecipesFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/stay_in_center"
+            app:popEnterAnim="@anim/stay_in_center"
+            app:popExitAnim="@anim/to_bottom" />
+
     </fragment>
 
     <fragment
@@ -99,6 +107,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.inelasticcollision.recipelink.ui.fragment.settings.SettingsParentFragment">
+
         <action
             android:id="@+id/action_settingsFragment_to_openSourceLicensesFragment"
             app:destination="@id/openSourceLicensesFragment"
@@ -106,11 +115,23 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+
+        <action
+            android:id="@+id/action_settingsFragment_to_learnAddingRecipesFragment"
+            app:destination="@id/learnAddingRecipesFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/stay_in_center"
+            app:popEnterAnim="@anim/stay_in_center"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
 
     <fragment
         android:id="@+id/openSourceLicensesFragment"
         android:name="com.inelasticcollision.recipelink.ui.fragment.opensource.OpenSourceLicensesFragment"
         android:label="OpenSourceLicensesFragment" />
+
+    <fragment
+        android:id="@+id/learnAddingRecipesFragment"
+        android:name="com.inelasticcollision.recipelink.ui.fragment.learn.LearnAddingRecipesFragment" />
 
 </navigation>

@@ -43,5 +43,8 @@
     </string>
     <string name="open">Open</string>
     <string name="open_source_licenses">Open Source Licenses</string>
+    <string name="adding_recipes">Adding Recipes</string>
+    <string name="adding_recipes_instructions">Share a recipe to Recipier from Chrome or your favorite browser</string>
+    <string name="got_it">Got it</string>
 
 </resources>
